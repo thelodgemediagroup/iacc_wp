@@ -1,0 +1,16 @@
+/*
+Theme Name: IACC Theme
+Theme URI: http://www.thelodgemediagroup.com
+Description: Child theme for the Politician Theme
+Author: The Lodge Media Group
+Author URI: http://www.thelodgemediagroup.com
+Template: politician
+Version: 0.1.0
+*/
+
+@import url("../politician/style.css");
+
+.header-sitename h1 {
+	font-size: 32px;
+	padding-top: 50px;
+}

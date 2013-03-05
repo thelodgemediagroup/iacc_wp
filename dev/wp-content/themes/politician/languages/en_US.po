@@ -1,0 +1,1037 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Text in function
+#: politician/functions/comments.php:23
+#: politician/functions/comments.php:41
+msgid "(Edit)"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "- Select -"
+msgstr ""
+
+#. Text in function
+#: politician/gallery.php:85
+#: politician/loop-posts.php:48
+msgid "<span class=\"meta-nav\">&larr;</span> Older posts"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "A %sstatic page%s (select bellow)"
+msgstr ""
+
+#. Text in function
+#: politician/widgets/widget-popular.php:1
+msgid "A popular posts widget that displays popular posts."
+msgstr ""
+
+#. Text in echo
+#: politician/functions/sidebars.php:112
+msgid "Add"
+msgstr ""
+
+#. Text in function
+#: politician/functions/custom_types/portfolio.php:1
+msgid "Add New Item"
+msgstr ""
+
+#. Text in function
+#: politician/functions/custom_types/portfolio.php:1
+msgid "Add New Tag"
+msgstr ""
+
+#. Text in function
+#: politician/part-title.php:1
+msgid "All Archives"
+msgstr ""
+
+#. Text in function
+#: politician/functions/custom_types/portfolio.php:1
+msgid "All Tags"
+msgstr ""
+
+#. Text in function
+#: politician/functions/class-tgm-plugin-activation.php:1
+msgid "All plugins installed and activated successfully. %1$s"
+msgstr ""
+
+#. Text in function
+#: politician/functions/core.php:1
+msgid "All plugins installed and activated successfully. %s"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Alternate"
+msgstr ""
+
+#. Text in function
+#: politician/functions/breadcrumbs.php:1
+msgid "Archive by category:"
+msgstr ""
+
+#. Text in echo
+#: politician/sidebar-side.php:19
+msgid "Archives"
+msgstr ""
+
+#. Text in function
+#: politician/functions/breadcrumbs.php:1
+msgid "Articles posted by:"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Blog bottom sidebar"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Blog posts & Pages"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Blog side sidebar"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Blog\\'s listing page layout"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Blue"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Blue/Bordo"
+msgstr ""
+
+#. Text in function
+#: politician/functions/admin_options/ElementUpload.php:1
+msgid "Cancel"
+msgstr ""
+
+#. Text in function
+#: politician/functions/admin_options/CustomAdminPage.php:1
+msgid "Capability not defined."
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Check this if you want to enable Google Analytics Service"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Check this to display donate button. (Dont forget to use WP menu nav, so the donate button will display in proper place)"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Check this to enable the slider."
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Check this to show special box."
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Choose an option to order slides."
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Choose bottom sidebar for blog pages."
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Choose bottom sidebar for gallery pages."
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Choose side sidebar for blog pages."
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Choose sidebar for bottom of page."
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Choose sidebar for side of page."
+msgstr ""
+
+#. Text in function
+#: politician/functions/admin_options/AdminPageSection.php:1
+msgid "Class \"%s\" not found."
+msgstr ""
+
+#. Text in echo
+#: politician/comments.php:73
+msgid "Comments are closed."
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Content area for special gray box, which is under slider."
+msgstr ""
+
+#. Text in function
+#: politician/functions/admin_options/ElementUpload.php:1
+msgid "Continue"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Custom CSS"
+msgstr ""
+
+#. Text in function
+#: politician/part-title.php:1
+msgid "Daily Archives: <span>%s</span>"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Default"
+msgstr ""
+
+#. Text in function
+#: politician/functions/sidebars.php:192
+msgid "Default Sidebar Widget Area"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Default bottom sidebar"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Default layout for blog"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Default layout for pages"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Default side sidebar"
+msgstr ""
+
+#. Text in echo
+#: politician/functions/sidebars.php:130
+#: politician/functions/admin_options/ElementUpload.php:1
+msgid "Delete"
+msgstr ""
+
+#. Text in function
+#: politician/functions/admin_options/ElementUpload.php:1
+msgid "Delete Permanently"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Disable"
+msgstr ""
+
+#. Text in echo
+#: politician/comments.php:34
+msgid "Discussion"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Display donate button?"
+msgstr ""
+
+#. Text in function
+#: politician/widgets/widget-twitter.php:1
+msgid "Displays a list of twitter feeds"
+msgstr ""
+
+#. Text in echo
+#: politician/header.php:117
+msgid "Donate"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Donate button url"
+msgstr ""
+
+#. Text in function
+#: politician/functions/comments.php:42
+msgid "E-mail"
+msgstr ""
+
+#. Text in function
+#: politician/functions/custom_types/portfolio.php:1
+msgid "Edit Item"
+msgstr ""
+
+#. Text in function
+#: politician/functions/custom_types/portfolio.php:1
+msgid "Edit Tag"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Enable Slider"
+msgstr ""
+
+#. Text in echo
+#: politician/functions/sidebars.php:115
+msgid "Enter description for a new sidebar:"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Enter in an optional description (accepts HTML)"
+msgstr ""
+
+#. Text in echo
+#: politician/functions/sidebars.php:110
+msgid "Enter name for a new sidebar:"
+msgstr ""
+
+#. Text in function
+#: politician/functions/breadcrumbs.php:1
+msgid "Error 404"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "File type: .ico or .png File dimensions: 16x16, 32x32."
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Footer copyright text"
+msgstr ""
+
+#. Text in function
+#: politician/functions/sidebars.php:192
+msgid "Full width"
+msgstr ""
+
+#. Text in function
+#: politician/functions/custom_types/portfolio.php:1
+msgid "Gallery Tags"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Gallery bottom sidebar"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "General"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Google Analytics"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Google Analytics Code"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Green"
+msgstr ""
+
+#. Text in function
+#: politician/functions/breadcrumbs.php:1
+msgid "Home"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Home Page"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Home page Special box"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Home page displays"
+msgstr ""
+
+#. Text in echo
+#: politician/widgets/widget-twitter.php:79
+msgid "How many tweets to display?"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Image 1"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Image 1 Description"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Image 2"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Image 2 Description"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Image 3"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Image 3 Description"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Image 4"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Image 4 Description"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Image 5"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Image 5 Description"
+msgstr ""
+
+#. Text in function
+#: politician/functions/admin_options/ElementUpload.php:1
+msgid "Insert image"
+msgstr ""
+
+#. Text in function
+#: politician/functions/class-tgm-plugin-activation.php:1
+msgid "Install Plugins"
+msgstr ""
+
+#. Text in function
+#: politician/functions/core.php:1
+msgid "Install Politician Plugins"
+msgstr ""
+
+#. Text in function
+#: politician/functions/class-tgm-plugin-activation.php:1
+msgid "Install Required Plugins"
+msgstr ""
+
+#. Text in function
+#: politician/functions/core.php:1
+msgid "Install Required Politician Plugins"
+msgstr ""
+
+#. Text in function
+#: politician/functions/class-tgm-plugin-activation.php:1
+msgid "Installing Plugin: %s"
+msgstr ""
+
+#. Text in function
+#: politician/functions/core.php:1
+msgid "Installing Politician Plugin: %s"
+msgstr ""
+
+#. Text in function
+#: politician/functions/custom_types/portfolio.php:1
+msgid "Items"
+msgstr ""
+
+#. Text in function
+#: politician/comments.php:82
+msgid "Leave a Comment"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Leave it blank if you do not want to display this button."
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Light Blue/Dark Blue"
+msgstr ""
+
+#. Text in function
+#: politician/functions/admin_options/CustomAdminPage.php:1
+msgid "Menu title not defined."
+msgstr ""
+
+#. Text in function
+#: politician/comments.php:82
+msgid "Message"
+msgstr ""
+
+#. Text in echo
+#: politician/sidebar-side.php:26
+msgid "Meta"
+msgstr ""
+
+#. Text in function
+#: politician/part-title.php:1
+msgid "Monthly Archives: <span>%s</span>"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "More button text"
+msgstr ""
+
+#. Text in function
+#: politician/functions/admin_options/ElementUpload.php:1
+msgid "Move to Trash"
+msgstr ""
+
+#. Text in function
+#: politician/functions/custom_types/portfolio.php:1
+msgid "New Item"
+msgstr ""
+
+#. Text in function
+#: politician/functions/custom_types/portfolio.php:1
+msgid "New Tag Name"
+msgstr ""
+
+#. Text in function
+#: politician/comments.php:61
+msgid "Newer Comments"
+msgstr ""
+
+#. Text in function
+#: politician/gallery.php:86
+#: politician/loop-posts.php:49
+msgid "Newer posts <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#. Text in echo
+#: politician/part-no_results.php:4
+msgid "No Results Found"
+msgstr ""
+
+#. Text in function
+#: politician/functions/custom_types/portfolio.php:78
+msgid "No Tags"
+msgstr ""
+
+#. Text in function
+#: politician/functions/custom_types/portfolio.php:1
+msgid "No items found"
+msgstr ""
+
+#. Text in function
+#: politician/functions/custom_types/portfolio.php:1
+msgid "No items found in Trash"
+msgstr ""
+
+#. Text in function
+#: politician/comments.php:60
+msgid "Older Comments"
+msgstr ""
+
+#. Text in function
+#: politician/functions/breadcrumbs.php:1
+msgid "Page"
+msgstr ""
+
+#. Text in function
+#: politician/header.php:17
+msgid "Page %s"
+msgstr ""
+
+#. Text in function
+#: politician/functions/custom_types/portfolio.php:1
+msgid "Parent Tag"
+msgstr ""
+
+#. Text in function
+#: politician/functions/custom_types/portfolio.php:1
+msgid "Parent Tag:"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Paste your %sGoogle Analytics%s code here, it will get applied to each page."
+msgstr ""
+
+#. Text in echo
+#: politician/functions/comments.php:41
+msgid "Pingback:"
+msgstr ""
+
+#. Text in function
+#: politician/functions/core.php:1
+#: politician/functions/class-tgm-plugin-activation.php:1
+msgid "Plugin activated successfully."
+msgstr ""
+
+#. Text in function
+#: politician/widgets/widget-popular.php:1
+msgid "Popular Posts"
+msgstr ""
+
+#. Text in function
+#: politician/part-title.php:1
+msgid "Posts by: <span>%s</span>"
+msgstr ""
+
+#. Text in function
+#: politician/functions/breadcrumbs.php:1
+msgid "Posts classified under:"
+msgstr ""
+
+#. Text in echo
+#: politician/widgets/widget-popular.php:34
+msgid "Posts count:"
+msgstr ""
+
+#. Text in function
+#: politician/functions/breadcrumbs.php:1
+msgid "Posts tagged:"
+msgstr ""
+
+#. Text in function
+#: politician/functions/core.php:1
+msgid "Primary Navigation"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Read More &rarr;"
+msgstr ""
+
+#. Text in function
+#: politician/widgets/widget-twitter.php:1
+msgid "Recent Tweets"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Red"
+msgstr ""
+
+#. Text in function
+#: politician/functions/core.php:1
+#: politician/functions/class-tgm-plugin-activation.php:1
+msgid "Return to Required Plugins Installer"
+msgstr ""
+
+#. Text in echo
+#: politician/functions/admin_options/template-page.php:9
+msgid "Save Changes"
+msgstr ""
+
+#. Text in echo
+#: politician/sidebar-side.php:14
+#: politician/searchform.php:3
+#: politician/searchform.php:4
+msgid "Search"
+msgstr ""
+
+#. Text in function
+#: politician/functions/custom_types/portfolio.php:1
+msgid "Search Items"
+msgstr ""
+
+#. Text in function
+#: politician/functions/custom_types/portfolio.php:1
+msgid "Search Tags"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Search posts limit"
+msgstr ""
+
+#. Text in function
+#: politician/part-title.php:1
+msgid "Search result for: <span>%s</span>"
+msgstr ""
+
+#. Text in function
+#: politician/functions/breadcrumbs.php:1
+msgid "Search results for:"
+msgstr ""
+
+#. Text in echo
+#: politician/functions/sidebars.php:124
+msgid "Select a sidebar to delete:"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Select default layout for blog."
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Select default layout for pages."
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Show Special box?"
+msgstr ""
+
+#. Text in function
+#: politician/functions/sidebars.php:192
+msgid "Sidebar already exists, please use a different name."
+msgstr ""
+
+#. Text in echo
+#: politician/functions/sidebars.php:103
+msgid "Sidebar managment"
+msgstr ""
+
+#. Text in function
+#: politician/functions/sidebars.php:192
+msgid "Sidebar name cannot by empty."
+msgstr ""
+
+#. Text in function
+#: politician/functions/sidebars.php:192
+msgid "Sidebar successfully added."
+msgstr ""
+
+#. Text in function
+#: politician/functions/sidebars.php:192
+msgid "Sidebar successfully removed."
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Sidebars"
+msgstr ""
+
+#. Text in function
+#: politician/functions/admin_options/CustomAdminPage.php:1
+msgid "Slug not defined."
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Social"
+msgstr ""
+
+#. Text in function
+#: politician/functions/core.php:1
+msgid "Something went wrong with the plugin API."
+msgstr ""
+
+#. Text in function
+#: politician/functions/class-tgm-plugin-activation.php:1
+msgid "Something went wrong."
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Static home page"
+msgstr ""
+
+#. Text in function
+#: politician/comments.php:82
+msgid "Submit Comment &rarr;"
+msgstr ""
+
+#. Text in function
+#: politician/functions/sidebars.php:192
+msgid "The default sidebar of page widget area"
+msgstr ""
+
+#. Text in echo
+#: politician/part-no_results.php:7
+msgid "The page you requested could not be found. Try refining your search, or use the navigation above to locate the post."
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Theme Options"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Theme Skin"
+msgstr ""
+
+#. Text in echo
+#: politician/footer.php:17
+msgid "ThemeMakers"
+msgstr ""
+
+#. Text in echo
+#: politician/comments.php:18
+msgid "This post is password protected. Enter the password to view any comments."
+msgstr ""
+
+#. Text in function
+#: politician/functions/sidebars.php:192
+msgid "This sidebar does not exist."
+msgstr ""
+
+#. Text in function
+#: politician/functions/sidebars.php:192
+msgid "This sidebar is not possible to remove."
+msgstr ""
+
+#. Text in function
+#: politician/functions/custom_types/portfolio.php:1
+msgid "Thumbnail"
+msgstr ""
+
+#. Text in function
+#: politician/functions/admin_options/CustomAdminPage.php:1
+msgid "Title not defined."
+msgstr ""
+
+#. Text in echo
+#: politician/widgets/widget-twitter.php:73
+msgid "Title:"
+msgstr ""
+
+#. Text in function
+#: politician/widgets/widget-twitter.php:1
+msgid "Twitter +"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Type a copyright text."
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Type a number of posts to be displayed on search results page"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Type an url for donate button."
+msgstr ""
+
+#. Text in function
+#: politician/functions/admin_options/AdminPageFactory.php:1
+msgid "Unable to load class: %s"
+msgstr ""
+
+#. Text in function
+#: politician/functions/admin_options/ElementUpload.php:1
+msgid "Undo"
+msgstr ""
+
+#. Text in function
+#: politician/functions/custom_types/portfolio.php:1
+msgid "Update Tag"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Upload an image to show in the slider. Dimensions: 924px x 384px."
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Upload favicon"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Upload logo"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Use Google Analytics"
+msgstr ""
+
+#. Text in function
+#: politician/functions/admin_options/ElementUpload.php:1
+msgid "Use this"
+msgstr ""
+
+#. Text in echo
+#: politician/widgets/widget-twitter.php:76
+msgid "Username:"
+msgstr ""
+
+#. Text in function
+#: politician/functions/custom_types/portfolio.php:1
+msgid "View Item"
+msgstr ""
+
+#. Text in echo
+#: politician/gallery.php:28
+msgid "View all"
+msgstr ""
+
+#. Text in function
+#: politician/functions/breadcrumbs.php:1
+msgid "View all posts in %s"
+msgstr ""
+
+#. Text in function
+#: politician/functions/comments.php:42
+msgid "Website"
+msgstr ""
+
+#. Text in function
+#: politician/functions/sidebars.php:192
+msgid "With left sidebar"
+msgstr ""
+
+#. Text in function
+#: politician/functions/sidebars.php:192
+msgid "With right sidebar"
+msgstr ""
+
+#. Text in function
+#: politician/part-title.php:1
+msgid "Yearly Archives: <span>%s</span>"
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Yellow"
+msgstr ""
+
+#. Text in function
+#: politician/functions/admin_options/ElementUpload.php:1
+msgid "You are about to delete <strong>%s</strong>."
+msgstr ""
+
+#. Text in function
+#: politician/functions/comments.php:42
+msgid "Your Name"
+msgstr ""
+
+#. Text in echo
+#: politician/functions/comments.php:27
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#. Text in function
+#: politician/functions.php:1
+msgid "Your hosting currently use version of PHP %s. To get this theme worked properly you should ask your hosting provider to turn on at least version of PHP5 on your hosting."
+msgstr ""
+
+#. Text in function
+#: politician/functions/options.php:1
+msgid "Your latest posts"
+msgstr ""
+
+#. Text in echo
+#: politician/widgets/widget-twitter.php:46
+msgid "about %d days ago"
+msgstr ""
+
+#. Text in echo
+#: politician/widgets/widget-twitter.php:44
+msgid "about %d hours ago"
+msgstr ""
+
+#. Text in echo
+#: politician/widgets/widget-twitter.php:42
+msgid "about %d minutes ago"
+msgstr ""
+
+#. Text in echo
+#: politician/widgets/widget-twitter.php:40
+msgid "about %d seconds ago"
+msgstr ""
+
+#. Text in echo
+#: politician/widgets/widget-twitter.php:45
+msgid "about a day ago"
+msgstr ""
+
+#. Text in echo
+#: politician/widgets/widget-twitter.php:41
+msgid "about a minute ago"
+msgstr ""
+
+#. Text in echo
+#: politician/widgets/widget-twitter.php:43
+msgid "about an hour ago"
+msgstr ""
+
+#. Text in echo
+#: politician/functions/comments.php:23
+msgid "at"
+msgstr ""
+
+#. Text in function
+#: politician/functions/social_links.php:28
+msgid "dribbble"
+msgstr ""
+
+#. Text in function
+#: politician/functions/social_links.php:28
+msgid "facebook"
+msgstr ""
+
+#. Text in function
+#: politician/functions/comments.php:42
+msgid "required"
+msgstr ""
+
+#. Text in function
+#: politician/functions/social_links.php:28
+msgid "rss"
+msgstr ""
+
+#. Text in function
+#: politician/functions/social_links.php:28
+msgid "twitter"
+msgstr ""
+
+#. Text in echo
+#: politician/widgets/widget-twitter.php:47
+msgid "view tweet on twitter"
+msgstr ""
+
+#. Text in function
+#: politician/functions/social_links.php:28
+msgid "vimeo"
+msgstr ""
+
+#. Text in function
+#: politician/functions/social_links.php:28
+msgid "youtube"
+msgstr ""
