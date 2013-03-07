@@ -14,7 +14,7 @@
 		
 		<ul class="copyright">
 			
-			<li>Copyright &copy; <?php echo the_date('Y'); ?> IACC USA.</li>
+			<li>Copyright &copy; <?php echo date('Y'); ?> IACC USA.</li>
 			<li>A Non-Profit, Tax-exempt Organization</li>
 			<li>Tax ID #38-3687119</li>
 			
