@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Links/About
+Template Name: Links/About/Contact
 */
 ?>
 
@@ -16,7 +16,11 @@ Template Name: Links/About
 
 		<section id="content">
 
+			<?php while ( have_posts() ) : the_post(); ?>
 
+				<?php the_content(); ?>
+
+			<?php endwhile; ?>
 
 		</section><!--/ #content -->
 
