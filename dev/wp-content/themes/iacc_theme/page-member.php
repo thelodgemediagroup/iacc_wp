@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Links/About/Contact
+Template Name: IACC Member
 */
 ?>
 
