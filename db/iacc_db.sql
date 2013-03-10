@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 10, 2013 at 01:38 AM
+-- Generation Time: Mar 10, 2013 at 03:00 AM
 -- Server version: 5.5.25
 -- PHP Version: 5.4.4
 
@@ -109,7 +109,7 @@ CREATE TABLE `wp_options` (
   `autoload` varchar(20) NOT NULL DEFAULT 'yes',
   PRIMARY KEY (`option_id`),
   UNIQUE KEY `option_name` (`option_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=515 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=516 ;
 
 --
 -- Dumping data for table `wp_options`
@@ -214,10 +214,10 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (96, 'widget_archives', 'a:1:{s:12:"_multiwidget";i:1;}', 'yes'),
 (97, 'widget_meta', 'a:1:{s:12:"_multiwidget";i:1;}', 'yes'),
 (98, 'sidebars_widgets', 'a:3:{s:19:"wp_inactive_widgets";a:0:{}s:24:"default-side-widget-area";a:2:{i:0;s:20:"widget_wpmemwidget-2";i:1;s:8:"search-2";}s:13:"array_version";i:3;}', 'yes'),
-(99, 'cron', 'a:4:{i:1362876311;a:1:{s:30:"wp_scheduled_auto_draft_delete";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:5:"daily";s:4:"args";a:0:{}s:8:"interval";i:86400;}}}i:1362910280;a:3:{s:16:"wp_version_check";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}s:17:"wp_update_plugins";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}s:16:"wp_update_themes";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}}i:1362953489;a:1:{s:19:"wp_scheduled_delete";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:5:"daily";s:4:"args";a:0:{}s:8:"interval";i:86400;}}}s:7:"version";i:2;}', 'yes'),
+(99, 'cron', 'a:4:{i:1362910280;a:3:{s:16:"wp_version_check";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}s:17:"wp_update_plugins";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}s:16:"wp_update_themes";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}}i:1362953489;a:1:{s:19:"wp_scheduled_delete";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:5:"daily";s:4:"args";a:0:{}s:8:"interval";i:86400;}}}i:1362962711;a:1:{s:30:"wp_scheduled_auto_draft_delete";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:5:"daily";s:4:"args";a:0:{}s:8:"interval";i:86400;}}}s:7:"version";i:2;}', 'yes'),
 (101, '_site_transient_update_core', 'O:8:"stdClass":3:{s:7:"updates";a:1:{i:0;O:8:"stdClass":9:{s:8:"response";s:6:"latest";s:8:"download";s:40:"http://wordpress.org/wordpress-3.5.1.zip";s:6:"locale";s:5:"en_US";s:8:"packages";O:8:"stdClass":4:{s:4:"full";s:40:"http://wordpress.org/wordpress-3.5.1.zip";s:10:"no_content";s:51:"http://wordpress.org/wordpress-3.5.1-no-content.zip";s:11:"new_bundled";s:52:"http://wordpress.org/wordpress-3.5.1-new-bundled.zip";s:7:"partial";b:0;}s:7:"current";s:5:"3.5.1";s:11:"php_version";s:5:"5.2.4";s:13:"mysql_version";s:3:"5.0";s:11:"new_bundled";s:3:"3.5";s:15:"partial_version";s:0:"";}}s:12:"last_checked";i:1362868408;s:15:"version_checked";s:5:"3.5.1";}', 'yes'),
 (105, '_site_transient_update_themes', 'O:8:"stdClass":3:{s:12:"last_checked";i:1362848743;s:7:"checked";a:4:{s:10:"iacc_theme";s:5:"0.1.0";s:10:"politician";s:4:"1.08";s:12:"twentyeleven";s:3:"1.5";s:12:"twentytwelve";s:3:"1.1";}s:8:"response";a:0:{}}', 'yes'),
-(106, '_transient_random_seed', '16b7639adb648bb1d949cce217a4e438', 'yes'),
+(106, '_transient_random_seed', 'c2b0c2e56e76c7225e13ea4cb957cafc', 'yes'),
 (107, 'auth_key', 'i|s`r6:H6[14m?CF`Y%Gy#KO#*15y.cmVb:(-<@OqDv!YKH?x^!Qs|Xwp}XA;57X', 'yes'),
 (108, 'auth_salt', 'nwZrtgQ~x1&%jny=KSbsi)}[%OvxgZJ}pT-%lcC)z)kLpbus&gl5XcT}D._xtQlP', 'yes'),
 (109, 'logged_in_key', 'Q{^;y:zs>Fpe4%5hFs?<#]A;uQQO V7!Hc546y%o^8=qwA45]v}5<^inL$60V*|6', 'yes'),
@@ -376,7 +376,7 @@ CREATE TABLE `wp_postmeta` (
   PRIMARY KEY (`meta_id`),
   KEY `post_id` (`post_id`),
   KEY `meta_key` (`meta_key`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=617 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=625 ;
 
 --
 -- Dumping data for table `wp_postmeta`
@@ -483,16 +483,16 @@ INSERT INTO `wp_postmeta` (`meta_id`, `post_id`, `meta_key`, `meta_value`) VALUE
 (229, 53, '_additional_settings', ''),
 (277, 71, '_edit_last', '1'),
 (278, 71, '_edit_lock', '1362853734:1'),
-(279, 71, '_bbp_last_active_time', '2013-03-09 00:44:18'),
+(279, 71, '_bbp_last_active_time', '2013-03-10 01:57:59'),
 (280, 71, '_bbp_forum_subforum_count', '0'),
 (281, 71, '_bbp_reply_count', '0'),
 (282, 71, '_bbp_total_reply_count', '0'),
-(283, 71, '_bbp_topic_count', '0'),
-(284, 71, '_bbp_total_topic_count', '0'),
+(283, 71, '_bbp_topic_count', '1'),
+(284, 71, '_bbp_total_topic_count', '1'),
 (285, 71, '_bbp_topic_count_hidden', '0'),
-(295, 71, '_bbp_last_topic_id', '0'),
-(296, 71, '_bbp_last_reply_id', '0'),
-(297, 71, '_bbp_last_active_id', '0'),
+(295, 71, '_bbp_last_topic_id', '124'),
+(296, 71, '_bbp_last_reply_id', '124'),
+(297, 71, '_bbp_last_active_id', '124'),
 (338, 81, '_edit_last', '1'),
 (339, 81, '_edit_lock', '1362849386:1'),
 (343, 81, 'textfalse', ''),
@@ -695,7 +695,15 @@ INSERT INTO `wp_postmeta` (`meta_id`, `post_id`, `meta_key`, `meta_value`) VALUE
 (613, 121, '_EventEndDate', '2013-04-24 22:00:00'),
 (614, 121, '_EventVenueID', '123'),
 (615, 121, '_EventCost', '$33'),
-(616, 121, '_EventOrganizerID', '122');
+(616, 121, '_EventOrganizerID', '122'),
+(617, 124, '_bbp_forum_id', '71'),
+(618, 124, '_bbp_topic_id', '124'),
+(619, 124, '_bbp_author_ip', '127.0.0.1'),
+(620, 124, '_bbp_last_active_id', '124'),
+(621, 124, '_bbp_last_active_time', '2013-03-10 01:57:59'),
+(622, 124, '_bbp_reply_count', '0'),
+(623, 124, '_bbp_reply_count_hidden', '0'),
+(624, 124, '_bbp_voice_count', '1');
 
 -- --------------------------------------------------------
 
@@ -732,7 +740,7 @@ CREATE TABLE `wp_posts` (
   KEY `type_status_date` (`post_type`,`post_status`,`post_date`,`ID`),
   KEY `post_parent` (`post_parent`),
   KEY `post_author` (`post_author`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=124 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=125 ;
 
 --
 -- Dumping data for table `wp_posts`
@@ -854,7 +862,8 @@ INSERT INTO `wp_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post
 (120, 1, '2013-03-09 20:20:22', '2013-03-09 20:20:22', ' ', '', '', 'publish', 'open', 'open', '', '120', '', '', '2013-03-09 20:20:22', '2013-03-09 20:20:22', '', 0, 'http://localhost/?p=120', 10, 'nav_menu_item', '', 0),
 (121, 1, '2013-03-10 00:08:53', '2013-03-10 00:08:53', '', 'Second Event', 'This is a thing that happens at a castle. Yes, I said castle. So you better go. Because it''s a castle.', 'publish', 'closed', 'closed', '', 'second-event', '', '', '2013-03-10 00:08:53', '2013-03-10 00:08:53', '', 0, 'http://localhost/?post_type=tribe_events&#038;p=121', 0, 'tribe_events', '', 0),
 (122, 1, '2013-03-10 00:08:53', '2013-03-10 00:08:53', '', 'IACC', '', 'publish', 'open', 'open', '', 'iacc-2', '', '', '2013-03-10 00:08:53', '2013-03-10 00:08:53', '', 0, 'http://localhost/?tribe_organizer=iacc-2', 0, 'tribe_organizer', '', 0),
-(123, 1, '2013-03-10 00:08:53', '2013-03-10 00:08:53', '', 'A Castle', '', 'publish', 'open', 'open', '', 'a-castle', '', '', '2013-03-10 00:08:53', '2013-03-10 00:08:53', '', 0, 'http://localhost/venue/a-castle/', 0, 'tribe_venue', '', 0);
+(123, 1, '2013-03-10 00:08:53', '2013-03-10 00:08:53', '', 'A Castle', '', 'publish', 'open', 'open', '', 'a-castle', '', '', '2013-03-10 00:08:53', '2013-03-10 00:08:53', '', 0, 'http://localhost/venue/a-castle/', 0, 'tribe_venue', '', 0),
+(124, 2, '2013-03-10 01:57:59', '2013-03-10 01:57:59', 'I''d like to start a topic and I''m just a lowly member, not an admin.', 'Member Topic', '', 'publish', 'closed', 'open', '', 'member-topic', '', '', '2013-03-10 01:57:59', '2013-03-10 01:57:59', '', 71, 'http://localhost/forums/topic/member-topic/', 0, 'topic', '', 0);
 
 -- --------------------------------------------------------
 
@@ -971,7 +980,7 @@ CREATE TABLE `wp_usermeta` (
   PRIMARY KEY (`umeta_id`),
   KEY `user_id` (`user_id`),
   KEY `meta_key` (`meta_key`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=52 ;
 
 --
 -- Dumping data for table `wp_usermeta`
@@ -1001,7 +1010,33 @@ INSERT INTO `wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALU
 (22, 1, 'meta-box-order_dashboard', 'a:4:{s:6:"normal";s:157:"dashboard_right_now,dashboard_recent_comments,dashboard_incoming_links,dashboard_plugins,tribe_dashboard_widget,dashboard_custom_feed,bbp-dashboard-right-now";s:4:"side";s:83:"dashboard_quick_press,dashboard_recent_drafts,dashboard_primary,dashboard_secondary";s:7:"column3";s:0:"";s:7:"column4";s:0:"";}'),
 (23, 1, 'screen_layout_dashboard', '2'),
 (24, 1, 'tribe_setDefaultNavMenuBoxes', '1'),
-(25, 1, 'closedpostboxes_nav-menus', 'a:0:{}');
+(25, 1, 'closedpostboxes_nav-menus', 'a:0:{}'),
+(26, 2, 'first_name', 'Joe'),
+(27, 2, 'last_name', 'Test'),
+(28, 2, 'nickname', 'FreekedOut'),
+(29, 2, 'description', ''),
+(30, 2, 'rich_editing', 'true'),
+(31, 2, 'comment_shortcuts', 'false'),
+(32, 2, 'admin_color', 'fresh'),
+(33, 2, 'use_ssl', '0'),
+(34, 2, 'show_admin_bar_front', 'true'),
+(35, 2, 'wp_capabilities', 'a:2:{s:10:"subscriber";b:1;s:15:"bbp_participant";b:1;}'),
+(36, 2, 'wp_user_level', '0'),
+(37, 2, 'addr1', '444 Big Street'),
+(38, 2, 'addr2', ''),
+(39, 2, 'city', 'Detroit'),
+(40, 2, 'thestate', 'MI'),
+(41, 2, 'zip', '48201'),
+(42, 2, 'country', 'United States'),
+(43, 2, 'phone1', '(313) 555-5555'),
+(44, 2, 'aim', ''),
+(45, 2, 'yim', ''),
+(46, 2, 'jabber', ''),
+(47, 2, 'wpmem_reg_ip', '127.0.0.1'),
+(48, 2, 'wpmem_reg_url', 'http://localhost/member-admin/'),
+(49, 2, 'dismissed_wp_pointers', 'wp330_toolbar'),
+(50, 2, 'tgmpa_dismissed_notice', '1'),
+(51, 2, 'wp__bbp_last_posted', '1362880679');
 
 -- --------------------------------------------------------
 
@@ -1023,14 +1058,15 @@ CREATE TABLE `wp_users` (
   PRIMARY KEY (`ID`),
   KEY `user_login_key` (`user_login`),
   KEY `user_nicename` (`user_nicename`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `wp_users`
 --
 
 INSERT INTO `wp_users` (`ID`, `user_login`, `user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_activation_key`, `user_status`, `display_name`) VALUES
-(1, 'thelodgemediagroup', '$P$BDIcodXIzIG6HtHv.xEn1n5tGFviD71', 'thelodgemediagroup', 'wozniak.jesse@gmail.com', '', '2013-02-25 22:11:16', '', 0, 'thelodgemediagroup');
+(1, 'thelodgemediagroup', '$P$BDIcodXIzIG6HtHv.xEn1n5tGFviD71', 'thelodgemediagroup', 'wozniak.jesse@gmail.com', '', '2013-02-25 22:11:16', '', 0, 'thelodgemediagroup'),
+(2, 'FreekedOut', '$P$BN7snv9na6STDXGFegy04Gw0UDCN.z/', 'FreekedOut', 'projektaprikot@gmail.com', '', '2013-03-10 01:12:06', '', 0, 'FreekedOut');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
