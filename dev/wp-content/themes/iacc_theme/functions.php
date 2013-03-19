@@ -15,13 +15,6 @@ function remove_wp_logo()
 	}
 }
 add_action('wp_before_admin_bar_render', 'remove_wp_logo');
-/*
-// hides wordpress bar for everyone but admin
-if ( ! current_user_can('manage_options') )
-{
-	add_filter( 'show_admin_bar', '__return_false' );
-}
-*/
 
 // Disallows access to wp-admin.php and wp-login.php
 add_action( 'init', 'blockusers_init' );
@@ -191,4 +184,5 @@ class logged_in_iacc_member
 }
 
 $logged_in_iacc_member = new logged_in_iacc_member();
+
 ?>

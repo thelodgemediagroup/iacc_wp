@@ -527,7 +527,8 @@ function wpmem_login_form_NEW( $page, $arr )
 	} else {
 		$redirect_to = get_permalink();
 	}*/
-	$redirect_to = ( isset( $_REQUEST['redirect_to'] ) ) ? esc_url( $_REQUEST['redirect_to'] ) : get_permalink();
+	$member_url = site_url().'/member-admin/';
+	$redirect_to = ( isset( $_REQUEST['redirect_to'] ) ) ? esc_url( $_REQUEST['redirect_to'] ) : $member_url;
 
 	// fix the wptexturize
 	remove_filter( 'the_content', 'wpautop' );
@@ -637,44 +638,6 @@ endif;
  */
 function wpmem_inc_attribution()
 {
-	/*
-		Taking this out?  That's ok.  But please consider making a donation
-		to support the further development of this plugin.  Many hours of
-		work have gone into its development and ongoing support.
-		
-		If you are a developer using this for a client site, you see 
-		value in not having to do this from scratch.
-		Please consider a larger amount.
-		
-		If you are a donor, I thank you for your support!  
-	*/
-	
-	$show_attribution = true;
-	if( defined( 'WPMEM_REMOVE_ATTR' ) ) { $show_attribution = false; }
-
-	if( WPMEM_OLD_FORMS != 1 && $show_attribution == true ) { // NEW FORMS
-	
-		$str = '
-		<!-- Attribution keeps this plugin free!! -->
-		<div align="center">
-			<small>Powered by <a href="http://rocketgeek.com" target="_blank">WP-Members</a></small>
-		</div>';
-		
-		return $str;
-
-	} elseif( $show_attribution == true ) {  // LEGACY FORMS
-
-		$str = '
-			<tr>
-			  <td>&nbsp;</td>
-			  <td align="center"><!-- Attribution keeps this plugin free!! -->
-				<small>Powered by <a href="http://rocketgeek.com" target="_blank">WP-Members</a></small>
-			  </td>
-			</tr>';
-			
-		return $str;
-			
-	}
 	
 	return;
 	

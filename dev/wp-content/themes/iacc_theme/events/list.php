@@ -105,6 +105,10 @@ if ( !defined('ABSPATH') ) { die('-1'); }
 				</table>
 			</div>
 		</div> <!-- End post -->
+		<?php
+			$id = get_the_ID();
+			fb($id);
+		?>
 	<?php endwhile;// posts ?>
 	<?php else :?>
 		<div class="tribe-events-no-entry">
