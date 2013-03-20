@@ -14,3 +14,10 @@ Version: 0.1.0
 	font-size: 32px;
 	padding-top: 50px;
 }
+
+.event-ticket {
+	float: left;	
+	position: absolute;
+	bottom: 50px;
+	left: 10px;
+}

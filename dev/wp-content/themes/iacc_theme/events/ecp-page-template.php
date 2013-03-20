@@ -14,6 +14,15 @@ if ( !defined('ABSPATH') ) { die('-1'); }
 
 		<section id="content">
 
+			<?php
+
+			if (!is_user_logged_in())
+			{
+				echo '<div id="message" class="updated">Login to purchase tickets to events</div>';
+			}
+
+			?>
+
 			<?php tribe_events_before_html(); ?>
 
 			<?php include(tribe_get_current_template()); ?>

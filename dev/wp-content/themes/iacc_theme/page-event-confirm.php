@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Upgrade Confirm
+Template Name: Event Confirm
 */
 ?>
 
@@ -24,7 +24,7 @@ Template Name: Upgrade Confirm
 			<?php endwhile; endif; ?>
 
 
-			<?php // logic for paypal upgrade
+			<?php // logic for paypal event confirm
 
 			function confirm_paypal()
 			{
@@ -82,7 +82,7 @@ Template Name: Upgrade Confirm
 			if (isset($_POST['submit']) && $_POST['submit'] == 'Confirm Purchase')
 				{
 
-					$purchase_data = $_POST;
+					
 					$paypal_user = 'iaccbizmerchant_api1.iacctest.com';
 					$paypal_pwd = '8GZ7NVHFRLD2P2TC';
 					$paypal_signature = 'A2vrgv8RnN71M0W0b47Zo.s0QqLnA9YVeS0HX.PkUR2NJuqxPE3EtS8N';
@@ -124,25 +124,25 @@ Template Name: Upgrade Confirm
 					parse_str($result, $result);
 
 					if ( $result['ACK'] == 'Success')
-					{
-						//change membership type
-						update_user_meta($_POST['user_id'], 'membership_type', $_POST['DESC']);
+					{ 
+
 						//prepare paypal and post data for db insert
-						$token = $result['TOKEN'];
-						$timestamp = strtotime($result['TIMESTAMP']);
-						$transaction_id = $result['PAYMENTINFO_0_TRANSACTIONID'];
-						$amt = $result['PAYMENTINFO_0_AMT'];
-						$fee_amt = $result['PAYMENTINFO_0_FEEAMT'];
 						$user_id = $_POST['user_id'];
-						$description = $_POST['DESC'];
+						$event_id = $_POST['CUSTOM'];
+						$transaction_id = $result['PAYMENTINFO_0_TRANSACTIONID'];
 						$email = $_POST['EMAIL'];
 						$first_name = $_POST['FIRSTNAME'];
 						$last_name = $_POST['LASTNAME'];
+						$token = $result['TOKEN'];
+						$amt = $result['PAYMENTINFO_0_AMT'];
+						$fee = $result['PAYMENTINFO_0_FEEAMT'];
+						$timestamp = strtotime($result['TIMESTAMP']);
+						$quantity = $_POST['L_QTY0'];
 
 						//insert data into database
 						global $wpdb;
 						$sql = $wpdb->prepare(
-							"INSERT INTO `member_paypal` (`user_id`, `description`, `amt`, `fee`, `email`, `first_name`, `last_name`, `token`, `timestamp`, `transaction_id`) VALUES (%d,%s,%d,%d,%s,%s,%s,%s,%d,%s)", $user_id, $description, $amt, $fee_amt, $email, $first_name, $last_name, $token, $timestamp, $transaction_id);
+							"INSERT INTO `event_paypal` (`user_id`, `event_id`, `amt`, `fee`, `email`, `first_name`, `last_name`, `token`, `timestamp`, `transaction_id`, `quantity`) VALUES (%d,%d,%d,%d,%s,%s,%s,%s,%d,%s,%d)", $user_id, $event_id, $amt, $fee, $email, $first_name, $last_name, $token, $timestamp, $transaction_id, $quantity);
 
 						$query = $wpdb->query($sql);
 
@@ -190,14 +190,6 @@ Template Name: Upgrade Confirm
 						<td><?php echo $result['LASTNAME']; ?></td>
 					</tr>
 					<tr>
-						<td>Upgrade Type:</td>
-						<td><?php echo $result['L_NAME0']; ?></td>
-					</tr>
-					<tr>
-						<td>Billing Total:</td>
-						<td><?php echo '$'.$result['AMT'].' '.$result['CURRENCYCODE']; ?></td>
-					</tr>
-					<tr>
 						<td>Email:</td>
 						<td><?php echo $result['EMAIL']; ?></td>
 					</tr>
@@ -216,7 +208,23 @@ Template Name: Upgrade Confirm
 					<tr>
 						<td>Country</td>
 						<td><?php echo $result['SHIPTOCOUNTRYNAME']; ?></td>
-
+					</tr>
+					<tr>
+						<td>Item:</td>
+						<td><?php echo $result['L_NAME0']; ?></td>
+					</tr>
+					<tr>
+						<td>Ticket Quantity:</td>
+						<td><?php echo $result['L_PAYMENTREQUEST_0_QTY0']; ?></td>
+					</tr>
+					<tr>
+						<td>Cost Per Ticket:</td>
+						<td>$<?php echo $result['L_PAYMENTREQUEST_0_AMT0']; ?></td>
+					</tr>
+					<tr>
+						<td>Billing Total:</td>
+						<td><?php echo '$'.$result['AMT'].' '.$result['CURRENCYCODE']; ?></td>
+					</tr>
 				</table>
 
 				<input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
@@ -234,7 +242,7 @@ Template Name: Upgrade Confirm
 
 			</form>
 
-			<form method="get" action="<?php echo site_url(); ?>/upgrade/">
+			<form method="get" action="<?php echo site_url(); ?>/events/category/iacc-events/">
 				<input type="submit" name="confirm-cancel" value="Cancel">
 			</form>
 

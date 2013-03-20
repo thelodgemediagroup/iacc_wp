@@ -23,7 +23,7 @@ if ( !defined('ABSPATH') ) { die('-1'); }
 	<?php $hasPosts = true; $first = true; ?>
 	<?php while ( have_posts() ) : the_post(); ?>
 		<?php global $more; $more = false; ?>
-		<div id="post-<?php the_ID(); ?>" <?php post_class('tribe-events-event clearfix'); ?> itemscope itemtype="http://schema.org/Event">
+		<div id="post-<?php the_ID(); ?>" <?php post_class('tribe-events-event clearfix'); ?> itemscope itemtype="http://schema.org/Event" style="position:relative;">
 			<?php if ( tribe_is_new_event_day() && !tribe_is_day() && !tribe_is_multiday() ) : ?>
 				<h4 class="event-day"><?php echo tribe_get_start_date( null, false ); ?></h4>
 			<?php endif; ?>
@@ -40,6 +40,16 @@ if ( !defined('ABSPATH') ) { die('-1'); }
 				<?php else: ?>
 					<?php the_content(); ?>
 				<?php endif; ?>
+				<div class="event-ticket">
+
+					<?php 
+					if (is_user_logged_in())
+					{
+						echo '<a href="'. tribe_get_event_link().'" title="Get '.get_the_title().' tickets">Get '.get_the_title().' Tickets</a>';
+					}
+					?>
+
+				</div><!--/ #event-ticket -->
 			</div> <!-- End tribe-events-event-entry -->
 
 			<div class="tribe-events-event-list-meta" itemprop="location" itemscope itemtype="http://schema.org/Place">
@@ -105,10 +115,6 @@ if ( !defined('ABSPATH') ) { die('-1'); }
 				</table>
 			</div>
 		</div> <!-- End post -->
-		<?php
-			$id = get_the_ID();
-			fb($id);
-		?>
 	<?php endwhile;// posts ?>
 	<?php else :?>
 		<div class="tribe-events-no-entry">

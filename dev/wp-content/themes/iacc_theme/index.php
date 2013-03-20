@@ -25,10 +25,6 @@
 
 		<section id="content">
 
-						<?php	$user_id = get_current_user_id();
-				$user = get_user_meta($user_id, 'nickname', true);
-
-				fb($user); ?>
 
 		</section><!--/ #content -->
 
