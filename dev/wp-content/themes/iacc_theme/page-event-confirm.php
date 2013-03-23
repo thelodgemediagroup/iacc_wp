@@ -28,9 +28,9 @@ Template Name: Event Confirm
 
 			function confirm_paypal()
 			{
-				$paypal_user = 'iaccbizmerchant_api1.iacctest.com';
-				$paypal_pwd = '8GZ7NVHFRLD2P2TC';
-				$paypal_signature = 'A2vrgv8RnN71M0W0b47Zo.s0QqLnA9YVeS0HX.PkUR2NJuqxPE3EtS8N';
+				$paypal_user = 'iacctest_api1.iacc.org';
+				$paypal_pwd = '1364059762';
+				$paypal_signature = 'A7TqZwXuy-wkefzg6ZJOzSRN4BT0AMAkmbyUdSVB.gp7RG-kMNotJJ-O';
 
 				$paypal_target = 'https://api-3t.sandbox.paypal.com/nvp';
 
@@ -83,9 +83,9 @@ Template Name: Event Confirm
 				{
 
 					
-					$paypal_user = 'iaccbizmerchant_api1.iacctest.com';
-					$paypal_pwd = '8GZ7NVHFRLD2P2TC';
-					$paypal_signature = 'A2vrgv8RnN71M0W0b47Zo.s0QqLnA9YVeS0HX.PkUR2NJuqxPE3EtS8N';
+					$paypal_user = 'iacctest_api1.iacc.org';
+					$paypal_pwd = '1364059762';
+					$paypal_signature = 'A7TqZwXuy-wkefzg6ZJOzSRN4BT0AMAkmbyUdSVB.gp7RG-kMNotJJ-O';
 
 					$paypal_target = 'https://api-3t.sandbox.paypal.com/nvp';
 
