@@ -134,6 +134,7 @@ Template Name: Upgrade Confirm
 						$amt = $result['PAYMENTINFO_0_AMT'];
 						$fee_amt = $result['PAYMENTINFO_0_FEEAMT'];
 						$user_id = $_POST['user_id'];
+						$nickname = $_POST['user'];
 						$description = $_POST['DESC'];
 						$email = $_POST['EMAIL'];
 						$first_name = $_POST['FIRSTNAME'];
@@ -142,7 +143,7 @@ Template Name: Upgrade Confirm
 						//insert data into database
 						global $wpdb;
 						$sql = $wpdb->prepare(
-							"INSERT INTO `member_paypal` (`user_id`, `description`, `amt`, `fee`, `email`, `first_name`, `last_name`, `token`, `timestamp`, `transaction_id`) VALUES (%d,%s,%d,%d,%s,%s,%s,%s,%d,%s)", $user_id, $description, $amt, $fee_amt, $email, $first_name, $last_name, $token, $timestamp, $transaction_id);
+							"INSERT INTO `member_paypal` (`user_id`, `nickname`, `description`, `amt`, `fee`, `email`, `first_name`, `last_name`, `token`, `timestamp`, `transaction_id`) VALUES (%d,%s,%s,%d,%d,%s,%s,%s,%s,%d,%s)", $user_id, $nickname, $description, $amt, $fee_amt, $email, $first_name, $last_name, $token, $timestamp, $transaction_id);
 
 						$query = $wpdb->query($sql);
 
@@ -220,6 +221,8 @@ Template Name: Upgrade Confirm
 				</table>
 
 				<input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+
+				<input type="hidden" name="user" value="<?php echo $user; ?>">
 
 				<input type="submit" name="submit" value="Confirm Purchase">
 

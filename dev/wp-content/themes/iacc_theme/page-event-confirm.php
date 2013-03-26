@@ -81,7 +81,6 @@ Template Name: Event Confirm
 
 			if (isset($_POST['submit']) && $_POST['submit'] == 'Confirm Purchase')
 				{
-
 					
 					$paypal_user = 'iacctest_api1.iacc.org';
 					$paypal_pwd = '1364059762';
@@ -128,7 +127,10 @@ Template Name: Event Confirm
 
 						//prepare paypal and post data for db insert
 						$user_id = $_POST['user_id'];
-						$event_id = $_POST['CUSTOM'];
+						$event_id = $_POST['event_id'];
+						$event_date = strtotime($_POST['event_date']);
+						$event_venue = $_POST['event_venue'];
+						$event_title = $_POST['event_title'];
 						$transaction_id = $result['PAYMENTINFO_0_TRANSACTIONID'];
 						$email = $_POST['EMAIL'];
 						$first_name = $_POST['FIRSTNAME'];
@@ -142,7 +144,7 @@ Template Name: Event Confirm
 						//insert data into database
 						global $wpdb;
 						$sql = $wpdb->prepare(
-							"INSERT INTO `event_paypal` (`user_id`, `event_id`, `amt`, `fee`, `email`, `first_name`, `last_name`, `token`, `timestamp`, `transaction_id`, `quantity`) VALUES (%d,%d,%d,%d,%s,%s,%s,%s,%d,%s,%d)", $user_id, $event_id, $amt, $fee, $email, $first_name, $last_name, $token, $timestamp, $transaction_id, $quantity);
+							"INSERT INTO `event_paypal` (`user_id`, `event_id`, `event_title`, `event_venue`, `event_date`, `amt`, `fee`, `email`, `first_name`, `last_name`, `token`, `timestamp`, `transaction_id`, `quantity`) VALUES (%d,%d,%s,%s,%d,%d,%d,%s,%s,%s,%s,%d,%s,%d)", $user_id, $event_id, $event_title, $event_venue, $event_date, $amt, $fee, $email, $first_name, $last_name, $token, $timestamp, $transaction_id, $quantity);
 
 						$query = $wpdb->query($sql);
 
@@ -231,11 +233,23 @@ Template Name: Event Confirm
 
 				<input type="submit" name="submit" value="Confirm Purchase">
 
-				<?php 
+				<?php
+
+					$paypal_json = stripslashes($result['CUSTOM']);
+					$event_detail = json_decode($paypal_json);
+
+					foreach ($event_detail as $key => $value)
+					{
+						echo '<input type="hidden" name="'.$key.'" value="'.$value.'">';
+
+					}
 
 					foreach($result as $key => $value)
 					{
-						echo '<input type="hidden" name ="'.$key.'" value="'.$value.'">';
+						if ($key != 'CUSTOM' && $key != 'PAYMENTREQUEST_0_CUSTOM')
+						{
+							echo '<input type="hidden" name ="'.$key.'" value="'.$value.'">';	
+						}
 					}
 
 				?>

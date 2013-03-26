@@ -22,7 +22,14 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Purchase Tickets')
 				$paypal_total = $event_cost * $ticket_quantity;
 				$paypal_total_cost = number_format($paypal_total, 2, '.', '');
 				$paypal_desc = $event_title;
-				$paypal_custom = $event_id;
+				$paypal_custom = array();
+
+				$paypal_custom['event_id'] = $event_id;
+				$paypal_custom['event_venue'] = $event_venue;
+				$paypal_custom['event_title'] = $event_title;
+				$paypal_custom['event_date'] = $event_date;				
+
+				$paypal_custom_json = json_encode($paypal_custom);
 
 				// set paypal constants
 				$paypal_user = 'iacctest_api1.iacc.org';
@@ -45,13 +52,13 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Purchase Tickets')
 					'L_PAYMENTREQUEST_0_AMT0' => urlencode($event_cost),
 					'L_PAYMENTREQUEST_0_QTY0' => urlencode($ticket_quantity),
 					'ITEMAMT' => urlencode($ticket_quantity),
-					'PAYMENTREQUEST_0_CUSTOM' => urlencode($paypal_custom),
+					'PAYMENTREQUEST_0_CUSTOM' => urlencode($paypal_custom_json),
 					'PAYMENTREQUEST_0_DESC' => urlencode($paypal_desc),
 					'PAYMENTREQUEST_0_CURRENCYCODE' => urlencode('USD'),
 					'PAYMENTREQUEST_0_SHIPPINGAMT' => urlencode('0.00'),
 					'PAYMENTREQUEST_0_TAXAMT' => urlencode('0.00'),
-					'CANCELURL' => urlencode('http://iacc.thelodgemediagroup.com/events/category/iacc-events/'),
-					'RETURNURL' => urlencode('http://iacc.thelodgemediagroup.com/event-confirm/')					
+					'CANCELURL' => urlencode('http://localhost:80/events/category/iacc-events/'),
+					'RETURNURL' => urlencode('http://localhost:80/event-confirm/')					
 					);
 				fb($paypal_fields);
 				$fields_string = '';
