@@ -185,7 +185,9 @@ function wpmem_registration( $toggle )
 		} 
 		
 		// stick in a default value for membership_type
-		update_user_meta($user_id, 'membership_type', 'attendee');
+		update_user_meta($user_id, 'membership_type', 'IACC Attendee');
+		update_user_meta($user_id, 'member_permissions', 1);
+		update_user_meta($user_id, 'member_prettyprint', 'Attendee');
 
 		// capture IP address of user at registration
 		update_user_meta( $user_id, 'wpmem_reg_ip', $_SERVER['REMOTE_ADDR'] );

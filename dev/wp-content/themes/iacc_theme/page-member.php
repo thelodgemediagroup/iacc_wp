@@ -30,7 +30,7 @@ Template Name: IACC Member
 
 			if ($member_permissions < 2)
 			{
-				echo '<p>You are currently registered as an Attendee. <a href="'. site_url().'"/upgrade" title="Upgrade your membership">Upgrade</a>  your membership to get access to all areas of the IACC!</p>';
+				echo '<p>You are currently registered as an Attendee. <a href="'.site_url().'/upgrade/" title="Upgrade your membership">Upgrade</a>  your membership to get access to all areas of the IACC!</p>';
 			}
 			else 
 			{

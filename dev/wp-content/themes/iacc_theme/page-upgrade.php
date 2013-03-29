@@ -87,18 +87,6 @@ Template Name: Membership Upgrade
 						break;
 				}
 
-				/*if ($_POST['upgrade_type'] == 'member')
-				{
-					$paypal_description = 'IACC Membership';
-				}
-				elseif ($_POST['upgrade_type'] == 'corporate_member')
-				{
-					$paypal_description = 'IACC Corporate Membership';
-				}
-				if ($membership_type == 'member') {$paypal_price = $member_price;}
-				elseif ($membership_type) {$paypal_price = $corporate_member_price;}
-				else {$paypal_price = null;} */
-
 				// set paypal constants
 				$paypal_user = 'iacctest_api1.iacc.org';
 				$paypal_pwd = '1364059762';
