@@ -28,8 +28,15 @@ Template Name: Membership Upgrade
 			<?php // logic for paypal upgrade
 
 			// Set prices for the user to select from
-			$member_price = '39.00';
-			$corporate_member_price = '100.00';
+			// # appended represents max employees
+			$individual_member_price = '75.00';
+			$corporate_member_25_price = '250.00';
+			$corporate_member_50_price = '500.00';
+			$corporate_member_75_price = '750.00';
+			$corporate_member_100_price = '1000.00';
+			$donor_silver_price = '1500.00';
+			$donor_gold_price = '2500.00';
+			$donor_platinum_price = '5000.00';
 
 			// Pack data into form for paypal
 			if (isset($_POST['submit']) && $_POST['submit'] == 'Upgrade Membership')
@@ -38,7 +45,49 @@ Template Name: Membership Upgrade
 				// gather _POST data
 				$user_id = $_POST['user_id'];
 				$membership_type = $_POST['upgrade_type'];
-				if ($_POST['upgrade_type'] == 'member')
+				$paypal_name = "IACC Membership Upgrade";
+
+				switch($membership_type)
+				{
+					case 2: 
+						$paypal_description = "IACC Individual Membership";
+						$paypal_price = $individual_member_price;
+						break;
+					case 3:
+						$paypal_description = "IACC Corporate Membership 1-25 Employees";
+						$paypal_price = $corporate_member_25_price;
+						break;
+					case 4:
+						$paypal_description = "IACC Corporate Membership 26-50 Employees";
+						$paypal_price = $corporate_member_50_price;
+						break;
+					case 5:
+						$paypal_description = "IACC Corporate Membership 51-75 Employees";
+						$paypal_price = $corporate_member_75_price;
+						break;
+					case 6:
+						$paypal_description = "IACC Corporate Membership 76-100 Employees";
+						$paypal_price = $corporate_member_100_price;
+						break;
+					case 7:
+						$paypal_description = "Silver Donor Membership";
+						$paypal_price = $donor_silver_price;
+						break;
+					case 8:
+						$paypal_description = "Gold Donor Membership";
+						$paypal_price = $donor_gold_price;
+						break;
+					case 9:
+						$paypal_description = "Platinum Donor Membership";
+						$paypal_price = $donor_platinum_price;
+						break;
+					default:
+						$paypal_description = "IACC Attendee";
+						$paypal_price = '0.00';
+						break;
+				}
+
+				/*if ($_POST['upgrade_type'] == 'member')
 				{
 					$paypal_description = 'IACC Membership';
 				}
@@ -48,7 +97,7 @@ Template Name: Membership Upgrade
 				}
 				if ($membership_type == 'member') {$paypal_price = $member_price;}
 				elseif ($membership_type) {$paypal_price = $corporate_member_price;}
-				else {$paypal_price = null;}
+				else {$paypal_price = null;} */
 
 				// set paypal constants
 				$paypal_user = 'iacctest_api1.iacc.org';
@@ -66,17 +115,18 @@ Template Name: Membership Upgrade
 					'PAYMENTREQUEST_0_AMT' => urlencode($paypal_price),
 					'PAYMENTREQUEST_0_AMT0' => urlencode($paypal_price),
 					'PAYMENTREQUEST_0_ITEMAMT' => urlencode($paypal_price),
-					'L_PAYMENTREQUEST_0_NAME0' => urlencode($paypal_description),
-					'L_PAYMENTREQUEST_0_DESC0' => urlencode($membership_type),
+					'PAYMENTREQUEST_0_CUSTOM' => urlencode($membership_type),
+					'L_PAYMENTREQUEST_0_NAME0' => urlencode($paypal_name),
+					'L_PAYMENTREQUEST_0_DESC0' => urlencode($paypal_description),
 					'L_PAYMENTREQUEST_0_AMT0' => urlencode($paypal_price),
 					'L_PAYMENTREQUEST_0_QTY0' => urlencode('1'),
-					'ITEMAMT' => urlencode('1'),
-					'PAYMENTREQUEST_0_DESC' => urlencode($membership_type),
+					//'ITEMAMT' => urlencode('1'),
+					'PAYMENTREQUEST_0_DESC' => urlencode($paypal_description),
 					'PAYMENTREQUEST_0_CURRENCYCODE' => urlencode('USD'),
 					'PAYMENTREQUEST_0_SHIPPINGAMT' => urlencode('0.00'),
 					'PAYMENTREQUEST_0_TAXAMT' => urlencode('0.00'),
-					'CANCELURL' => urlencode('http://iacc.thelodgemediagroup.com/upgrade'),
-					'RETURNURL' => urlencode('http://iacc.thelodgemediagroup.com/confirm')					
+					'CANCELURL' => urlencode('http://localhost:80/upgrade'),
+					'RETURNURL' => urlencode('http://localhost:80/confirm')					
 					);
 
 				$fields_string = '';
@@ -126,14 +176,26 @@ Template Name: Membership Upgrade
 
 				<select name="upgrade_type">
 
-					<option value="member">Member ($<?php echo $member_price; ?>)</option>
-					<option value="corporate_member">Corporate Member ($<?php echo $corporate_member_price; ?>)</option>
-
+					<optgroup label="Donor Membership">
+						<option value="7">Silver ($<?php echo $donor_silver_price; ?>)</option>
+						<option value="8">Gold ($<?php echo $donor_gold_price; ?>)</option>
+						<option value="9">Platinum ($<?php echo $donor_platinum_price; ?>)</option>
+					</optgroup>
+					<optgroup label="Corporate Membership">
+						<option value="3">1-25 Employees ($<?php echo $corporate_member_25_price; ?>)</option>	
+						<option value="4">26-50 Employees ($<?php echo $corporate_member_50_price; ?>)</option>
+						<option value="5">51-75 Employees ($<?php echo $corporate_member_75_price; ?>)</option>
+						<option value="6">76-100 Employees ($<?php echo $corporate_member_100_price; ?>)</option>
+					</optgroup>
+					<optgroup label="Individual Membership">
+						<option value="2">Individual Member ($<?php echo $individual_member_price; ?>)</option>	
+					</optgroup>
+					
 				</select><br />
 
 				<input type="hidden" name="user_id" value="<?php echo get_current_user_id(); ?>">
-
-				<input type="submit" name="submit" value="Upgrade Membership">
+				<br />
+				<input type="submit" name="submit" value="Upgrade Membership" id="upgrade-button" class="button style-5">
 
 			</form>
 

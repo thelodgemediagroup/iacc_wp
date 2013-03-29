@@ -82,7 +82,6 @@ Template Name: Upgrade Confirm
 			if (isset($_POST['submit']) && $_POST['submit'] == 'Confirm Purchase')
 				{
 
-					$purchase_data = $_POST;
 					$paypal_user = 'iacctest_api1.iacc.org';
 					$paypal_pwd = '1364059762';
 					$paypal_signature = 'A7TqZwXuy-wkefzg6ZJOzSRN4BT0AMAkmbyUdSVB.gp7RG-kMNotJJ-O';
@@ -126,7 +125,37 @@ Template Name: Upgrade Confirm
 					if ( $result['ACK'] == 'Success')
 					{
 						//change membership type
-						update_user_meta($_POST['user_id'], 'membership_type', $_POST['DESC']);
+						//set variables
+						$membership_type = $_POST['DESC'];
+						$member_permissions = $_POST['CUSTOM'];
+						switch($member_permissions)
+						{
+							case 2:
+								$member_prettyprint = 'Member';
+								break;
+							case 3:
+								$member_prettyprint = 'Corporate Member';
+								break;
+							case 4:
+								$member_prettyprint = 'Corporate Member';
+								break;
+							case 5:
+								$member_prettyprint = 'Corporate Member';
+								break;
+							case 6:
+								$member_prettyprint = 'Corporate Member';
+								break;
+							case 7:
+								$member_prettyprint = 'Silver Donor';
+								break;
+							case 8:
+								$member_prettyprint = 'Gold Donor';
+								break;
+							case 9:
+								$member_prettyprint = 'Platinum Donor';
+								break;
+						}
+
 						//prepare paypal and post data for db insert
 						$token = $result['TOKEN'];
 						$timestamp = strtotime($result['TIMESTAMP']);
@@ -140,10 +169,15 @@ Template Name: Upgrade Confirm
 						$first_name = $_POST['FIRSTNAME'];
 						$last_name = $_POST['LASTNAME'];
 
+						//update wp tables with member data
+						update_user_meta($user_id, 'membership_type', $membership_type);
+						update_user_meta($user_id, 'member_permissions', $member_permissions);
+						update_user_meta($user_id, 'member_prettyprint', $member_prettyprint);
+
 						//insert data into database
 						global $wpdb;
 						$sql = $wpdb->prepare(
-							"INSERT INTO `member_paypal` (`user_id`, `nickname`, `description`, `amt`, `fee`, `email`, `first_name`, `last_name`, `token`, `timestamp`, `transaction_id`) VALUES (%d,%s,%s,%d,%d,%s,%s,%s,%s,%d,%s)", $user_id, $nickname, $description, $amt, $fee_amt, $email, $first_name, $last_name, $token, $timestamp, $transaction_id);
+							"INSERT INTO `member_paypal` (`user_id`, `nickname`, `description`, `permissions`, `pretty_print`, `amt`, `fee`, `email`, `first_name`, `last_name`, `token`, `timestamp`, `transaction_id`) VALUES (%d,%s,%s,%d,%s,%d,%d,%s,%s,%s,%s,%d,%s)", $user_id, $nickname, $membership_type, $member_permissions, $member_prettyprint, $amt, $fee_amt, $email, $first_name, $last_name, $token, $timestamp, $transaction_id);
 
 						$query = $wpdb->query($sql);
 

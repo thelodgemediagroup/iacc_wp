@@ -56,8 +56,9 @@ function imm_view_all_members()
 	$corp_member_args = array('key' => 'membership_type', 'value' => 'corporate_member');
 	$user_args = array('relation' => 'OR', $attendee_args, $member_args, $corp_member_args);
 	$iacc_users = get_users($user_args);
+	$user_count = count($iacc_users);
 
-	echo '<h2>Current Members</h2>';
+	echo '<h2>Current Members ('.$user_count.')</h2>';
 	echo '<table class="widefat page fixed"><thead><tr><th>Member</th><th>Email</th><th>Membership Type</th></tr></thead>';
 	
 	foreach ($iacc_users as $user)

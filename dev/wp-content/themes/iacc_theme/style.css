@@ -21,3 +21,7 @@ Version: 0.1.0
 	bottom: 50px;
 	left: 10px;
 }
+
+#upgrade-button {
+	color: #606163;
+}

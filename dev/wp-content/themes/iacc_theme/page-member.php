@@ -24,24 +24,19 @@ Template Name: IACC Member
 		<section id="content">
 
 			<?php
+
+			$member_prettyprint = $user['member_prettyprint'][0];
+			$member_permissions = $user['member_permissions'][0];
+
+			if ($member_permissions < 2)
+			{
+				echo '<p>You are currently registered as an Attendee. <a href="'. site_url().'"/upgrade" title="Upgrade your membership">Upgrade</a>  your membership to get access to all areas of the IACC!</p>';
+			}
+			else 
+			{
+				echo '<p>You are currently registered as a '.$member_prettyprint.'.</p>';	
+			}
 			
-			$membership_val = $user['membership_type'][0];
-
-			if ($membership_val == 'attendee')
-			{
-				?>
-				<p>You are currently registered as an <?php echo ucfirst($membership_val); ?>. <a href="<?php site_url(); ?>/upgrade" title="Upgrade your membership">Upgrade</a> your membership to get access to all areas of the IACC!</p>
-				<?php
-			}
-			elseif ($membership_val == 'member')
-			{
-				echo '<p>You are currently registered as an IACC Member.</p>';
-			}
-			elseif ($membership_val == 'corporate_member')
-			{
-				echo '<p>You are currently registered as a IACC Corporate Member</p>';
-			}
-
 			?>
 
 			<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
