@@ -63,7 +63,7 @@ function imm_view_all_members()
 	
 	foreach ($iacc_users as $user)
 	{
-		fb($user);
+		
 		echo '<tr>';
 		echo '<td>'.$user->nickname.'</td>';
 		echo '<td>'.$user->user_email.'</td>';
