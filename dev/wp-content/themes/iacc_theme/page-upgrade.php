@@ -113,8 +113,8 @@ Template Name: Membership Upgrade
 					'PAYMENTREQUEST_0_CURRENCYCODE' => urlencode('USD'),
 					'PAYMENTREQUEST_0_SHIPPINGAMT' => urlencode('0.00'),
 					'PAYMENTREQUEST_0_TAXAMT' => urlencode('0.00'),
-					'CANCELURL' => urlencode('http://localhost:80/upgrade'),
-					'RETURNURL' => urlencode('http://localhost:80/confirm')					
+					'CANCELURL' => urlencode('http://iacc.thelodgemediagroup.com/upgrade'),
+					'RETURNURL' => urlencode('http://iacc.thelodgemediagroup.com/confirm')					
 					);
 
 				$fields_string = '';
@@ -196,4 +196,3 @@ Template Name: Membership Upgrade
 	</section><!--/ .container -->
 
 <?php get_footer(); ?>
-

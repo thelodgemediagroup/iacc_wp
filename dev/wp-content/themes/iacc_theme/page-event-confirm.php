@@ -152,7 +152,8 @@ Template Name: Event Confirm
 
 						//redirect users to their profile
 
-						wp_redirect($redirect_to);
+						//wp_redirect($redirect_to);
+						header('Location: '.$redirect_to);
 						exit;
 
 					}
@@ -256,7 +257,7 @@ Template Name: Event Confirm
 
 			</form>
 
-			<form method="get" action="<?php echo site_url(); ?>/events/category/iacc-events/">
+			<form method="get" action="<?php echo site_url(); ?>/events/">
 				<input type="submit" name="confirm-cancel" value="Cancel">
 			</form>
 
@@ -269,4 +270,3 @@ Template Name: Event Confirm
 	</section><!--/ .container -->
 
 <?php get_footer(); ?>
-
