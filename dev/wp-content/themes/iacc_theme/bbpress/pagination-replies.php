@@ -41,6 +41,6 @@ $member_permissions = get_user_meta($user_id, 'member_permissions', TRUE);
 	<br />
 	<br />
 	<br />
-	<p><b>You must be an Member to access the IACC Forums. Upgrade your account to participate!</b></p>
+	<p><b>You must be a Member to access the IACC Forums. Upgrade your account to participate!</b></p>
 
 <?php endif; ?>
