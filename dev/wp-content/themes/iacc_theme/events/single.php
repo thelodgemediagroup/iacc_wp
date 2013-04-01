@@ -194,6 +194,29 @@ if ( !defined('ABSPATH') ) { die('-1'); }
 	<?php endif; ?>
 
 <!-- PURCHASE TICKETS FORM -->
+
+<?php //prepare price data
+
+$event_id = get_the_ID();
+$ticket_prices = get_post_meta($event_id, 'ticket_price');
+$event_cost_form = '<select name="event_cost">';
+
+if (!empty($ticket_prices))
+{
+	foreach ($ticket_prices as $price)
+	{
+		$ticket = explode(':', $price);
+		$ticket_desc = $ticket[0];
+		$ticket_price = $ticket[1];
+		$event_cost_form .= '<option value="'.$ticket_price.'">'.$ticket_desc.' ($'.$ticket_price.')</option>';
+
+	}
+}
+
+$event_cost_form .= '</select>';
+
+?>
+
 <?php 
 $user_id = get_current_user_id();
 if (is_user_logged_in())
@@ -201,15 +224,19 @@ if (is_user_logged_in())
 	<dl class="column">
 		<form method="post" action="<?php the_permalink(); ?>">
 	
+			<dt class="event-label">Ticket Type:</dt>
+			<dd>
+				<?php echo $event_cost_form; ?>
+			</dd>
 			<dt class="event-label">Ticket Quantity:</dt>
 			<dd><input type="text" size="10" name="ticket_quantity"></dd>
 				<input type="hidden" name="event_id" value="<?php the_ID(); ?>">
 				<input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
-				<input type="hidden" name="event_cost" value="<?php echo tribe_get_cost(); ?>">
+				
 				<input type="hidden" name="event_venue" value="<?php echo tribe_get_venue(); ?>">
 				<input type="hidden" name="event_date" value="<?php echo tribe_get_start_date(); ?>">
 				<input type="hidden" name="event_title" value="<?php the_title(); ?>">
-			<dt class"event-label"></dt>
+			<dt class="event-label"></dt>
 			<dd><input type="submit" name="submit" value="Purchase Tickets"></dd>
 		
 		</form>
