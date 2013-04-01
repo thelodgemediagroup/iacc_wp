@@ -10,12 +10,17 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Purchase Tickets')
 			{
 
 				// gather _POST data
+
+				$ticket_details = explode(':', $_POST['event_cost']);
+				$ticket_type_desc = $ticket_details[0];
+				$ticket_type_price = $ticket_details[1];
+
 				$user_id = $_POST['user_id'];
 				$ticket_quantity = $_POST['ticket_quantity'];
 				$event_id = $_POST['event_id'];
 				$event_title = $_POST['event_title'];
 				$event_venue = $_POST['event_venue'];
-				$event_cost = number_format($_POST['event_cost'], 2, '.', '');
+				$event_cost = number_format($ticket_type_price, 2, '.', '');
 				$event_date = $_POST['event_date'];
 
 				$paypal_name = 'Tickets for '.$event_title.' '.$event_date;
@@ -27,7 +32,8 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Purchase Tickets')
 				$paypal_custom['event_id'] = $event_id;
 				$paypal_custom['event_venue'] = $event_venue;
 				$paypal_custom['event_title'] = $event_title;
-				$paypal_custom['event_date'] = $event_date;				
+				$paypal_custom['event_date'] = $event_date;
+				$paypal_custom['ticket_desc'] = $ticket_type_desc;			
 
 				$paypal_custom_json = json_encode($paypal_custom);
 
@@ -208,8 +214,7 @@ if (!empty($ticket_prices))
 		$ticket = explode(':', $price);
 		$ticket_desc = $ticket[0];
 		$ticket_price = $ticket[1];
-		$event_cost_form .= '<option value="'.$ticket_price.'">'.$ticket_desc.' ($'.$ticket_price.')</option>';
-
+		$event_cost_form .= '<option value="'.$price.'">'.$ticket_desc.' ($'.$ticket_price.')</option>';
 	}
 }
 

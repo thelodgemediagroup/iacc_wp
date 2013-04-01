@@ -131,6 +131,7 @@ Template Name: Event Confirm
 						$event_date = strtotime($_POST['event_date']);
 						$event_venue = $_POST['event_venue'];
 						$event_title = $_POST['event_title'];
+						$ticket_desc = $_POST['ticket_desc'];
 						$transaction_id = $result['PAYMENTINFO_0_TRANSACTIONID'];
 						$email = $_POST['EMAIL'];
 						$first_name = $_POST['FIRSTNAME'];
@@ -144,7 +145,7 @@ Template Name: Event Confirm
 						//insert data into database
 						global $wpdb;
 						$sql = $wpdb->prepare(
-							"INSERT INTO `event_paypal` (`user_id`, `event_id`, `event_title`, `event_venue`, `event_date`, `amt`, `fee`, `email`, `first_name`, `last_name`, `token`, `timestamp`, `transaction_id`, `quantity`) VALUES (%d,%d,%s,%s,%d,%d,%d,%s,%s,%s,%s,%d,%s,%d)", $user_id, $event_id, $event_title, $event_venue, $event_date, $amt, $fee, $email, $first_name, $last_name, $token, $timestamp, $transaction_id, $quantity);
+							"INSERT INTO `event_paypal` (`user_id`, `event_id`, `event_title`, `event_venue`, `event_date`, `ticket_desc`, `amt`, `fee`, `email`, `first_name`, `last_name`, `token`, `timestamp`, `transaction_id`, `quantity`) VALUES (%d,%d,%s,%s,%d,%s,%d,%d,%s,%s,%s,%s,%d,%s,%d)", $user_id, $event_id, $event_title, $event_venue, $event_date, $ticket_desc, $amt, $fee, $email, $first_name, $last_name, $token, $timestamp, $transaction_id, $quantity);
 
 						$query = $wpdb->query($sql);
 

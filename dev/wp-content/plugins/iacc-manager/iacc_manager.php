@@ -85,7 +85,7 @@ function imm_get_purchased_events()
 */
 
 	echo '<h2>Purchased Events</h2>';
-	echo '<table class="widefat page fixed"><thead><tr><th>Event</th><th>Event Date</th><th>Ticket Quantity</th><th>Member</th><th>Email</th><th>Price</th><th>Time</th></tr></thead>';
+	echo '<table class="widefat page fixed"><thead><tr><th>Event</th><th>Event Date</th><th>Ticket Quantity</th><th>Ticket Type</th><th>Member</th><th>Email</th><th>Price</th><th>Time</th></tr></thead>';
 
 	foreach ($purchases as $purchase)
 	{
@@ -93,6 +93,7 @@ function imm_get_purchased_events()
 		echo '<td>'.$purchase->event_title.'</td>';
 		echo '<td>'.date("jS F, Y", $purchase->event_date).'</td>';
 		echo '<td>'.$purchase->quantity.'</td>';
+		echo '<td>'.$purchase->ticket_desc.'</td>';
 		echo '<td>'.$purchase->first_name.' '.$purchase->last_name.'</td>';
 		echo '<td>'.$purchase->email.'</td>';
 		echo '<td>'.$purchase->amt.'</td>';
