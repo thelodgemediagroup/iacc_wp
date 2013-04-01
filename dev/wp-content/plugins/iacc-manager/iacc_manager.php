@@ -38,7 +38,7 @@ function imm_action()
 	}
 	else if ( $action == 'edit' )
 	{
-		exit;
+		imm_edit_member();
 	}
 	else if ( $action == 'delete' )
 	{
@@ -59,7 +59,7 @@ function imm_view_all_members()
 	$user_count = count($iacc_users);
 
 	echo '<h2>Current Members ('.$user_count.')</h2>';
-	echo '<table class="widefat page fixed"><thead><tr><th>Member</th><th>Email</th><th>Membership Type</th></tr></thead>';
+	echo '<table class="widefat page fixed"><thead><tr><th>Member</th><th>Email</th><th>Membership Type</th><th>Edit</th></tr></thead>';
 	
 	foreach ($iacc_users as $user)
 	{
@@ -68,10 +68,61 @@ function imm_view_all_members()
 		echo '<td>'.$user->nickname.'</td>';
 		echo '<td>'.$user->user_email.'</td>';
 		echo '<td>'.$user->membership_type.'</td>';
+		echo '<td><a href="admin.php?page=iacc-manager/iacc_manager.php&action=edit&user_id='.$user->ID.'" title="Edit Membership Details">Edit</a></td>';
 		echo '</tr>';
 	}
 
 	echo '</table>';
+}
+
+function imm_edit_member()
+{
+	if (is_numeric($_GET['user_id']))
+	{
+		$user_id = $_GET['user_id'];	
+	}
+	else
+	{
+		echo '<b>Search error, please go back and find a user to edit.</b>';
+		exit;
+	}
+
+	$user = get_user_meta($user_id);
+	//verify that a membership type exists. set a default for manually entered users.
+	if ( !empty($user['membership_type'][0]) )
+	{
+		$membership_type = $user['membership_type'][0];	
+	}
+	else
+	{
+		$membership_type = 'Attendee';
+		update_user_meta($user_id, 'membership_type', $membership_type);
+	}
+	
+	//verify that membership permission exists. set a default for manually entered users.
+	if ( !empty($user['member_permissions'][0]) )
+	{
+		$member_permissions = $user['member_permissions'][0];	
+	}
+	else
+	{
+		$member_permissions = 1;
+		update_user_meta($user_id, 'member_permissions', $member_permissions);
+	}
+	
+	//verify that membership prettyprint exists. set a default for manually entered users.
+	if ( !empty($user['member_prettyprint'][0]) )
+	{
+		$member_prettyprint = $user['member_prettyprint'][0];	
+	}
+	else
+	{
+		$member_prettyprint = 'Attendee';
+		update_user_meta($user_id, 'member_prettyprint', $member_prettyprint);
+	}
+
+
+
 }
 
 function imm_get_purchased_events()
