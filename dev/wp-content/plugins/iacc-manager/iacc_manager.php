@@ -203,11 +203,11 @@ function imm_edit_member()
 			update_user_meta($user_id, 'membership_type', $membership_type);
 			update_user_meta($user_id, 'member_permissions', $member_permissions);
 			update_user_meta($user_id, 'member_prettyprint', $member_prettyprint);
-			echo 'Membership type updated.';
+			echo '<div class="updated settings-error><p><b>Membership type updated.</b></p></div>';
 		}
 		else
 		{
-			echo 'There was an error processing the edit. Please try again.';
+			echo '<div class="updated settings-error"><p><b>There was an error processing the edit. Please try again.</b></p></div>';
 		}
 	}
 
