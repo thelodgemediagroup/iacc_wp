@@ -88,6 +88,9 @@ function imm_edit_member()
 	}
 
 	$user = get_user_meta($user_id);
+	fb($user);
+	$member_meta = get_user_by('id', $user_id);
+	$user_email = $member_meta->user_email;
 	//verify that a membership type exists. set a default for manually entered users.
 	if ( !empty($user['membership_type'][0]) )
 	{
@@ -95,7 +98,7 @@ function imm_edit_member()
 	}
 	else
 	{
-		$membership_type = 'Attendee';
+		$membership_type = 'IACC Attendee';
 		update_user_meta($user_id, 'membership_type', $membership_type);
 	}
 	
@@ -121,8 +124,125 @@ function imm_edit_member()
 		update_user_meta($user_id, 'member_prettyprint', $member_prettyprint);
 	}
 
+// Prepare dropdown
+	$membership_kinds = array(
+		'IACC Attendee' 							 => 1,
+		'IACC Individual Membership' 				 => 2,
+		'IACC Corporate Membership 1-25 Employees'   => 3,
+		'IACC Corporate Membership 26-50 Employees'  => 4,
+		'IACC Corporate Membership 51-75 Employees'  => 5,
+		'IACC Corporate Membership 76-100 Employees' => 6,
+		'IACC Silver Donor Membership' 				 => 7,
+		'IACC Gold Donor Membership' 				 => 8,
+		'IACC Platinum Donor Membership' 			 => 9
+		);
 
+	$member_dropdown_form = '<select name="membership_type">';
 
+	foreach ($membership_kinds as $key => $value)
+	{
+		$member_dropdown_form .= '<option value="'.$value.'"';
+		if ($value == $member_permissions)
+		{
+			$member_dropdown_form .= ' selected="selected"';
+		}
+		$member_dropdown_form .= '>'.$key.'</option>';
+	}	
+
+	$member_dropdown_form .= '</select>';
+
+	//Do the post action if it's set
+
+	if (isset($_POST['submit']) && $_POST['submit'] == 'Edit Member')
+	{
+		$user_id = $_POST['user_id'];
+		$member_permissions = $_POST['membership_type'];
+
+		switch($member_permissions)
+		{
+			case 2: 
+				$membership_type = "IACC Individual Membership";
+				$member_prettyprint = 'Member';
+				break;
+			case 3:
+				$membership_type = "IACC Corporate Membership 1-25 Employees";
+				$member_prettyprint = 'Corporate Member';
+				break;
+			case 4:
+				$membership_type = "IACC Corporate Membership 26-50 Employees";
+				$member_prettyprint = 'Corporate Member';
+				break;
+			case 5:
+				$membership_type = "IACC Corporate Membership 51-75 Employees";
+				$member_prettyprint = 'Corporate Member';
+				break;
+			case 6:
+				$membership_type = "IACC Corporate Membership 76-100 Employees";
+				$member_prettyprint = 'Corporate Member';
+				break;
+			case 7:
+				$membership_type = "Silver Donor Membership";
+				$member_prettyprint = 'Silver Donor';
+				break;
+			case 8:
+				$membership_type = "Gold Donor Membership";
+				$member_prettyprint = 'Gold Donor';
+				break;
+			case 9:
+				$membership_type = "Platinum Donor Membership";
+				$member_prettyprint = 'Platinum Donor';
+				break;
+			default:
+				$membership_type = "IACC Attendee";
+				$member_prettyprint = '0.00';
+				break;
+		}
+
+		if (isset($membership_type) && isset($member_prettyprint) && isset($member_permissions))
+		{
+			update_user_meta($user_id, 'membership_type', $membership_type);
+			update_user_meta($user_id, 'member_permissions', $member_permissions);
+			update_user_meta($user_id, 'member_prettyprint', $member_prettyprint);
+			echo 'Membership type updated.';
+		}
+		else
+		{
+			echo 'There was an error processing the edit. Please try again.';
+		}
+	}
+
+	?>
+
+	<h2>Edit Member: <?php echo $user['nickname'][0]; ?></h2>
+
+	<form method="POST">
+
+		<table class="widefat page fixed">
+			<thead><tr><th>Field</th><th>Value</th></tr></thead>
+
+			<tr>
+				<td>Full Name:</td>
+				<td><?php echo $user['first_name'][0].' '.$user['last_name'][0]; ?></td>
+			</tr>
+			<tr>
+				<td>Username:</td>
+				<td><?php echo $user['nickname'][0]; ?></td>
+			</tr>
+			<tr>
+				<td>Email:</td>
+				<td><?php echo $user_email; ?></td>
+			</tr>
+			<tr>
+				<td>Membership Type:</td>
+				<td><?php echo $member_dropdown_form; ?></td>
+			</tr>
+		</table>
+		<br />
+		<input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+		<input type="submit" name="submit" value="Edit Member" class="button-primary">
+
+	</form>		
+<?php
 }
 
 function imm_get_purchased_events()
@@ -130,10 +250,6 @@ function imm_get_purchased_events()
 	global $wpdb;
 	$sql = "SELECT * FROM ".EVENT_PAYPAL." ORDER BY event_id ASC, timestamp ASC;";
 	$purchases = $wpdb->get_results($sql);
-/*
-	$sql = "SELECT DISTINCT event_id FROM ".EVENT_PAYPAL;
-	$events = $wpdb->get_results($sql);
-*/
 
 	echo '<h2>Purchased Events</h2>';
 	echo '<table class="widefat page fixed"><thead><tr><th>Event</th><th>Event Date</th><th>Ticket Quantity</th><th>Ticket Type</th><th>Member</th><th>Email</th><th>Price</th><th>Time</th></tr></thead>';
