@@ -25,3 +25,7 @@ Version: 0.1.0
 #upgrade-button {
 	color: #606163;
 }
+
+ul.copyright {
+	padding-top: 10px;
+}

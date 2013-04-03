@@ -1,31 +1,12 @@
-.wpic_container html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, address, big, cite, code, pre,
-del, dfn, em, font, img, ins, kbd, q, s, samp,
-small, strike, strong, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	outline: 0;
-	font-size: 100%;
-	vertical-align: baseline;
-	background: transparent;
-} 
-
 .wpic_container {
+	clear: both;
 	margin-top: 3px;
+	margin-bottom: 20px;
 	}
-	
-.wpic_navigation {
-	margin-bottom: 7px;
-	overflow: hidden;
-	}	
 
 .wpic_next {
+	float: right;
+	margin-top: 40px;
 	opacity: 0.85;
    transition: opacity .20s ease-in-out;
    -moz-transition: opacity .20s ease-in-out;
@@ -44,6 +25,8 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	}
 	
 .wpic_prev {
+	float: left;
+	margin-top: 40px;
 	opacity: 0.85;
    transition: opacity .20s ease-in-out;
    -moz-transition: opacity .20s ease-in-out;
@@ -63,7 +46,11 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	border: 0px;
 	}
 
+.wpic_content {
+	margin: 0 auto;
+}
+
 .wpic_content img {
-	margin-right: 3px;
+	margin: 0 auto;
 	}
 

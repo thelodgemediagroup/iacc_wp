@@ -13,25 +13,25 @@
 		<?php get_sidebar('footer'); ?>
 		
 		<ul class="copyright">
-					<script src="http://localhost/wp-content/logos/sponsors.js"></script>
+		<script src="http://localhost/wp-content/logos/sponsors.js"></script>
 		<script src="http://localhost/wp-content/logos/jcarousellite_1.0.1.js"></script>
 		<link href="http://localhost/wp-content/logos/style.css" rel="stylesheet">
 		<div class="wpic_container">
-			<div class="wpic_navigation" style="float: left;width: 60px;">
-				<button style="float:right; background: url(http://localhost/wp-content/logos/next.png) no-repeat;" class="wpic_next"></button>
-				<button style="float:right; background: url(http://localhost/wp-content/logos/prev.png) no-repeat;" class="wpic_prev"></button>
+			<div class="wpic_navigation">
+				<button style="float:right; background: url('http://localhost/wp-content/logos/next.png') no-repeat;" class="wpic_next"></button>
+				<button style="float:left; background: url('http://localhost/wp-content/logos/prev.png') no-repeat;" class="wpic_prev"></button>
 			</div>
-			<div style="clear: both;"></div>
+			
 			<div class="wpic_content">
 				<ul class="wpic_gallery">
-					<li style="height: 210px; margin: 0px;padding: 0px;top: 0px; bottom: 0px;"><a href="http://www.google.com"><img src="http://localhost/wp-content/logos/lakeshore_toltest.png"></a></li>
-					<li style="height: 210px; margin: 0px;padding: 0px;top: 0px; bottom: 0px;"><img src="http://localhost/wp-content/logos/comerica.png"></li>
-					<li style="height: 210px; margin: 0px;padding: 0px;top: 0px; bottom: 0px;"><img src="http://localhost/wp-content/logos/jack_doheny.png"></li>
-					<li style="height: 210px; margin: 0px;padding: 0px;top: 0px; bottom: 0px;"><img src="http://localhost/wp-content/logos/ug_software.png"></li>
-					<li style="height: 210px; margin: 0px;padding: 0px;top: 0px; bottom: 0px;"><img src="http://localhost/wp-content/logos/drc_iacc.png"></li>
+					<li style="height: 100px; width: 210px;"><a href="http://www.lakeshoreeng.com/"><img src="<?php echo site_url(); ?>/wp-content/logos/lakeshore_toltest.jpg"></a></li>
+					<li style="height: 100px; width: 210px;"><a href="http://comerica.com/vgn-ext-templating/v/index.jsp?vgnextoid=8888577d17a31010VgnVCM1000004302a8c0RCRD"><img src="<?php echo site_url(); ?>/wp-content/logos/comerica.jpg"></a></li>
+					<li style="height: 100px; width: 210px;"><a href="http://www.dohenysupplies.com/"><img src="<?php echo site_url(); ?>/wp-content/logos/jack_doheny.jpg"></a></li>
+					<li style="height: 100px; width: 210px;"><a href="http://www.ugsoftware.com/"><img src="<?php echo site_url(); ?>/wp-content/logos/ug_software.jpg"></a></li>
+					<li style="height: 100px; width: 210px;"><a href="http://www.detroitchamber.com/"><img src="<?php echo site_url(); ?>/wp-content/logos/drc_iacc.jpg"></a></li>
 				</ul>
 			</div>	
-		</div>	
+		</div>
 			<li>Copyright &copy; <?php echo date('Y'); ?> IACC USA.</li>
 			<li>A Non-Profit, Tax-exempt Organization</li>
 			<li>Tax ID #38-3687119</li>
