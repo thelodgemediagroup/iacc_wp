@@ -70,6 +70,35 @@ Template Name: Event Confirm
 
 				if ( $result['ACK'] == 'Success')
 				{
+
+					// get the user id					
+					$user_id = get_current_user_id();
+
+					//unpack the custom field
+					$paypal_json = stripslashes($result['CUSTOM']);
+					$event_detail = json_decode($paypal_json, TRUE);
+
+					// set the rest of the vars
+					fb($event_detail);
+					$event_id = $event_detail['event_id'];
+					$event_date = strtotime($event_detail['event_date']);
+					$event_venue = $event_detail['event_venue'];
+					$event_title = $event_detail['event_title'];
+					$ticket_desc = $event_detail['ticket_desc'];
+					$email = $result['EMAIL'];
+					$first_name = $result['FIRSTNAME'];
+					$last_name = $result['LASTNAME'];
+					$quantity = $result['L_QTY0'];
+					$token = $result['TOKEN'];
+					$timestamp = strtotime($result['TIMESTAMP']);
+					$tx_state = 0;
+
+					global $wpdb;
+					$sql = $wpdb->prepare(
+						"INSERT INTO `event_paypal` (`user_id`, `event_id`, `event_title`, `event_venue`, `event_date`, `ticket_desc`, `email`, `first_name`, `last_name`, `token`, `timestamp`, `quantity`, `tx_state`) VALUES (%d,%d,%s,%s,%d,%s,%s,%s,%s,%s,%d,%d,%d)", $user_id, $event_id, $event_title, $event_venue, $event_date, $ticket_desc, $email, $first_name, $last_name, $token, $timestamp, $quantity, $tx_state);
+
+					$query = $wpdb->query($sql);
+
 					return $result;
 				}
 				else
@@ -80,8 +109,7 @@ Template Name: Event Confirm
 			//Get info for building the confirmation form
 
 				$result = confirm_paypal();
-				session_start();
-				
+
 				// get info from DB about user
 				$user_id = get_current_user_id();
 				$user = get_user_meta($user_id, 'nickname', true);
@@ -89,8 +117,13 @@ Template Name: Event Confirm
 
 			if (isset($_POST['submit']) && $_POST['submit'] == 'Confirm Purchase')
 				{
-					
-					
+					// Check token in form against token in DB
+					global $wpdb;
+					$sql = $wpdb->prepare(
+						"SELECT * FROM event_paypal WHERE token = ".$_POST['chk_val']);
+					$query = $wpdb->get_results($sql);
+
+					fb($query);
 					exit;
 					$paypal_user = 'iacctest_api1.iacc.org';
 					$paypal_pwd = '1364059762';
@@ -136,21 +169,15 @@ Template Name: Event Confirm
 					{ 
 
 						//prepare paypal and post data for db insert
-						$user_id = $_POST['user_id'];
-						$event_id = $_POST['event_id'];
-						$event_date = strtotime($_POST['event_date']);
-						$event_venue = $_POST['event_venue'];
-						$event_title = $_POST['event_title'];
-						$ticket_desc = $_POST['ticket_desc'];
+
 						$transaction_id = $result['PAYMENTINFO_0_TRANSACTIONID'];
-						$email = $_POST['EMAIL'];
-						$first_name = $_POST['FIRSTNAME'];
-						$last_name = $_POST['LASTNAME'];
-						$token = $result['TOKEN'];
 						$amt = $result['PAYMENTINFO_0_AMT'];
 						$fee = $result['PAYMENTINFO_0_FEEAMT'];
-						$timestamp = strtotime($result['TIMESTAMP']);
-						$quantity = $_POST['L_QTY0'];
+
+						// Change state to success
+
+						$tx_state = 1;
+
 
 						//insert data into database
 						global $wpdb;
@@ -233,30 +260,9 @@ Template Name: Event Confirm
 					</tr>
 				</table>
 
-				<input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
-				<input type="hidden" name="test" value="<?php $result ?>">
 				<input type="submit" name="submit" value="Confirm Purchase">
 
-				<?php
-/*
-					$paypal_json = stripslashes($result['CUSTOM']);
-					$event_detail = json_decode($paypal_json);
-
-					foreach ($event_detail as $key => $value)
-					{
-						echo '<input type="hidden" name="'.$key.'" value="'.$value.'">';
-
-					}
-
-					foreach($result as $key => $value)
-					{
-						if ($key != 'CUSTOM' && $key != 'PAYMENTREQUEST_0_CUSTOM')
-						{
-							echo '<input type="hidden" name ="'.$key.'" value="'.$value.'">';	
-						}
-					}
-*/
-				?>
+				<input type="hidden" name="chk_val" value="<?php echo $result['TOKEN'] ?>">
 
 			</form>
 
