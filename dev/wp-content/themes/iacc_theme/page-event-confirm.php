@@ -74,14 +74,24 @@ Template Name: Event Confirm
 				}
 				else
 				{
-					echo '<b>The transaction did not complete, please try again.</b>';	
+					echo '<div class="notice">The transaction did not complete, please try again.</div>';	
 				}
 			}
+			//Get info for building the confirmation form
+
+				$result = confirm_paypal();
+				session_start();
+				
+				// get info from DB about user
+				$user_id = get_current_user_id();
+				$user = get_user_meta($user_id, 'nickname', true);
 
 
 			if (isset($_POST['submit']) && $_POST['submit'] == 'Confirm Purchase')
 				{
 					
+					
+					exit;
 					$paypal_user = 'iacctest_api1.iacc.org';
 					$paypal_pwd = '1364059762';
 					$paypal_signature = 'A7TqZwXuy-wkefzg6ZJOzSRN4BT0AMAkmbyUdSVB.gp7RG-kMNotJJ-O';
@@ -165,17 +175,9 @@ Template Name: Event Confirm
 				}
 			?>
 
-
-			<?php //Get info for building the confirmation form
-
-				$result = confirm_paypal();
-
-				// get info from DB about user
-				$user_id = get_current_user_id();
-				$user = get_user_meta($user_id, 'nickname', true);
+			<?php
 
 			?>
-
 
 			<form action="<?php echo the_permalink(); ?>" method="POST">
 
@@ -232,11 +234,11 @@ Template Name: Event Confirm
 				</table>
 
 				<input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
-
+				<input type="hidden" name="test" value="<?php $result ?>">
 				<input type="submit" name="submit" value="Confirm Purchase">
 
 				<?php
-
+/*
 					$paypal_json = stripslashes($result['CUSTOM']);
 					$event_detail = json_decode($paypal_json);
 
@@ -253,7 +255,7 @@ Template Name: Event Confirm
 							echo '<input type="hidden" name ="'.$key.'" value="'.$value.'">';	
 						}
 					}
-
+*/
 				?>
 
 			</form>

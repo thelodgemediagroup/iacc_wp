@@ -42,7 +42,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Purchase Tickets')
 					$ticket_quantity = intval($_POST['ticket_quantity']);
 
 					$user_id = get_current_user_id();
-					$event_title = the_title();
+					$event_title = get_the_title();
 					$event_venue = tribe_get_venue();
 					$event_cost = number_format($ticket_type_price, 2, '.', '');
 					$event_date = tribe_get_start_date();
@@ -87,8 +87,8 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Purchase Tickets')
 						'PAYMENTREQUEST_0_CURRENCYCODE' => urlencode('USD'),
 						'PAYMENTREQUEST_0_SHIPPINGAMT' => urlencode('0.00'),
 						'PAYMENTREQUEST_0_TAXAMT' => urlencode('0.00'),
-						'CANCELURL' => urlencode('http://iacc.thelodgemediagroup.com/events/'),
-						'RETURNURL' => urlencode('http://iacc.thelodgemediagroup.com/event-confirm/')					
+						'CANCELURL' => urlencode('http://localhost:80/events/'),
+						'RETURNURL' => urlencode('http://localhost:80/event-confirm/')					
 						);
 					
 					$fields_string = '';
