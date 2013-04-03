@@ -28,15 +28,19 @@ Template Name: IACC Member
 			$member_prettyprint = $user['member_prettyprint'][0];
 			$member_permissions = $user['member_permissions'][0];
 
-			if ($member_permissions < 2)
+			if (is_user_logged_in())
 			{
-				echo '<p>You are currently registered as an Attendee. <a href="'.site_url().'/upgrade/" title="Upgrade your membership">Upgrade</a>  your membership to get access to all areas of the IACC!</p>';
-			}
-			else 
-			{
-				echo '<p>You are currently registered as a '.$member_prettyprint.'.</p>';	
-			}
+
+				if ($member_permissions < 2)
+				{
+					echo '<p>You are currently registered as an Attendee. <a href="'.site_url().'/upgrade/" title="Upgrade your membership">Upgrade</a>  your membership to get access to all areas of the IACC!</p>';
+				}
+				else 
+				{
+					echo '<p>You are currently registered as a '.$member_prettyprint.'.</p>';	
+				}
 			
+			}
 			?>
 
 			<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>

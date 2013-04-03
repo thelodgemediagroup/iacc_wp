@@ -11,6 +11,24 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Purchase Tickets')
 
 				// gather _POST data
 
+				$event_id = get_the_ID();
+				fb($event_id);
+				exit;
+				$ticket_prices = get_post_meta($event_id, 'ticket_price');
+				$event_cost_form = '<select name="event_cost">';
+
+				if (!empty($ticket_prices))
+				{
+					foreach ($ticket_prices as $price)
+					{
+						$ticket = explode(':', $price);
+						$ticket_desc = $ticket[0];
+						$ticket_price = $ticket[1];
+						$event_cost_form .= '<option value="'.$price.'">'.$ticket_desc.' ($'.$ticket_price.')</option>';
+					}
+				}
+
+
 				$ticket_details = explode(':', $_POST['event_cost']);
 				$ticket_type_desc = $ticket_details[0];
 				$ticket_type_price = $ticket_details[1];
