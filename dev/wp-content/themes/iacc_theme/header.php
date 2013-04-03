@@ -86,7 +86,7 @@
 
 		<div class="header-sitename">
 
-			<h1>Indo American Chamber of Commerce USA</h1>
+			<h1>Indo-American Chamber of Commerce USA</h1>
 
 		</div><!--/ .sitename -->
 
