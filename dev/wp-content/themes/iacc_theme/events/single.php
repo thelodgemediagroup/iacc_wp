@@ -10,119 +10,126 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Purchase Tickets')
 			{
 
 				// gather _POST data
-
+				
 				$event_id = get_the_ID();
-				fb($event_id);
-				exit;
 				$ticket_prices = get_post_meta($event_id, 'ticket_price');
-				$event_cost_form = '<select name="event_cost">';
+				$selected_ticket = $_POST['event_cost'];
 
 				if (!empty($ticket_prices))
 				{
 					foreach ($ticket_prices as $price)
 					{
-						$ticket = explode(':', $price);
-						$ticket_desc = $ticket[0];
-						$ticket_price = $ticket[1];
-						$event_cost_form .= '<option value="'.$price.'">'.$ticket_desc.' ($'.$ticket_price.')</option>';
+						if ($selected_ticket == $price)
+						{
+							$ticket_details = explode(':', $price);
+							$ticket_type_desc = $ticket_details[0];
+							$ticket_type_price = $ticket_details[1];
+						}
 					}
 				}
 
-
-				$ticket_details = explode(':', $_POST['event_cost']);
-				$ticket_type_desc = $ticket_details[0];
-				$ticket_type_price = $ticket_details[1];
-
-				$user_id = $_POST['user_id'];
-				$ticket_quantity = $_POST['ticket_quantity'];
-				$event_id = $_POST['event_id'];
-				$event_title = $_POST['event_title'];
-				$event_venue = $_POST['event_venue'];
-				$event_cost = number_format($ticket_type_price, 2, '.', '');
-				$event_date = $_POST['event_date'];
-
-				$paypal_name = 'Tickets for '.$event_title.' '.$event_date;
-				$paypal_total = $event_cost * $ticket_quantity;
-				$paypal_total_cost = number_format($paypal_total, 2, '.', '');
-				$paypal_desc = $event_title;
-				$paypal_custom = array();
-
-				$paypal_custom['event_id'] = $event_id;
-				$paypal_custom['event_venue'] = $event_venue;
-				$paypal_custom['event_title'] = $event_title;
-				$paypal_custom['event_date'] = $event_date;
-				$paypal_custom['ticket_desc'] = $ticket_type_desc;			
-
-				$paypal_custom_json = json_encode($paypal_custom);
-
-				// set paypal constants
-				$paypal_user = 'iacctest_api1.iacc.org';
-				$paypal_pwd = '1364059762';
-				$paypal_signature = 'A7TqZwXuy-wkefzg6ZJOzSRN4BT0AMAkmbyUdSVB.gp7RG-kMNotJJ-O';
-				$paypal_target = 'https://api-3t.sandbox.paypal.com/nvp';
-
-				$paypal_fields = array(
-					'USER' => urlencode($paypal_user),
-					'PWD' => urlencode($paypal_pwd),
-					'SIGNATURE' => urlencode($paypal_signature),
-					'METHOD' => urlencode('SetExpressCheckout'),
-					'VERSION' => urlencode('72.0'),
-					'PAYMENTREQUEST_0_PAYMENTACTION' => urlencode('SALE'),
-					'PAYMENTREQUEST_0_AMT' => urlencode($paypal_total_cost),
-					'PAYMENTREQUEST_0_AMT0' => urlencode($paypal_total_cost),
-					'PAYMENTREQUEST_0_ITEMAMT' => urlencode($paypal_total_cost),
-					'L_PAYMENTREQUEST_0_NAME0' => urlencode($paypal_name),
-					'L_PAYMENTREQUEST_0_DESC0' => urlencode($paypal_desc),
-					'L_PAYMENTREQUEST_0_AMT0' => urlencode($event_cost),
-					'L_PAYMENTREQUEST_0_QTY0' => urlencode($ticket_quantity),
-					'ITEMAMT' => urlencode($ticket_quantity),
-					'PAYMENTREQUEST_0_CUSTOM' => urlencode($paypal_custom_json),
-					'PAYMENTREQUEST_0_DESC' => urlencode($paypal_desc),
-					'PAYMENTREQUEST_0_CURRENCYCODE' => urlencode('USD'),
-					'PAYMENTREQUEST_0_SHIPPINGAMT' => urlencode('0.00'),
-					'PAYMENTREQUEST_0_TAXAMT' => urlencode('0.00'),
-					'CANCELURL' => urlencode('http://iacc.thelodgemediagroup.com/events/'),
-					'RETURNURL' => urlencode('http://iacc.thelodgemediagroup.com/event-confirm/')					
-					);
-				
-				$fields_string = '';
-
-				foreach ($paypal_fields as $key => $value)
+				if (!isset($ticket_type_desc) || !isset($ticket_type_price))
 				{
-					$fields_string .= $key.'='.$value.'&';
+					echo '<div class="notice">Please re-enter the purchase information</div>';
 				}
-
-				
-				rtrim($fields_string,'&');
-				
-				$ch = curl_init();
-
-				curl_setopt($ch, CURLOPT_URL, $paypal_target);
-				curl_setopt($ch, CURLOPT_POST, count($paypal_fields));
-				curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-				curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-				curl_setopt($ch, CURLOPT_VERBOSE, 1);
-
-				
-				$result = curl_exec($ch);
-
-				curl_close($ch);
-				
-
-				
-				parse_str($result, $result);
-
-				if ( $result['ACK'] == 'Success')
+				elseif (!is_numeric($_POST['ticket_quantity']))
 				{
-					$response = urldecode($result['TOKEN']);
-					header('Location: https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&token='.$response);
-					exit;
+					echo '<div class="notice">Please enter a numeric value for ticket quantity</div>';
 				}
 				else
 				{
-					echo '<b>The transaction did not initialize, please try again.</b>';
+					
+					$ticket_quantity = intval($_POST['ticket_quantity']);
+
+					$user_id = get_current_user_id();
+					$event_title = the_title();
+					$event_venue = tribe_get_venue();
+					$event_cost = number_format($ticket_type_price, 2, '.', '');
+					$event_date = tribe_get_start_date();
+
+					$paypal_name = 'Tickets for '.$event_title.' '.$event_date;
+					$paypal_total = $event_cost * $ticket_quantity;
+					$paypal_total_cost = number_format($paypal_total, 2, '.', '');
+					$paypal_desc = $event_title;
+					$paypal_custom = array();
+
+					$paypal_custom['event_id'] = $event_id;
+					$paypal_custom['event_venue'] = $event_venue;
+					$paypal_custom['event_title'] = $event_title;
+					$paypal_custom['event_date'] = $event_date;
+					$paypal_custom['ticket_desc'] = $ticket_type_desc;			
+
+					$paypal_custom_json = json_encode($paypal_custom);
+
+					// set paypal constants
+					$paypal_user = 'iacctest_api1.iacc.org';
+					$paypal_pwd = '1364059762';
+					$paypal_signature = 'A7TqZwXuy-wkefzg6ZJOzSRN4BT0AMAkmbyUdSVB.gp7RG-kMNotJJ-O';
+					$paypal_target = 'https://api-3t.sandbox.paypal.com/nvp';
+
+					$paypal_fields = array(
+						'USER' => urlencode($paypal_user),
+						'PWD' => urlencode($paypal_pwd),
+						'SIGNATURE' => urlencode($paypal_signature),
+						'METHOD' => urlencode('SetExpressCheckout'),
+						'VERSION' => urlencode('72.0'),
+						'PAYMENTREQUEST_0_PAYMENTACTION' => urlencode('SALE'),
+						'PAYMENTREQUEST_0_AMT' => urlencode($paypal_total_cost),
+						'PAYMENTREQUEST_0_AMT0' => urlencode($paypal_total_cost),
+						'PAYMENTREQUEST_0_ITEMAMT' => urlencode($paypal_total_cost),
+						'L_PAYMENTREQUEST_0_NAME0' => urlencode($paypal_name),
+						'L_PAYMENTREQUEST_0_DESC0' => urlencode($paypal_desc),
+						'L_PAYMENTREQUEST_0_AMT0' => urlencode($event_cost),
+						'L_PAYMENTREQUEST_0_QTY0' => urlencode($ticket_quantity),
+						'ITEMAMT' => urlencode($ticket_quantity),
+						'PAYMENTREQUEST_0_CUSTOM' => urlencode($paypal_custom_json),
+						'PAYMENTREQUEST_0_DESC' => urlencode($paypal_desc),
+						'PAYMENTREQUEST_0_CURRENCYCODE' => urlencode('USD'),
+						'PAYMENTREQUEST_0_SHIPPINGAMT' => urlencode('0.00'),
+						'PAYMENTREQUEST_0_TAXAMT' => urlencode('0.00'),
+						'CANCELURL' => urlencode('http://iacc.thelodgemediagroup.com/events/'),
+						'RETURNURL' => urlencode('http://iacc.thelodgemediagroup.com/event-confirm/')					
+						);
+					
+					$fields_string = '';
+
+					foreach ($paypal_fields as $key => $value)
+					{
+						$fields_string .= $key.'='.$value.'&';
+					}
+
+					
+					rtrim($fields_string,'&');
+					
+					$ch = curl_init();
+
+					curl_setopt($ch, CURLOPT_URL, $paypal_target);
+					curl_setopt($ch, CURLOPT_POST, count($paypal_fields));
+					curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+					curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+					curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+					curl_setopt($ch, CURLOPT_VERBOSE, 1);
+
+					
+					$result = curl_exec($ch);
+
+					curl_close($ch);
+					
+
+					
+					parse_str($result, $result);
+
+					if ( $result['ACK'] == 'Success')
+					{
+						$response = urldecode($result['TOKEN']);
+						header('Location: https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&token='.$response);
+						exit;
+					}
+					else
+					{
+						echo '<div class="notice">The transaction did not initialize, please try again.</div>';
+					}
 				}
 			}
 
@@ -140,7 +147,7 @@ if ( !defined('ABSPATH') ) { die('-1'); }
 	<?php
 		if (!is_user_logged_in())
 		{
-			echo '<b>Login to purchase tickets</b>';
+			echo '<div class="info">Login to purchase tickets</div>';
 		}
 	?>
 	<dl class="column">
@@ -253,12 +260,7 @@ if (is_user_logged_in())
 			</dd>
 			<dt class="event-label">Ticket Quantity:</dt>
 			<dd><input type="text" size="10" name="ticket_quantity"></dd>
-				<input type="hidden" name="event_id" value="<?php the_ID(); ?>">
-				<input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
-				
-				<input type="hidden" name="event_venue" value="<?php echo tribe_get_venue(); ?>">
-				<input type="hidden" name="event_date" value="<?php echo tribe_get_start_date(); ?>">
-				<input type="hidden" name="event_title" value="<?php the_title(); ?>">
+
 			<dt class="event-label"></dt>
 			<dd><input type="submit" name="submit" value="Purchase Tickets"></dd>
 		
