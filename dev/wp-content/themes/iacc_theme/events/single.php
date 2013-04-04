@@ -5,7 +5,7 @@
 *
 * You can customize this view by putting a replacement file of the same name (single.php) in the events/ directory of your theme.
 */
-ob_start();
+
 if (isset($_POST['submit']) && $_POST['submit'] == 'Purchase Tickets')
 			{
 
@@ -87,8 +87,8 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Purchase Tickets')
 						'PAYMENTREQUEST_0_CURRENCYCODE' => urlencode('USD'),
 						'PAYMENTREQUEST_0_SHIPPINGAMT' => urlencode('0.00'),
 						'PAYMENTREQUEST_0_TAXAMT' => urlencode('0.00'),
-						'CANCELURL' => urlencode('http://localhost:80/events/'),
-						'RETURNURL' => urlencode('http://localhost:80/event-confirm/')					
+						'CANCELURL' => urlencode('http://iacc.thelodgemediagroup.com/events/'),
+						'RETURNURL' => urlencode('http://iacc.thelodgemediagroup.com/event-confirm/')					
 						);
 					
 					$fields_string = '';

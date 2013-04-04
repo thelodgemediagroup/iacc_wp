@@ -91,11 +91,13 @@ Template Name: Event Confirm
 					$quantity = $result['L_QTY0'];
 					$token = $result['TOKEN'];
 					$timestamp = strtotime($result['TIMESTAMP']);
+					$payerid = $result['PAYERID'];
+					$amt = $result['AMT'];
 					$tx_state = 0;
 
 					global $wpdb;
 					$sql = $wpdb->prepare(
-						"INSERT INTO `event_paypal` (`user_id`, `event_id`, `event_title`, `event_venue`, `event_date`, `ticket_desc`, `email`, `first_name`, `last_name`, `token`, `timestamp`, `quantity`, `tx_state`) VALUES (%d,%d,%s,%s,%d,%s,%s,%s,%s,%s,%d,%d,%d)", $user_id, $event_id, $event_title, $event_venue, $event_date, $ticket_desc, $email, $first_name, $last_name, $token, $timestamp, $quantity, $tx_state);
+						"INSERT INTO `event_paypal` (`user_id`, `event_id`, `event_title`, `event_venue`, `event_date`, `ticket_desc`, `email`, `first_name`, `last_name`, `token`, `timestamp`, `quantity`, `tx_state`, `amt`, `payer_id`) VALUES (%d,%d,%s,%s,%d,%s,%s,%s,%s,%s,%d,%d,%d,%d,%s)", $user_id, $event_id, $event_title, $event_venue, $event_date, $ticket_desc, $email, $first_name, $last_name, $token, $timestamp, $quantity, $tx_state, $amt, $payerid);
 
 					$query = $wpdb->query($sql);
 
@@ -118,86 +120,98 @@ Template Name: Event Confirm
 			if (isset($_POST['submit']) && $_POST['submit'] == 'Confirm Purchase')
 				{
 					// Check token in form against token in DB
+					$chk_val = $_POST['chk_val'];
+					$chk_val2 = $_POST['chk_val2'];
+
 					global $wpdb;
 					$sql = $wpdb->prepare(
-						"SELECT * FROM event_paypal WHERE token = ".$_POST['chk_val']);
+						"SELECT * FROM `event_paypal` WHERE `token` = '".$_POST['chk_val']."' AND `timestamp` = '".$_POST['chk_val2']."'");
 					$query = $wpdb->get_results($sql);
+					$token = $query[0]->token;
+					$timestamp = $query[0]->timestamp;
+					$payer_id = $query[0]->payer_id;
+					$amt = $query[0]->amt;
 
-					fb($query);
-					exit;
-					$paypal_user = 'iacctest_api1.iacc.org';
-					$paypal_pwd = '1364059762';
-					$paypal_signature = 'A7TqZwXuy-wkefzg6ZJOzSRN4BT0AMAkmbyUdSVB.gp7RG-kMNotJJ-O';
-
-					$paypal_target = 'https://api-3t.sandbox.paypal.com/nvp';
-
-					$fields = array(
-			              'USER' => urlencode($paypal_user),
-			              'PWD' => urlencode($paypal_pwd),
-			              'SIGNATURE' => urlencode($paypal_signature),
-			              'VERSION' => urlencode('72.0'),
-			              'PAYMENTREQUEST_0_PAYMENTACTION' => urlencode('Sale'),
-			              'PAYERID' => urlencode($_POST['PAYERID']),
-			              'TOKEN' => urlencode($_POST['TOKEN']),
-			              'PAYMENTREQUEST_0_AMT' => urlencode($_POST['AMT']),
-			              'METHOD' => urlencode('DoExpressCheckoutPayment')
-			          );
-					
-					$fields_string = '';
-			      	foreach ( $fields as $key => $value)
-			        {
-			        	$fields_string .= $key.'='.$value.'&';
-			        }
-			     	rtrim($fields_string,'&');
-			     
-			     	$ch = curl_init();
-
-					curl_setopt($ch, CURLOPT_URL, $paypal_target);
-					curl_setopt($ch, CURLOPT_POST, count($fields));
-					curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
-					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-					curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-					curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-					curl_setopt($ch, CURLOPT_VERBOSE, 1);
-
-					$result = curl_exec($ch);
-
-					curl_close($ch);
-					parse_str($result, $result);
-
-					if ( $result['ACK'] == 'Success')
-					{ 
-
-						//prepare paypal and post data for db insert
-
-						$transaction_id = $result['PAYMENTINFO_0_TRANSACTIONID'];
-						$amt = $result['PAYMENTINFO_0_AMT'];
-						$fee = $result['PAYMENTINFO_0_FEEAMT'];
-
-						// Change state to success
-
-						$tx_state = 1;
-
-
-						//insert data into database
-						global $wpdb;
-						$sql = $wpdb->prepare(
-							"INSERT INTO `event_paypal` (`user_id`, `event_id`, `event_title`, `event_venue`, `event_date`, `ticket_desc`, `amt`, `fee`, `email`, `first_name`, `last_name`, `token`, `timestamp`, `transaction_id`, `quantity`) VALUES (%d,%d,%s,%s,%d,%s,%d,%d,%s,%s,%s,%s,%d,%s,%d)", $user_id, $event_id, $event_title, $event_venue, $event_date, $ticket_desc, $amt, $fee, $email, $first_name, $last_name, $token, $timestamp, $transaction_id, $quantity);
-
-						$query = $wpdb->query($sql);
-
-						$redirect_to = site_url().'/member-admin/';
-
-						//redirect users to their profile
-
-						//wp_redirect($redirect_to);
-						header('Location: '.$redirect_to);
-						exit;
-
+					if ($chk_val != $token || $chk_val2 != $timestamp)
+					{
+						echo '<div class="notice">An error occurred during processing. Please try again</div>';
 					}
 					else
 					{
-						echo 'Payment did not complete. Please try again';
+
+						$paypal_user = 'iacctest_api1.iacc.org';
+						$paypal_pwd = '1364059762';
+						$paypal_signature = 'A7TqZwXuy-wkefzg6ZJOzSRN4BT0AMAkmbyUdSVB.gp7RG-kMNotJJ-O';
+
+						$paypal_target = 'https://api-3t.sandbox.paypal.com/nvp';
+
+						$fields = array(
+				              'USER' => urlencode($paypal_user),
+				              'PWD' => urlencode($paypal_pwd),
+				              'SIGNATURE' => urlencode($paypal_signature),
+				              'VERSION' => urlencode('72.0'),
+				              'PAYMENTREQUEST_0_PAYMENTACTION' => urlencode('Sale'),
+				              'PAYERID' => urlencode($payer_id),
+				              'TOKEN' => urlencode($token),
+				              'PAYMENTREQUEST_0_AMT' => urlencode($amt),
+				              'METHOD' => urlencode('DoExpressCheckoutPayment')
+				          );
+						
+						$fields_string = '';
+				      	foreach ( $fields as $key => $value)
+				        {
+				        	$fields_string .= $key.'='.$value.'&';
+				        }
+				     	rtrim($fields_string,'&');
+				     
+				     	$ch = curl_init();
+
+						curl_setopt($ch, CURLOPT_URL, $paypal_target);
+						curl_setopt($ch, CURLOPT_POST, count($fields));
+						curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+						curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+						curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+						curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+						curl_setopt($ch, CURLOPT_VERBOSE, 1);
+
+						$result = curl_exec($ch);
+
+						curl_close($ch);
+						parse_str($result, $result);
+
+						if ( $result['ACK'] == 'Success')
+						{ 
+
+							//prepare paypal and post data for db insert
+
+							$transaction_id = $result['PAYMENTINFO_0_TRANSACTIONID'];
+							$fee = $result['PAYMENTINFO_0_FEEAMT'];
+
+							// Change state to success
+
+							$tx_state = 1;
+
+
+							//insert data into database
+							global $wpdb;
+							$sql = $wpdb->prepare(
+								"UPDATE `event_paypal` SET `transaction_id`=%s, `fee`=%d, `tx_state`=%d WHERE `token`=%s AND `timestamp`=%d", $transaction_id, $fee, $tx_state, $token, $timestamp);
+
+							$query = $wpdb->query($sql);
+
+							$redirect_to = site_url().'/member-admin/';
+
+							//redirect users to their profile
+
+							//wp_redirect($redirect_to);
+							header('Location: '.$redirect_to);
+							exit;
+
+						}
+						else
+						{
+							echo '<div class="notice">Payment did not complete. Please try again</div>';
+						}
 					}
 				}
 			?>
@@ -262,7 +276,8 @@ Template Name: Event Confirm
 
 				<input type="submit" name="submit" value="Confirm Purchase">
 
-				<input type="hidden" name="chk_val" value="<?php echo $result['TOKEN'] ?>">
+				<input type="hidden" name="chk_val" value="<?php echo $result['TOKEN']; ?>">
+				<input type="hidden" name="chk_val2" value="<?php echo strtotime($result['TIMESTAMP']); ?>">
 
 			</form>
 
