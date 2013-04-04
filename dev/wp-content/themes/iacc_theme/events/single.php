@@ -15,6 +15,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Purchase Tickets')
 				$ticket_prices = get_post_meta($event_id, 'ticket_price');
 				$selected_ticket = $_POST['event_cost'];
 
+				// check that selection is valid
 				if (!empty($ticket_prices))
 				{
 					foreach ($ticket_prices as $price)
@@ -28,6 +29,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Purchase Tickets')
 					}
 				}
 
+				// throw error for invalid selection
 				if (!isset($ticket_type_desc) || !isset($ticket_type_price))
 				{
 					echo '<div class="notice">Please re-enter the purchase information</div>';
@@ -35,6 +37,32 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Purchase Tickets')
 				elseif (!is_numeric($_POST['ticket_quantity']))
 				{
 					echo '<div class="notice">Please enter a numeric value for ticket quantity</div>';
+				}
+				else if ($ticket_type_price == 0)
+				{
+					$user_info = get_userdata($user_id);
+					$first_name = $user_info->user_firstname;
+					$last_name = $user_info->user_lastname;
+					$email = $user_info->user_email;
+					$ticket_quantity = intval($_POST['ticket_quantity']);
+					$user_id = get_current_user_id();
+					$event_title = get_the_title();
+					$event_venue = tribe_get_venue();
+					$event_cost = number_format($ticket_type_price, 2, '.', '');
+					$event_date = tribe_get_start_date();
+					$timestamp = time();
+					$tx_state = 1;
+
+					global $wpdb;
+					$sql = $wpdb->prepare(
+						"INSERT INTO `event_paypal` (`user_id`, `quantity`, `event_id`, `ticket_desc`, `event_title`, `event_venue`, `event_date`, `tx_state`, `first_name`, `last_name`, `email`, `timestamp`) VALUES (%d,%d,%d,%s,%s,%s,%s,%d,%s,%s,%s,%d)", $user_id, $ticket_quantity, $event_id, $event_title, $event_venue, $event_date, $tx_state, $first_name, $last_name, $email, $timestamp);
+
+					$query = $wpdb->query($sql);
+
+					//redirect users to their profile
+					$redirect_to = site_url().'/member-admin/';
+					header('Location: '.$redirect_to);
+					exit;
 				}
 				else
 				{
