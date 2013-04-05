@@ -30,7 +30,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Purchase Tickets')
 				}
 
 				// throw error for invalid selection
-				if (!isset($ticket_type_desc) || !isset($ticket_type_price))
+				if (!isset($ticket_type_desc) || empty($ticket_type_price))
 				{
 					echo '<div class="notice">Please re-enter the purchase information</div>';
 				}
@@ -40,23 +40,37 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Purchase Tickets')
 				}
 				else if ($ticket_type_price == 0)
 				{
+					$user_id = get_current_user_id();
 					$user_info = get_userdata($user_id);
-					$first_name = $user_info->user_firstname;
-					$last_name = $user_info->user_lastname;
+					if (empty($user_info->user_firstname))
+					{
+						$first_name = 'NA';
+					}
+					else
+					{
+						$first_name = $user_info->user_firstname;	
+					}
+					if (empty($user_info->user_lastname))
+					{
+						$last_name = 'NA';
+					}
+					else
+					{
+						$last_name = $user_info->user_lastname;	
+					}
+					
 					$email = $user_info->user_email;
 					$ticket_quantity = intval($_POST['ticket_quantity']);
-					$user_id = get_current_user_id();
 					$event_title = get_the_title();
 					$event_venue = tribe_get_venue();
-					$event_cost = number_format($ticket_type_price, 2, '.', '');
-					$event_date = tribe_get_start_date();
+					$event_date = strtotime(tribe_get_start_date());
 					$timestamp = time();
 					$tx_state = 1;
 
 					global $wpdb;
 					$sql = $wpdb->prepare(
-						"INSERT INTO `event_paypal` (`user_id`, `quantity`, `event_id`, `ticket_desc`, `event_title`, `event_venue`, `event_date`, `tx_state`, `first_name`, `last_name`, `email`, `timestamp`) VALUES (%d,%d,%d,%s,%s,%s,%s,%d,%s,%s,%s,%d)", $user_id, $ticket_quantity, $event_id, $event_title, $event_venue, $event_date, $tx_state, $first_name, $last_name, $email, $timestamp);
-
+						"INSERT INTO `event_paypal` (`user_id`, `quantity`, `event_id`, `ticket_desc`, `event_title`, `event_venue`, `event_date`, `tx_state`, `first_name`, `last_name`, `email`, `timestamp`) VALUES (%d,%d,%d,%s,%s,%s,%d,%d,%s,%s,%s,%d)", $user_id, $ticket_quantity, $event_id, $ticket_type_desc, $event_title, $event_venue, $event_date, $tx_state, $first_name, $last_name, $email, $timestamp);
+					
 					$query = $wpdb->query($sql);
 
 					//redirect users to their profile
@@ -161,6 +175,77 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Purchase Tickets')
 				}
 			}
 
+if (isset($_POST['submit']) && $_POST['submit'] == 'Reserve Seats')
+{
+				// gather _POST data
+				
+				$event_id = get_the_ID();
+				$free_tickets = get_post_meta($event_id, 'free_tickets');
+				$selected_ticket = $_POST['event_cost'];
+				
+				// check that selection is valid
+				if (!empty($free_tickets))
+				{
+					foreach ($free_tickets as $ticket_info)
+					{
+						if ($selected_ticket == $ticket_info)
+						{
+							$ticket_details = explode(':', $ticket_info);
+							$ticket_type_desc = $ticket_details[0];
+							$ticket_type_price = $ticket_details[1];
+						}
+					}
+				}
+
+				// throw error for invalid selection
+				if (!isset($ticket_type_desc))
+				{
+					echo '<div class="notice">Please re-enter the purchase information</div>';
+				}
+				elseif (!is_numeric($_POST['ticket_quantity']))
+				{
+					echo '<div class="notice">Please enter a numeric value for ticket quantity</div>';
+				}
+				
+					$user_id = get_current_user_id();
+					$user_info = get_userdata($user_id);
+					if (empty($user_info->user_firstname))
+					{
+						$first_name = 'NA';
+					}
+					else
+					{
+						$first_name = $user_info->user_firstname;	
+					}
+					if (empty($user_info->user_lastname))
+					{
+						$last_name = 'NA';
+					}
+					else
+					{
+						$last_name = $user_info->user_lastname;	
+					}
+					
+					$email = $user_info->user_email;
+					$ticket_quantity = intval($_POST['ticket_quantity']);
+					$event_title = get_the_title();
+					$event_venue = tribe_get_venue();
+					$event_date = strtotime(tribe_get_start_date());
+					$timestamp = time();
+					$tx_state = 1;
+
+					global $wpdb;
+					$sql = $wpdb->prepare(
+						"INSERT INTO `event_paypal` (`user_id`, `quantity`, `event_id`, `ticket_desc`, `event_title`, `event_venue`, `event_date`, `tx_state`, `first_name`, `last_name`, `email`, `timestamp`) VALUES (%d,%d,%d,%s,%s,%s,%d,%d,%s,%s,%s,%d)", $user_id, $ticket_quantity, $event_id, $ticket_type_desc, $event_title, $event_venue, $event_date, $tx_state, $first_name, $last_name, $email, $timestamp);
+					
+					$query = $wpdb->query($sql);
+
+					//redirect users to their profile
+					$redirect_to = site_url().'/member-admin/';
+					header('Location: '.$redirect_to);
+					exit;
+				
+}
 
 //require_once('paypal_event.php');
 // Don't load directly
@@ -175,7 +260,7 @@ if ( !defined('ABSPATH') ) { die('-1'); }
 	<?php
 		if (!is_user_logged_in())
 		{
-			echo '<div class="info">Login to purchase tickets</div>';
+			echo '<div class="info"><a href="'.site_url().'/login/" title="Member Login">Login</a> to purchase tickets</div>';
 		}
 	?>
 	<dl class="column">
@@ -258,6 +343,7 @@ if ( !defined('ABSPATH') ) { die('-1'); }
 
 $event_id = get_the_ID();
 $ticket_prices = get_post_meta($event_id, 'ticket_price');
+$free_tickets = get_post_meta($event_id, 'free_tickets');
 $event_cost_form = '<select name="event_cost">';
 
 if (!empty($ticket_prices))
@@ -271,6 +357,17 @@ if (!empty($ticket_prices))
 	}
 }
 
+if (!empty($free_tickets))
+{
+	foreach($free_tickets as $free)
+	{
+		$ticket = explode(':', $free);
+		$ticket_desc = $ticket[0];
+		$ticket_price = $ticket[1];
+		$event_cost_form .= '<option value="'.$free.'">'.$ticket_desc.' (Free)</option>';
+	}
+}
+
 $event_cost_form .= '</select>';
 
 ?>
@@ -278,22 +375,43 @@ $event_cost_form .= '</select>';
 <?php 
 $user_id = get_current_user_id();
 if (is_user_logged_in())
-{ ?>
-	<dl class="column">
-		<form method="post" action="<?php the_permalink(); ?>">
-	
-			<dt class="event-label">Ticket Type:</dt>
-			<dd>
-				<?php echo $event_cost_form; ?>
-			</dd>
-			<dt class="event-label">Ticket Quantity:</dt>
-			<dd><input type="text" size="10" name="ticket_quantity"></dd>
-
-			<dt class="event-label"></dt>
-			<dd><input type="submit" name="submit" value="Purchase Tickets"></dd>
+{ 
+	if (!empty($ticket_prices))
+	{?>
+		<dl class="column">
+			<form method="post" action="<?php the_permalink(); ?>">
 		
-		</form>
-	</dl>
+				<dt class="event-label">Ticket Type:</dt>
+				<dd>
+					<?php echo $event_cost_form; ?>
+				</dd>
+				<dt class="event-label">Ticket Quantity:</dt>
+				<dd><input type="text" size="10" name="ticket_quantity"></dd>
+
+				<dt class="event-label"></dt>
+				<dd><input type="submit" name="submit" value="Purchase Tickets"></dd>
+			
+			</form>
+		</dl>
+	<?php } 
+	else
+	{?>
+		<dl class="column">
+			<form method="post" action="<?php the_permalink(); ?>">
+		
+				<dt class="event-label">Ticket Type:</dt>
+				<dd>
+					<?php echo $event_cost_form; ?>
+				</dd>
+				<dt class="event-label">Seat Quantity:</dt>
+				<dd><input type="text" size="10" name="ticket_quantity"></dd>
+
+				<dt class="event-label"></dt>
+				<dd><input type="submit" name="submit" value="Reserve Seats"></dd>
+			
+			</form>
+		</dl>		
+	<?php } ?>	
 <?php } ?>
 
 
