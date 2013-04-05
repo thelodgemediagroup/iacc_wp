@@ -43,7 +43,7 @@ Template Name: Membership Upgrade
 			{
 
 				// gather _POST data
-				$user_id = $_POST['user_id'];
+				$user_id = get_current_user_id();
 				$membership_type = $_POST['upgrade_type'];
 				$paypal_name = "IACC Membership Upgrade";
 
@@ -83,7 +83,9 @@ Template Name: Membership Upgrade
 						break;
 					default:
 						$paypal_description = "IACC Attendee";
-						$paypal_price = '0.00';
+						$paypal_price = 0.00;
+						$membership_type = 1;
+						echo '<div class="notice">Please re-enter the upgrade details</div>';
 						break;
 				}
 
@@ -127,34 +129,35 @@ Template Name: Membership Upgrade
 				
 				rtrim($fields_string,'&');
 				
-				$ch = curl_init();
-
-				curl_setopt($ch, CURLOPT_URL, $paypal_target);
-				curl_setopt($ch, CURLOPT_POST, count($paypal_fields));
-				curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-				curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-				curl_setopt($ch, CURLOPT_VERBOSE, 1);
-
-				
-				$result = curl_exec($ch);
-
-				curl_close($ch);
-				
-
-				
-				parse_str($result, $result);
-
-				if ( $result['ACK'] == 'Success')
+				if ($paypal_price > 0)
 				{
-					$response = urldecode($result['TOKEN']);
-					header('Location: https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&token='.$response);
-					exit;
-				}
-				else
-				{
-					echo '<b>The transaction did not initialize, please try again.</b>';
+
+					$ch = curl_init();
+
+					curl_setopt($ch, CURLOPT_URL, $paypal_target);
+					curl_setopt($ch, CURLOPT_POST, count($paypal_fields));
+					curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+					curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+					curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+					curl_setopt($ch, CURLOPT_VERBOSE, 1);
+	
+					$result = curl_exec($ch);
+
+					curl_close($ch);
+						
+					parse_str($result, $result);
+
+					if ( $result['ACK'] == 'Success')
+					{
+						$response = urldecode($result['TOKEN']);
+						header('Location: https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&token='.$response);
+						exit;
+					}
+					else
+					{
+						echo '<div class="notice">The transaction did not initialize, please try again.</div>';
+					}
 				}
 			}
 			?>
@@ -181,7 +184,6 @@ Template Name: Membership Upgrade
 					
 				</select><br />
 
-				<input type="hidden" name="user_id" value="<?php echo get_current_user_id(); ?>">
 				<br />
 				<input type="submit" name="submit" value="Upgrade Membership" id="upgrade-button" class="button style-5">
 

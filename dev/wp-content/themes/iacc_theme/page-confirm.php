@@ -70,65 +70,20 @@ Template Name: Upgrade Confirm
 
 				if ( $result['ACK'] == 'Success')
 				{
-					return $result;
-				}
-				else
-				{
-					echo '<b>The transaction did not complete, please try again.</b>';	
-				}
-			}
+					$token = $result['TOKEN'];
+					$timestamp = strtotime($result['TIMESTAMP']);
+					$amt = $result['AMT'];
+					$user_id = get_current_user_id();
+					$nickname = get_user_meta($user_id, 'nickname', true);
+					$membership_type = $result['DESC'];
+					$member_permissions = $result['CUSTOM'];
+					$email = $result['EMAIL'];
+					$first_name = $result['FIRSTNAME'];
+					$last_name = $result['LASTNAME'];
+					$payer_id = $result['PAYERID'];
+					$tx_state = 0;
 
-
-			if (isset($_POST['submit']) && $_POST['submit'] == 'Confirm Purchase')
-				{
-
-					$paypal_user = 'iacctest_api1.iacc.org';
-					$paypal_pwd = '1364059762';
-					$paypal_signature = 'A7TqZwXuy-wkefzg6ZJOzSRN4BT0AMAkmbyUdSVB.gp7RG-kMNotJJ-O';
-
-					$paypal_target = 'https://api-3t.sandbox.paypal.com/nvp';
-
-					$fields = array(
-			              'USER' => urlencode($paypal_user),
-			              'PWD' => urlencode($paypal_pwd),
-			              'SIGNATURE' => urlencode($paypal_signature),
-			              'VERSION' => urlencode('72.0'),
-			              'PAYMENTREQUEST_0_PAYMENTACTION' => urlencode('Sale'),
-			              'PAYERID' => urlencode($_POST['PAYERID']),
-			              'TOKEN' => urlencode($_POST['TOKEN']),
-			              'PAYMENTREQUEST_0_AMT' => urlencode($_POST['AMT']),
-			              'METHOD' => urlencode('DoExpressCheckoutPayment')
-			          );
-					
-					$fields_string = '';
-			      	foreach ( $fields as $key => $value)
-			        {
-			        	$fields_string .= $key.'='.$value.'&';
-			        }
-			     	rtrim($fields_string,'&');
-			     
-			     	$ch = curl_init();
-
-					curl_setopt($ch, CURLOPT_URL, $paypal_target);
-					curl_setopt($ch, CURLOPT_POST, count($fields));
-					curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
-					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-					curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-					curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-					curl_setopt($ch, CURLOPT_VERBOSE, 1);
-
-					$result = curl_exec($ch);
-
-					curl_close($ch);
-					parse_str($result, $result);
-
-					if ( $result['ACK'] == 'Success')
-					{
-						//change membership type
-						//set variables
-						$membership_type = $_POST['DESC'];
-						$member_permissions = $_POST['CUSTOM'];
-						switch($member_permissions)
+					switch($member_permissions)
 						{
 							case 2:
 								$member_prettyprint = 'Member';
@@ -156,18 +111,87 @@ Template Name: Upgrade Confirm
 								break;
 						}
 
+					//insert data into database
+					global $wpdb;
+					$sql = $wpdb->prepare(
+						"INSERT INTO `member_paypal` (`user_id`, `nickname`, `description`, `permissions`, `pretty_print`, `amt`, `email`, `first_name`, `last_name`, `token`, `timestamp`, `payer_id`, `tx_state`) VALUES (%d,%s,%s,%d,%s,%d,%s,%s,%s,%s,%d,%s,%d)", $user_id, $nickname, $membership_type, $member_permissions, $member_prettyprint, $amt, $email, $first_name, $last_name, $token, $timestamp, $payer_id, $tx_state);
+
+					$query = $wpdb->query($sql);
+
+					return $result;
+				}
+				else
+				{
+					echo '<div class="notice">The transaction did not complete, please try again.</div>';	
+				}
+			}
+
+
+			if (isset($_POST['submit']) && $_POST['submit'] == 'Confirm Purchase')
+				{
+					global $wpdb;
+					$sql = $wpdb->prepare(
+						"SELECT * FROM `member_paypal` WHERE `token` = %s AND `timestamp` = %d", $_POST['chk_val'], $_POST['chk_val2']);
+
+					$query = $wpdb->get_results($sql);
+
+					$payer_id = $query[0]->payer_id;
+					$token = $query[0]->token;
+					$timestamp = $query[0]->timestamp;
+					$amt = $query[0]->amt;
+					$membership_type = $query[0]->description;
+					$member_prettyprint = $query[0]->pretty_print;
+					$member_permissions = $query[0]->permissions;
+					$user_id = $query[0]->user_id;
+					
+					$paypal_user = 'iacctest_api1.iacc.org';
+					$paypal_pwd = '1364059762';
+					$paypal_signature = 'A7TqZwXuy-wkefzg6ZJOzSRN4BT0AMAkmbyUdSVB.gp7RG-kMNotJJ-O';
+
+					$paypal_target = 'https://api-3t.sandbox.paypal.com/nvp';
+
+					$fields = array(
+			              'USER' => urlencode($paypal_user),
+			              'PWD' => urlencode($paypal_pwd),
+			              'SIGNATURE' => urlencode($paypal_signature),
+			              'VERSION' => urlencode('72.0'),
+			              'PAYMENTREQUEST_0_PAYMENTACTION' => urlencode('Sale'),
+			              'PAYERID' => urlencode($payer_id),
+			              'TOKEN' => urlencode($token),
+			              'PAYMENTREQUEST_0_AMT' => urlencode($amt),
+			              'METHOD' => urlencode('DoExpressCheckoutPayment')
+			          );
+					
+					$fields_string = '';
+			      	foreach ( $fields as $key => $value)
+			        {
+			        	$fields_string .= $key.'='.$value.'&';
+			        }
+			     	rtrim($fields_string,'&');
+			     
+			     	$ch = curl_init();
+
+					curl_setopt($ch, CURLOPT_URL, $paypal_target);
+					curl_setopt($ch, CURLOPT_POST, count($fields));
+					curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+					curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+					curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+					curl_setopt($ch, CURLOPT_VERBOSE, 1);
+
+					$result = curl_exec($ch);
+
+					curl_close($ch);
+					parse_str($result, $result);
+
+					if ( $result['ACK'] == 'Success')
+					{
+
 						//prepare paypal and post data for db insert
-						$token = $result['TOKEN'];
-						$timestamp = strtotime($result['TIMESTAMP']);
+
 						$transaction_id = $result['PAYMENTINFO_0_TRANSACTIONID'];
-						$amt = $result['PAYMENTINFO_0_AMT'];
-						$fee_amt = $result['PAYMENTINFO_0_FEEAMT'];
-						$user_id = $_POST['user_id'];
-						$nickname = $_POST['user'];
-						$description = $_POST['DESC'];
-						$email = $_POST['EMAIL'];
-						$first_name = $_POST['FIRSTNAME'];
-						$last_name = $_POST['LASTNAME'];
+						$fee = $result['PAYMENTINFO_0_FEEAMT'];
+						$tx_state = 1;
 
 						//update wp tables with member data
 						update_user_meta($user_id, 'membership_type', $membership_type);
@@ -175,9 +199,9 @@ Template Name: Upgrade Confirm
 						update_user_meta($user_id, 'member_prettyprint', $member_prettyprint);
 
 						//insert data into database
-						global $wpdb;
-						$sql = $wpdb->prepare(
-							"INSERT INTO `member_paypal` (`user_id`, `nickname`, `description`, `permissions`, `pretty_print`, `amt`, `fee`, `email`, `first_name`, `last_name`, `token`, `timestamp`, `transaction_id`) VALUES (%d,%s,%s,%d,%s,%d,%d,%s,%s,%s,%s,%d,%s)", $user_id, $nickname, $membership_type, $member_permissions, $member_prettyprint, $amt, $fee_amt, $email, $first_name, $last_name, $token, $timestamp, $transaction_id);
+							global $wpdb;
+							$sql = $wpdb->prepare(
+								"UPDATE `member_paypal` SET `transaction_id`=%s, `fee`=%d, `tx_state`=%d WHERE `token`=%s AND `timestamp`=%d", $transaction_id, $fee, $tx_state, $token, $timestamp);
 
 						$query = $wpdb->query($sql);
 
@@ -191,7 +215,7 @@ Template Name: Upgrade Confirm
 					}
 					else
 					{
-						echo 'Payment did not complete. Please try again';
+						echo '<div class="notice">Payment did not complete. Please try again</div>';
 					}
 				}
 			?>
@@ -254,20 +278,11 @@ Template Name: Upgrade Confirm
 
 				</table>
 
-				<input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+				<input type="hidden" name="chk_val" value="<?php echo $result['TOKEN']; ?>">
 
-				<input type="hidden" name="user" value="<?php echo $user; ?>">
+				<input type="hidden" name="chk_val2" value="<?php echo strtotime($result['TIMESTAMP']); ?>">
 
 				<input type="submit" name="submit" value="Confirm Purchase">
-
-				<?php 
-
-					foreach($result as $key => $value)
-					{
-						echo '<input type="hidden" name ="'.$key.'" value="'.$value.'">';
-					}
-
-				?>
 
 			</form>
 
