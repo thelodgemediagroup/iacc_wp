@@ -102,7 +102,6 @@ function imm_edit_member()
 	}
 
 	$user = get_user_meta($user_id);
-	fb($user);
 	$member_meta = get_user_by('id', $user_id);
 	$user_email = $member_meta->user_email;
 	//verify that a membership type exists. set a default for manually entered users.
