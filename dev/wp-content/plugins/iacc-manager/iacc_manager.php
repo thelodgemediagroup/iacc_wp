@@ -22,12 +22,12 @@ add_action('admin_menu', 'imm_create_menu');
 function imm_create_menu()
 {
 	$imm_icon_location = plugin_dir_url( __FILE__ ).'/images/plugin_logo.png';
-	$imm_create_settings = add_menu_page('IACC Manager', 'IACC', 'administrator', __FILE__,'imm_action',$imm_icon_location,'30');
-	$imm_append_events = add_submenu_page(__FILE__, 'Purchased Events', 'Purchased Events', 'administrator', 'purchased_events', 'imm_get_purchased_events');
+	$imm_create_settings = add_menu_page('IACC Manager', 'IACC', 'administrator', __FILE__,'imm_member_action',$imm_icon_location,'30');
+	$imm_append_events = add_submenu_page(__FILE__, 'Purchased Events', 'Purchased Events', 'administrator', 'purchased_events', 'imm_event_action');
 	$imm_append_members = add_submenu_page(__FILE__, 'Membership Upgrades', 'Membership Upgrades', 'administrator', 'membership_upgrades', 'imm_get_membership_upgrades');
 }
 
-function imm_action()
+function imm_member_action()
 {
 
 	$action  = !empty($_REQUEST['action']) ? $_REQUEST['action'] : 'view';
@@ -40,11 +40,25 @@ function imm_action()
 	{
 		imm_edit_member();
 	}
-	else if ( $action == 'delete' )
+	else if ( $action == 'event_view' )
 	{
-		exit;
+		imm_get_registers_by_event();
 	}
 
+}
+
+function imm_event_action()
+{
+	$action  = !empty($_REQUEST['action']) ? $_REQUEST['action'] : 'view';
+
+	if ( $action == 'view' )
+	{
+		imm_get_purchased_events();
+	}
+	else if ( $action == 'event_view' )
+	{
+		imm_get_registers_by_event();
+	}	
 }
 
 function imm_view_all_members()
@@ -203,11 +217,11 @@ function imm_edit_member()
 			update_user_meta($user_id, 'membership_type', $membership_type);
 			update_user_meta($user_id, 'member_permissions', $member_permissions);
 			update_user_meta($user_id, 'member_prettyprint', $member_prettyprint);
-			echo '<div class="updated settings-error><p><b>Membership type updated.</b></p></div>';
+			echo '<div class="updated"><p><b>Membership type updated.</b></p></div>';
 		}
 		else
 		{
-			echo '<div class="updated settings-error"><p><b>There was an error processing the edit. Please try again.</b></p></div>';
+			echo '<div class="updated"><p><b>There was an error processing the edit. Please try again.</b></p></div>';
 		}
 	}
 
@@ -248,23 +262,51 @@ function imm_edit_member()
 function imm_get_purchased_events()
 {
 	global $wpdb;
-	$sql = "SELECT * FROM ".EVENT_PAYPAL." ORDER BY event_id ASC, timestamp ASC;";
+	$sql = "SELECT * FROM ".EVENT_PAYPAL." WHERE tx_state = 1 ORDER BY event_id ASC, timestamp ASC;";
 	$purchases = $wpdb->get_results($sql);
 
 	echo '<h2>Purchased Events</h2>';
-	echo '<table class="widefat page fixed"><thead><tr><th>Event</th><th>Event Date</th><th>Ticket Quantity</th><th>Ticket Type</th><th>Member</th><th>Email</th><th>Price</th><th>Time</th></tr></thead>';
+	echo '<table class="widefat page fixed"><thead><tr><th>Event</th><th>Event Date</th><th>Ticket Quantity</th><th>Ticket Type</th><th>Member</th><th>Email</th><th>Price</th><th>Purchase Date</th></tr></thead>';
 
 	foreach ($purchases as $purchase)
 	{
 		echo '<tr>';
-		echo '<td>'.$purchase->event_title.'</td>';
-		echo '<td>'.date("jS F, Y", $purchase->event_date).'</td>';
+		echo '<td><a href="admin.php?page=purchased_events&action=event_view&event_id='.$purchase->event_id.'" title="View by Event">'.$purchase->event_title.'</a></td>';
+		echo '<td>'.date("F j, Y, g:i a", $purchase->event_date).'</td>';
 		echo '<td>'.$purchase->quantity.'</td>';
 		echo '<td>'.$purchase->ticket_desc.'</td>';
 		echo '<td>'.$purchase->first_name.' '.$purchase->last_name.'</td>';
 		echo '<td>'.$purchase->email.'</td>';
 		echo '<td>'.$purchase->amt.'</td>';
-		echo '<td>'.date("jS F, Y", $purchase->timestamp).'</td>';
+		echo '<td>'.date("F j, Y, g:i a", $purchase->timestamp).'</td>';
+		echo '</tr>';
+	}
+
+	echo '</table>';
+}
+
+function imm_get_registers_by_event()
+{
+	global $wpdb;
+	$sql = "SELECT * FROM ".EVENT_PAYPAL." WHERE tx_state = 1 AND event_id = ".$_GET['event_id']." ORDER BY timestamp ASC;";
+	$purchases = $wpdb->get_results($sql);
+
+	$event_title = $purchases[0]->event_title;
+
+	echo '<h2>'.$event_title.'</h2>';
+	echo '<table class="widefat page fixed"><thead><tr><th>Event</th><th>Event Date</th><th>Ticket Quantity</th><th>Ticket Type</th><th>Member</th><th>Email</th><th>Price</th><th>Purchase Date</th></tr></thead>';
+
+	foreach ($purchases as $purchase)
+	{
+		echo '<tr>';
+		echo '<td><a href="admin.php?page=purchased_events&action=event_view&event_id='.$purchase->event_id.'" title="View by Event">'.$purchase->event_title.'</a></td>';
+		echo '<td>'.date("F j, Y, g:i a", $purchase->event_date).'</td>';
+		echo '<td>'.$purchase->quantity.'</td>';
+		echo '<td>'.$purchase->ticket_desc.'</td>';
+		echo '<td>'.$purchase->first_name.' '.$purchase->last_name.'</td>';
+		echo '<td>'.$purchase->email.'</td>';
+		echo '<td>'.$purchase->amt.'</td>';
+		echo '<td>'.date("F j, Y, g:i a", $purchase->timestamp).'</td>';
 		echo '</tr>';
 	}
 
