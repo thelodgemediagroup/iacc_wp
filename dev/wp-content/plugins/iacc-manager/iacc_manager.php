@@ -276,12 +276,21 @@ function imm_get_purchased_events()
 
 		foreach ($purchases as $purchase)
 		{
+
+			if ($purchase->first_name == 'NA' || $purchase->last_name == 'NA')
+			{
+				$full_name = 'N/A';
+			}
+			else
+			{
+				$full_name = $purchase->first_name.' '.$purchase->last_name;
+			}
 			echo '<tr>';
 			echo '<td><a href="admin.php?page=purchased_events&action=event_view&event_id='.$purchase->event_id.'" title="View by Event">'.$purchase->event_title.'</a></td>';
 			echo '<td>'.date("F j, Y, g:i a", $purchase->event_date).'</td>';
 			echo '<td>'.$purchase->quantity.'</td>';
 			echo '<td>'.$purchase->ticket_desc.'</td>';
-			echo '<td>'.$purchase->first_name.' '.$purchase->last_name.'</td>';
+			echo '<td>'.$full_name.'</td>';
 			echo '<td>'.$purchase->email.'</td>';
 			echo '<td>'.$purchase->amt.'</td>';
 			echo '<td>'.date("F j, Y, g:i a", $purchase->timestamp).'</td>';
@@ -309,12 +318,21 @@ function imm_get_registers_by_event()
 
 	foreach ($purchases as $purchase)
 	{
+		if ($purchase->first_name == 'NA' || $purchase->last_name == 'NA')
+		{
+			$full_name = 'N/A';
+		}
+		else
+		{
+			$full_name = $purchase->first_name.' '.$purchase->last_name;
+		}
+
 		echo '<tr>';
 		echo '<td><a href="admin.php?page=purchased_events&action=event_view&event_id='.$purchase->event_id.'" title="View by Event">'.$purchase->event_title.'</a></td>';
 		echo '<td>'.date("F j, Y, g:i a", $purchase->event_date).'</td>';
 		echo '<td>'.$purchase->quantity.'</td>';
 		echo '<td>'.$purchase->ticket_desc.'</td>';
-		echo '<td>'.$purchase->first_name.' '.$purchase->last_name.'</td>';
+		echo '<td>'.$full_name.'</td>';
 		echo '<td>'.$purchase->email.'</td>';
 		echo '<td>'.$purchase->amt.'</td>';
 		echo '<td>'.date("F j, Y, g:i a", $purchase->timestamp).'</td>';
