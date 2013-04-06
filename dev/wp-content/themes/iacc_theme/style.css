@@ -29,3 +29,8 @@ Version: 0.1.0
 ul.copyright {
 	padding-top: 10px;
 }
+
+.IN-widget {
+	float: right;
+	margin-right: 70px;
+}
