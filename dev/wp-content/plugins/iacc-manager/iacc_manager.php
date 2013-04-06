@@ -104,6 +104,7 @@ function imm_edit_member()
 	$user = get_user_meta($user_id);
 	$member_meta = get_user_by('id', $user_id);
 	$user_email = $member_meta->user_email;
+
 	//verify that a membership type exists. set a default for manually entered users.
 	if ( !empty($user['membership_type'][0]) )
 	{
@@ -216,6 +217,9 @@ function imm_edit_member()
 			update_user_meta($user_id, 'membership_type', $membership_type);
 			update_user_meta($user_id, 'member_permissions', $member_permissions);
 			update_user_meta($user_id, 'member_prettyprint', $member_prettyprint);
+
+			$redirect_path = '/wp-admin/admin.php?page=iacc-manager/iacc_manager.php';
+			header('Location: '.site_url().$redirect_path);
 			echo '<div class="updated"><p><b>Membership type updated.</b></p></div>';
 		}
 		else
