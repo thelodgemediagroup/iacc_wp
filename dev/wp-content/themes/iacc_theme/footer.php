@@ -13,13 +13,13 @@
 		<?php get_sidebar('footer'); ?>
 		
 		<ul class="copyright">
-		<script src="http://localhost/wp-content/logos/sponsors.js"></script>
-		<script src="http://localhost/wp-content/logos/jcarousellite_1.0.1.js"></script>
-		<link href="http://localhost/wp-content/logos/style.css" rel="stylesheet">
+		<script src="<?php echo site_url(); ?>/wp-content/logos/sponsors.js"></script>
+		<script src="<?php echo site_url(); ?>/wp-content/logos/jcarousellite_1.0.1.js"></script>
+		<link href="<?php echo site_url(); ?>/wp-content/logos/style.css" rel="stylesheet">
 		<div class="wpic_container">
 			<div class="wpic_navigation">
-				<button style="float:right; background: url('http://localhost/wp-content/logos/next.png') no-repeat;" class="wpic_next"></button>
-				<button style="float:left; background: url('http://localhost/wp-content/logos/prev.png') no-repeat;" class="wpic_prev"></button>
+				<button style="float:right; background: url('<?php echo site_url(); ?>/wp-content/logos/next.png') no-repeat;" class="wpic_next"></button>
+				<button style="float:left; background: url('<?php echo site_url(); ?>/wp-content/logos/prev.png') no-repeat;" class="wpic_prev"></button>
 			</div>
 			
 			<div class="wpic_content">
