@@ -12,8 +12,13 @@ Version: 0.5.0
 global $wpdb;
 define('EVENT_PAYPAL', 'event_paypal');
 define('MEMBER_PAYPAL', 'member_paypal');
+define('SPONSOR_PATH', '../wp-content/plugins/iacc-manager/sponsors/');
 require_once(ABSPATH . 'wp-config.php');
 require_once(ABSPATH . 'wp-load.php');
+
+require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+require_once(ABSPATH . "wp-admin" . '/includes/file.php');
+require_once(ABSPATH . "wp-admin" . '/includes/media.php');
 
 add_action('admin_menu', 'imm_create_menu');
 
@@ -25,6 +30,7 @@ function imm_create_menu()
 	$imm_create_settings = add_menu_page('IACC Manager', 'IACC', 'administrator', __FILE__,'imm_member_action',$imm_icon_location,'30');
 	$imm_append_events = add_submenu_page(__FILE__, 'Purchased Events', 'Purchased Events', 'administrator', 'purchased_events', 'imm_event_action');
 	$imm_append_members = add_submenu_page(__FILE__, 'Membership Upgrades', 'Membership Upgrades', 'administrator', 'membership_upgrades', 'imm_get_membership_upgrades');
+	$imm_append_sponsors = add_submenu_page(__FILE__, 'Sponsors Slider', 'Sponsors Slider', 'administrator', 'sponsors_slider', 'imm_sponsor_action');
 }
 
 function imm_member_action()
@@ -59,6 +65,25 @@ function imm_event_action()
 	{
 		imm_get_registers_by_event();
 	}	
+}
+
+function imm_sponsor_action()
+{
+	$action  = !empty($_REQUEST['action']) ? $_REQUEST['action'] : 'add';
+
+	if ( $action == 'add' )
+	{
+		imm_add_sponsor();
+		imm_get_all_sponsors();
+	}
+	else if ( $action == 'edit' )
+	{
+		imm_edit_sponsor();
+	}
+	else if ( $action == 'delete' )
+	{
+		imm_delete_sponsor();
+	}
 }
 
 function imm_view_all_members()
@@ -370,8 +395,245 @@ function imm_get_membership_upgrades()
 	}
 	else
 	{
-		echo '<p>No membership purchases to display</p>';
+		echo '<div class="updated"><p>No membership purchases to display</p></div>';
 	}
+}
+
+function imm_add_sponsor()
+{
+	if (isset($_POST['submit']) && $_POST['submit'] == 'Add Sponsor')
+	{
+		$sponsor_link = $_POST['sponsor_link'];
+
+		$file_name = $_FILES['img_file']['name'];
+		$file_size = $_FILES['img_file']['size'];
+		$file_error = $_FILES['img_file']['error'];
+		$file_tmp = $_FILES['img_file']['tmp_name'];
+
+		$file_split = explode('.', $file_name);
+		$split_length = count($file_split);
+		$file_ext = intval($split_length - 1);
+		$file_type = trim($file_split[$file_ext]);
+
+		
+		if ($file_size > 20480)
+		{
+			echo '<div class="updated"><p>The uploaded file is too large. Please submit a file less than 20kb in size</p></div>';
+		}
+		else if ($file_error === 1)
+		{
+			echo '<div class="updated"><p>An error occurred during processing. Please try again.</p></div>';
+		}
+		else if ($file_type == 'jpg' || $file_type == 'jpeg' || $file_type == 'png' or $file_type == 'gif')
+		{
+			$move_file = move_uploaded_file($file_tmp, SPONSOR_PATH.$file_name);
+
+			if ($move_file != true)
+			{
+				echo '<div class="update"><p>The file transfer was not successful. Please try the upload again.</p></div>';
+			}
+			else
+			{
+				$sponsors = get_option('imm_sponsors');
+				if (!$sponsors)
+				{
+					$sponsors = array();
+					$sponsors[$file_name] = $sponsor_link;
+
+					update_option( 'imm_sponsors', $sponsors);	
+				}
+				else
+				{
+					$sponsors[$file_name] = $sponsor_link;
+					update_option( 'imm_sponsors', $sponsors);	
+				}
+				
+			}			
+			
+		}		
+		else
+		{
+			echo '<div class="updated"><p>The uploaded image file is not of a valid type. Please submit a JPG, PNG, or GIF file.</p></div>';
+		}
+	}
+
+	?>
+	<h2>Add Sponsor</h2>
+	<form enctype="multipart/form-data" method="post" action="">
+		<div class="postbox">
+			<table>
+				<tr>
+					<td>Sponsor Link (Must begin with http://)</td>
+					<td><input type="text" size="60" name="sponsor_link"></td>
+				</tr>
+				<tr>
+					<td>Sponsor Image (210px width x 75px height)</td>
+					<td><input type="file" name="img_file"></td>
+				</tr>
+			</table>
+		</div>
+		<input type="submit" name="submit" class="button-primary" value="Add Sponsor">
+	</form>
+
+	<?php
+}
+
+function imm_get_all_sponsors()
+{
+	$imm_sponsors = get_option('imm_sponsors');
+	
+	?>
+	<br />
+	<br />
+	<br />
+	<h2>Sponsors</h2>
+
+	<table class="widefat page fixed">
+		<thead>
+			<tr><th>Image</th><th>Link</th><!--<th>Edit</th>--><th>Delete</th></tr>
+		</thead>
+	<?php
+
+	foreach ($imm_sponsors as $key => $value)
+	{
+		$spons_url = stripslashes($value);
+		echo '<tr>';
+		echo '<td><img src="'.SPONSOR_PATH.$key.'" height="75px" width="210px"></td>';
+		echo '<td><a href="'.$value.'">'.$value.'</a></td>';
+		//echo '<td><a href="'.site_url().'/wp-admin/admin.php?page=sponsors_slider&action=edit&img='.$key.'&spons_url='.$spons_url.'">Edit</a></td>';
+		echo '<td><a href="'.site_url().'/wp-admin/admin.php?page=sponsors_slider&action=delete&img='.$key.'&spons_url='.$spons_url.'" onclick="return confirm(\'Are you sure you want to delete this sponsor?\')">Delete</a></td>';
+		echo '</tr>';
+	}
+
+	echo '</table>';
+}
+/*
+function imm_edit_sponsor()
+{
+	$sponsor_img = $_GET['img'];
+	$sponsor_url = stripslashes($_GET['spons_url']);
+
+	if (isset($_POST['submit']) && $_POST['submit'] == 'Edit Sponsor')
+	{
+		if (!empty($_POST['sponsor_link']))
+		{
+			$up_sponsor_link = $_POST['sponsor_link'];
+		}
+		if (!empty($_FILES['img_file']))
+		{
+			$file_name = $_FILES['img_file']['name'];
+			$file_size = $_FILES['img_file']['size'];
+			$file_error = $_FILES['img_file']['error'];
+			$file_tmp = $_FILES['img_file']['tmp_name'];
+
+			$file_split = explode('.', $file_name);
+			$split_length = count($file_split);
+			$file_ext = intval($split_length - 1);
+			$file_type = $file_split[$file_ext];	
+		}
+		if (!isset($up_sponsor_link) && !isset($file_name))
+		{
+			echo '<div class="updated"><p>Please enter a New URL, a new image file, or both.</p></div>';
+		}
+		else
+		{
+			if ()
+		}
+
+	}
+?>
+	<h2>Edit Sponsor</h2>
+	<div class="postbox">
+		<table>
+			<tr>
+				<td><b>Current Image:</b></td>
+				<td><img src="<?php echo SPONSOR_PATH.$sponsor_img; ?>"></td>
+			</tr>
+			<tr>
+				<td><b>Current Link URL:</b></td>
+				<td><a href="<?php echo $sponsor_url; ?>"><?php echo $sponsor_url; ?></a></td>
+			</tr>
+		</table>
+	</div>
+
+	<h2>Update</h2>
+
+	<form enctype="multipart/form-data" method="post" action="">
+		<div class="postbox">
+			<table>
+				<tr>
+					<td>Sponsor Link (Must begin with http://)</td>
+					<td><input type="text" size="60" name="sponsor_link"></td>
+				</tr>
+				<tr>
+					<td>Sponsor Image (210px width x 75px height)</td>
+					<td><input type="file" name="img_file"></td>
+				</tr>
+			</table>
+		</div>
+		<input type="submit" name="submit" class="button-primary" value="Edit Sponsor">
+	</form>
+
+<?php
+}
+*/
+function imm_delete_sponsor()
+{
+	$sponsor_img = $_GET['img'];
+	$sponsor_url = stripslashes($_GET['spons_url']);
+
+	$sponsors = get_option('imm_sponsors');
+	$sponsor_reset = array();
+
+	foreach ($sponsors as $key => $value)
+	{
+		if ($key != $sponsor_img && $value != $sponsor_url)
+		{
+			$sponsor_reset[$key] = $value;
+		}
+	}
+
+	update_option('imm_sponsors', $sponsor_reset);
+	unlink(SPONSOR_PATH.$sponsor_img);
+	header('Location: '.site_url().'/wp-admin/admin.php?page=sponsors_slider');
+}
+
+function imm_display_sponsor_slider()
+{
+$sponsors = get_option('imm_sponsors');
+
+if (!empty($sponsors))
+{	
+?>
+	<script src="<?php echo site_url(); ?>/wp-content/plugins/iacc-manager/js/sponsors.js"></script>
+		<script src="<?php echo site_url(); ?>/wp-content/plugins/iacc-manager/js/jcarousellite_1.0.1.js"></script>
+		<link href="<?php echo site_url(); ?>/wp-content/plugins/iacc-manager/css/style.css" rel="stylesheet">
+		<div class="wpic_container">
+			<div class="wpic_navigation">
+				<button style="float:right; background: url('<?php echo site_url(); ?>/wp-content/plugins/iacc-manager/images/next.png') no-repeat;" class="wpic_next"></button>
+				<button style="float:left; background: url('<?php echo site_url(); ?>/wp-content/plugins/iacc-manager/images/prev.png') no-repeat;" class="wpic_prev"></button>
+			</div>
+			
+			<div class="wpic_content">
+				<ul class="wpic_gallery">
+					<?php 
+						foreach ($sponsors as $key => $value)
+						{
+							$spons_url = stripslashes($value);
+		
+							echo '<li style="height: 100px; width: 210px;"><a href="'.$spons_url.'"><img src="'.site_url().'/wp-content/plugins/iacc-manager/sponsors/'.$key.'"></a></li>';
+
+						}
+					?>
+				</ul>
+			</div>	
+		</div>
+		<?php
+}
+else
+{
+	return;
+}
 }
 
 ?>
