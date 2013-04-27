@@ -185,4 +185,7 @@ class logged_in_iacc_member
 
 $logged_in_iacc_member = new logged_in_iacc_member();
 
+update_option('home', 'local.iacc');
+update_option('siteurl', 'local.iacc');
+
 ?>
