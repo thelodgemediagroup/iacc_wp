@@ -9,7 +9,12 @@ Version: 0.1.0
 */
 
 @import url("../politician/style.css");
+/*a.container, a.tribe-events {
+	text-decoration: underline;
+}
+.container a:hover {
 
+} */
 .header-sitename h1 {
 	font-size: 32px;
 	padding-top: 50px;

@@ -50,6 +50,10 @@ function imm_member_action()
 	{
 		imm_get_registers_by_event();
 	}
+	else if ( $action == 'create_csv' )
+	{
+		create_csv_members();
+	}
 
 }
 
@@ -109,9 +113,17 @@ function imm_view_all_members()
 		echo '<td>'.$user->membership_type.'</td>';
 		echo '<td><a href="admin.php?page=iacc-manager/iacc_manager.php&action=edit&user_id='.$user->ID.'" title="Edit Membership Details">Edit</a></td>';
 		echo '</tr>';
+
 	}
 
 	echo '</table>';
+
+	echo '<br />';
+	#echo '<p><a href="admin.php?page=iacc-manager/iacc_manager.php&action=create_csv" title="Create CSV of Member Emails" class="button-primary">Create Email CSV</a></p>';
+	#echo '<p><a href="'. site_url().'/wp-content/themes/iacc_theme/csv/iacc_members.php">Create Email CSV</a></p>';
+	echo '<form action="'. site_url().'/wp-content/themes/iacc_theme/csv/iacc_members.php" method=POST>';
+	echo '<input type="submit" value="Create Email CSV">';
+	echo '</form>';
 }
 
 function imm_edit_member()
@@ -636,4 +648,30 @@ else
 }
 }
 
+function create_csv_members()
+{
+	#$filename = 'IACC_Members_' . date('Y m d H i s') . '.csv';
+	$filename = 'IACC_members.csv';
+	header( 'Content-Description: File Transfer' );
+	header( 'Content-Disposition: attachment; filename=' . $filename );
+	header( 'Content-Type: text/csv; charset=' . get_option( 'blog_charset' ), true );
+
+	global $wpdb;
+
+	$attendee_args = array('key' => 'membership_type', 'value' => 'attendee');
+	$member_args = array('key' => 'membership_type', 'value' => 'member');
+	$corp_member_args = array('key' => 'membership_type', 'value' => 'corporate_member');
+	$user_args = array('relation' => 'OR', $attendee_args, $member_args, $corp_member_args);
+	$iacc_users = get_users($user_args);
+
+
+	foreach ($iacc_users as $user)
+	{
+		$iacc_members = array();
+		$member_format = '"'.$user->user_email.'"';
+		$iacc_members[] = $member_format;
+		echo implode(',', $iacc_members)."\n";
+	}
+	exit;
+}
 ?>

@@ -18,8 +18,8 @@ global $_theme_side_sidebar;
 			<?php endif; ?>
 
 
-		<script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
-		<script type="IN/FollowCompany" data-id="2712759" data-counter="none"></script>
+		<!--<script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
+		<script type="IN/FollowCompany" data-id="2712759" data-counter="none"></script> -->
 
 		</aside><!--/ #sidebar-->
 		
