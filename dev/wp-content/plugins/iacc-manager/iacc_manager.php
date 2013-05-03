@@ -97,18 +97,42 @@ function imm_view_all_members()
 {
 	global $wpdb;
 
-	$attendee_args = array('key' => 'membership_type', 'value' => 'attendee');
-	$member_args = array('key' => 'membership_type', 'value' => 'member');
-	$corp_member_args = array('key' => 'membership_type', 'value' => 'corporate_member');
-	$user_args = array('relation' => 'OR', $attendee_args, $member_args, $corp_member_args);
+	$order_by = !empty($_GET['order_by']) ? $_GET['order_by'] : 'ID';
+
+	switch($order_by)
+	{
+		case 'member':
+			$order_members_by = 'nickname';
+			break;
+		case 'email':
+			$order_members_by = 'email';
+			break;
+		case 'membership_type':
+			$order_members_by = 'member_permissions';
+			break;
+		default:
+			$order_members_by = 'ID';
+			break;
+	}
+
+	$user_args = array(
+		'meta_key' => 'nickname',
+		'orderby' => $order_members_by
+		);
 	$iacc_users = get_users($user_args);
 	$user_count = count($iacc_users);
 
 	echo '<h2>Current Members ('.$user_count.')</h2>';
-	echo '<table class="widefat page fixed"><thead><tr><th>Member</th><th>Email</th><th>Membership Type</th><th>Edit</th></tr></thead>';
+	echo '<table class="widefat page fixed"><thead><tr>';
+	echo '<th><a href="admin.php?page=iacc-manager/iacc_manager.php&order_by=member">Member</a></th>';
+	echo '<th><a href="admin.php?page=iacc-manager/iacc_manager.php&order_by=email">Email</a></th>';
+	echo '<th><a href="admin.php?page=iacc-manager/iacc_manager.php&order_by=membership_type">Membership Type</a></th>';
+	echo '<th>Edit</th>';
+	echo '</tr></thead>';
 	
 	foreach ($iacc_users as $user)
 	{
+		fb($user);
 		echo '<tr>';
 		echo '<td>'.$user->nickname.'</td>';
 		echo '<td>'.$user->user_email.'</td>';
@@ -118,9 +142,8 @@ function imm_view_all_members()
 	}
 
 	echo '</table>';
-
 	echo '<br />';
-	echo '<p><a href="admin.php?page=iacc-manager/iacc_manager.php&action=create_members_csv" title="Create CSV of Member Emails" class="button-primary">Create Email CSV</a></p>';
+	echo '<p><a href="admin.php?page=iacc-manager/iacc_manager.php&action=create_members_csv&order_by='.$order_by.'" title="Create CSV of Member Emails" class="button-primary">Create Email CSV</a></p>';
 }
 
 function imm_edit_member()
@@ -299,14 +322,26 @@ function imm_edit_member()
 function imm_get_purchased_events()
 {
 	global $wpdb;
-	$sql = "SELECT * FROM ".EVENT_PAYPAL." WHERE tx_state = 1 ORDER BY event_id ASC, timestamp ASC;";
+
+	$order_by = !empty($_GET['order_by']) ? $_GET['order_by'] : 'event_id ASC, timestamp ASC';
+
+	$sql = "SELECT * FROM ".EVENT_PAYPAL." WHERE tx_state = 1 ORDER BY ".$order_by.";";
 	$purchases = $wpdb->get_results($sql);
 
 	echo '<h2>Purchased Events</h2>';
 
 	if (!empty($purchases))
 	{
-		echo '<table class="widefat page fixed"><thead><tr><th>Event</th><th>Event Date</th><th>Ticket Quantity</th><th>Ticket Type</th><th>Member</th><th>Email</th><th>Price</th><th>Purchase Date</th></tr></thead>';
+		echo '<table class="widefat page fixed"><thead><tr>';
+		echo '<th><a href="admin.php?page=purchased_events&order_by=event_id">Event</a></th>';
+		echo '<th><a href="admin.php?page=purchased_events&order_by=event_date">Event Date</a></th>';
+		echo '<th><a href="admin.php?page=purchased_events&order_by=quantity">Ticket Quantity</a></th>';
+		echo '<th><a href="admin.php?page=purchased_events&order_by=ticket_desc">Ticket Type</a></th>';
+		echo '<th><a href="admin.php?page=purchased_events&order_by=first_name">Member</a></th>';
+		echo '<th><a href="admin.php?page=purchased_events&order_by=email">Email</a></th>';
+		echo '<th><a href="admin.php?page=purchased_events&order_by=amt">Price</a></th>';
+		echo '<th><a href="admin.php?page=purchased_events&order_by=timestamp">Purchase Date</a></th>';
+		echo '</tr></thead>';
 
 		foreach ($purchases as $purchase)
 		{
@@ -342,13 +377,26 @@ function imm_get_purchased_events()
 function imm_get_registers_by_event()
 {
 	global $wpdb;
-	$sql = "SELECT * FROM ".EVENT_PAYPAL." WHERE tx_state = 1 AND event_id = ".$_GET['event_id']." ORDER BY timestamp ASC;";
+
+	$order_by = !empty($_GET['order_by']) ? $_GET['order_by'] : 'timestamp ASC';
+
+	$sql = "SELECT * FROM ".EVENT_PAYPAL." WHERE tx_state = 1 AND event_id = ".$_GET['event_id']." ORDER BY ".$order_by.";";
 	$purchases = $wpdb->get_results($sql);
 
 	$event_title = $purchases[0]->event_title;
 
 	echo '<h2>'.$event_title.'</h2>';
-	echo '<table class="widefat page fixed"><thead><tr><th>Event</th><th>Event Date</th><th>Ticket Quantity</th><th>Ticket Type</th><th>Member</th><th>Email</th><th>Price</th><th>Purchase Date</th></tr></thead>';
+		echo '<table class="widefat page fixed"><thead><tr>';
+		echo '<th><a href="admin.php?page=purchased_events&action=event_view&event_id='.$_GET['event_id'].'&order_by=event_id">Event</a></th>';
+		echo '<th><a href="admin.php?page=purchased_events&action=event_view&event_id='.$_GET['event_id'].'&order_by=event_date">Event Date</a></th>';
+		echo '<th><a href="admin.php?page=purchased_events&action=event_view&event_id='.$_GET['event_id'].'&order_by=quantity">Ticket Quantity</a></th>';
+		echo '<th><a href="admin.php?page=purchased_events&action=event_view&event_id='.$_GET['event_id'].'&order_by=ticket_desc">Ticket Type</a></th>';
+		echo '<th><a href="admin.php?page=purchased_events&action=event_view&event_id='.$_GET['event_id'].'&order_by=first_name">Member</a></th>';
+		echo '<th><a href="admin.php?page=purchased_events&action=event_view&event_id='.$_GET['event_id'].'&order_by=email">Email</a></th>';
+		echo '<th><a href="admin.php?page=purchased_events&action=event_view&event_id='.$_GET['event_id'].'&order_by=amt">Price</a></th>';
+		echo '<th><a href="admin.php?page=purchased_events&action=event_view&event_id='.$_GET['event_id'].'&order_by=timestamp">Purchase Date</a></th>';
+		echo '</tr></thead>';
+
 
 	foreach ($purchases as $purchase)
 	{
@@ -656,10 +704,28 @@ function create_csv_members()
 
 		global $wpdb;
 
-		$attendee_args = array('key' => 'membership_type', 'value' => 'attendee');
-		$member_args = array('key' => 'membership_type', 'value' => 'member');
-		$corp_member_args = array('key' => 'membership_type', 'value' => 'corporate_member');
-		$user_args = array('relation' => 'OR', $attendee_args, $member_args, $corp_member_args);
+		$order_by = !empty($_GET['order_by']) ? $_GET['order_by'] : 'ID';
+
+		switch($order_by)
+		{
+			case 'member':
+				$order_members_by = 'nickname';
+				break;
+			case 'email':
+				$order_members_by = 'email';
+				break;
+			case 'membership_type':
+				$order_members_by = 'member_permissions';
+				break;
+			default:
+				$order_members_by = 'ID';
+				break;
+		}
+
+		$user_args = array(
+			'meta_key' => 'nickname',
+			'orderby' => $order_members_by
+			);
 		$iacc_users = get_users($user_args);
 
 
