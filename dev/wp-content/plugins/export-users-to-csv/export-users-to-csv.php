@@ -75,7 +75,7 @@ class PP_EU_Export_Users {
 			add_action( 'pre_user_query', array( $this, 'pre_user_query' ) );
 			$users = get_users( $args );
 			remove_action( 'pre_user_query', array( $this, 'pre_user_query' ) );
-
+			fb($users);
 			if ( ! $users ) {
 				$referer = add_query_arg( 'error', 'empty', wp_get_referer() );
 				wp_redirect( $referer );
