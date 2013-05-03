@@ -21,7 +21,7 @@ require_once(ABSPATH . "wp-admin" . '/includes/file.php');
 require_once(ABSPATH . "wp-admin" . '/includes/media.php');
 
 add_action('admin_menu', 'imm_create_menu');
-add_action('init', 'create_csv_members');
+add_action('init', 'create_csv');
 
 // Create the dashboard links
 
@@ -51,13 +51,6 @@ function imm_member_action()
 	{
 		imm_get_registers_by_event();
 	}
-	/*else if ( $action == 'create_csv' )
-	{
-		
-		#create_csv_members();
-
-	} */
-
 }
 
 function imm_event_action()
@@ -367,6 +360,8 @@ function imm_get_purchased_events()
 		}
 
 		echo '</table>';
+		echo '<br />';
+		echo '<p><a href="admin.php?page=purchased_events&action=create_event_purchases_csv&order_by='.$order_by.'" title="Create CSV of Event Purchase Emails" class="button-primary">Create Event Purchase CSV</a></p>';
 	}
 	else
 	{
@@ -422,19 +417,30 @@ function imm_get_registers_by_event()
 	}
 
 	echo '</table>';
+	echo '<br />';
+	echo '<p><a href="admin.php?page=purchased_events&action=create_registers_by_event_csv&event_id='.$_GET['event_id'].'&order_by='.$order_by.'" title="Create CSV of Emails for Purchases of This Event" class="button-primary">Create Event Purchase CSV</a></p>';
 }
 
 function imm_get_membership_upgrades()
 {
+	$order_by = !empty($_GET['order_by']) ? $_GET['order_by'] : 'timestamp DESC';
+
 	global $wpdb;
-	$sql = "SELECT * FROM ".MEMBER_PAYPAL." WHERE tx_state = 1 ORDER BY timestamp DESC;";
+	$sql = "SELECT * FROM ".MEMBER_PAYPAL." WHERE tx_state = 1 ORDER BY ".$order_by.";";
 	$members = $wpdb->get_results($sql);
 
 	echo '<h2>Membership Upgrades</h2>';
 
 	if (!empty($members))
 	{
-		echo '<table class="widefat page fixed"><thead><tr><th>Member Name</th><th>Nickname</th><th>Email</th><th>Membership Type</th><th>Price</th><th>Purchase Date</th></tr></thead>';
+		echo '<table class="widefat page fixed"><thead><tr>';
+		echo '<th><a href="admin.php?page=membership_upgrades&order_by=first_name">Member Name</a></th>';
+		echo '<th><a href="admin.php?page=membership_upgrades&order_by=nickname">Nickname</a></th>';
+		echo '<th><a href="admin.php?page=membership_upgrades&order_by=email">Email</a></th>';
+		echo '<th><a href="admin.php?page=membership_upgrades&order_by=description">Membership Type</a></th>';
+		echo '<th><a href="admin.php?page=membership_upgrades&order_by=amt">Price</a></th>';
+		echo '<th><a href="admin.php?page=membership_upgrades&order_by=timestamp">Purchase Date</a></th>';
+		echo '</tr></thead>';
 
 		foreach ($members as $member)
 		{
@@ -449,6 +455,8 @@ function imm_get_membership_upgrades()
 		}
 
 		echo '</table>';
+		echo '<br />';
+		echo '<p><a href="admin.php?page=purchased_events&action=create_member_upgrade_csv&order_by='.$order_by.'" title="Create CSV of Membership Upgrades" class="button-primary">Create Membership Upgrade CSV</a></p>';
 	}
 	else
 	{
@@ -557,83 +565,13 @@ function imm_get_all_sponsors()
 		echo '<tr>';
 		echo '<td><img src="'.SPONSOR_PATH.$key.'" height="75px" width="210px"></td>';
 		echo '<td><a href="'.$value.'">'.$value.'</a></td>';
-		//echo '<td><a href="'.site_url().'/wp-admin/admin.php?page=sponsors_slider&action=edit&img='.$key.'&spons_url='.$spons_url.'">Edit</a></td>';
 		echo '<td><a href="'.site_url().'/wp-admin/admin.php?page=sponsors_slider&action=delete&img='.$key.'&spons_url='.$spons_url.'" onclick="return confirm(\'Are you sure you want to delete this sponsor?\')">Delete</a></td>';
 		echo '</tr>';
 	}
 
 	echo '</table>';
 }
-/*
-function imm_edit_sponsor()
-{
-	$sponsor_img = $_GET['img'];
-	$sponsor_url = stripslashes($_GET['spons_url']);
 
-	if (isset($_POST['submit']) && $_POST['submit'] == 'Edit Sponsor')
-	{
-		if (!empty($_POST['sponsor_link']))
-		{
-			$up_sponsor_link = $_POST['sponsor_link'];
-		}
-		if (!empty($_FILES['img_file']))
-		{
-			$file_name = $_FILES['img_file']['name'];
-			$file_size = $_FILES['img_file']['size'];
-			$file_error = $_FILES['img_file']['error'];
-			$file_tmp = $_FILES['img_file']['tmp_name'];
-
-			$file_split = explode('.', $file_name);
-			$split_length = count($file_split);
-			$file_ext = intval($split_length - 1);
-			$file_type = $file_split[$file_ext];	
-		}
-		if (!isset($up_sponsor_link) && !isset($file_name))
-		{
-			echo '<div class="updated"><p>Please enter a New URL, a new image file, or both.</p></div>';
-		}
-		else
-		{
-			if ()
-		}
-
-	}
-?>
-	<h2>Edit Sponsor</h2>
-	<div class="postbox">
-		<table>
-			<tr>
-				<td><b>Current Image:</b></td>
-				<td><img src="<?php echo SPONSOR_PATH.$sponsor_img; ?>"></td>
-			</tr>
-			<tr>
-				<td><b>Current Link URL:</b></td>
-				<td><a href="<?php echo $sponsor_url; ?>"><?php echo $sponsor_url; ?></a></td>
-			</tr>
-		</table>
-	</div>
-
-	<h2>Update</h2>
-
-	<form enctype="multipart/form-data" method="post" action="">
-		<div class="postbox">
-			<table>
-				<tr>
-					<td>Sponsor Link (Must begin with http://)</td>
-					<td><input type="text" size="60" name="sponsor_link"></td>
-				</tr>
-				<tr>
-					<td>Sponsor Image (210px width x 75px height)</td>
-					<td><input type="file" name="img_file"></td>
-				</tr>
-			</table>
-		</div>
-		<input type="submit" name="submit" class="button-primary" value="Edit Sponsor">
-	</form>
-
-<?php
-}
-*/
 function imm_delete_sponsor()
 {
 	$sponsor_img = $_GET['img'];
@@ -693,7 +631,7 @@ else
 }
 }
 
-function create_csv_members()
+function create_csv()
 {
 	if ( (isset($_GET['action'])) && ($_GET['action'] == 'create_members_csv') )
 	{
@@ -735,6 +673,78 @@ function create_csv_members()
 			$member_format = '"'.$user->user_email.'"';
 			$iacc_members[] = $member_format;
 			echo implode(',', $iacc_members)."\n";
+		}
+		exit;
+	}
+
+	if ( (isset($_GET['action'])) && ($_GET['action'] == 'create_event_purchases_csv') )
+	{
+		$filename = 'All_Event_Purchases_' . date('Y-m-d-H-i-s') . '.csv';
+		header( 'Content-Description: File Transfer' );
+		header( 'Content-Disposition: attachment; filename=' . $filename );
+		header( 'Content-Type: text/csv; charset=' . get_option( 'blog_charset' ), true );	
+
+		global $wpdb;
+
+		$order_by = !empty($_GET['order_by']) ? $_GET['order_by'] : 'event_id ASC, timestamp ASC';
+
+		$sql = "SELECT * FROM ".EVENT_PAYPAL." WHERE tx_state = 1 ORDER BY ".$order_by.";";
+		$purchases = $wpdb->get_results($sql);		
+
+		foreach ($purchases as $purchase)
+		{
+			$event_purchases = array();
+			$purchase_format = '"'.$purchase->email.'"';
+			$event_purchases[] = $purchase_format;
+			echo implode(',', $event_purchases)."\n";
+		}
+		exit;
+	}
+
+	if ( (isset($_GET['action'])) && ($_GET['action'] == 'create_registers_by_event_csv') )
+	{
+		$file_string = 'Event_ID_' . $_GET['event_id'] . '_';
+		$filename = $file_string . date('Y-m-d-H-i-s') . '.csv';
+		header( 'Content-Description: File Transfer' );
+		header( 'Content-Disposition: attachment; filename=' . $filename );
+		header( 'Content-Type: text/csv; charset=' . get_option( 'blog_charset' ), true );		
+
+		global $wpdb;
+
+		$order_by = !empty($_GET['order_by']) ? $_GET['order_by'] : 'timestamp ASC';
+
+		$sql = "SELECT * FROM ".EVENT_PAYPAL." WHERE tx_state = 1 AND event_id = ".$_GET['event_id']." ORDER BY ".$order_by.";";
+		$purchases = $wpdb->get_results($sql);
+
+		foreach ($purchases as $purchase)
+		{
+			$event_purchases = array();
+			$purchase_format = '"'.$purchase->email.'"';
+			$event_purchases[] = $purchase_format;
+			echo implode(',', $event_purchases)."\n";			
+		}
+		exit;
+	}
+
+	if ( (isset($_GET['action'])) && ($_GET['action'] == 'create_member_upgrade_csv') )
+	{
+		$filename = 'Membership_Upgrades_' . date('Y-m-d-H-i-s') . '.csv';
+		header( 'Content-Description: File Transfer' );
+		header( 'Content-Disposition: attachment; filename=' . $filename );
+		header( 'Content-Type: text/csv; charset=' . get_option( 'blog_charset' ), true );			
+
+		$order_by = !empty($_GET['order_by']) ? $_GET['order_by'] : 'timestamp DESC';
+
+		global $wpdb;
+		$sql = "SELECT * FROM ".MEMBER_PAYPAL." WHERE tx_state = 1 ORDER BY ".$order_by.";";
+		$members = $wpdb->get_results($sql);
+
+		foreach ($members as $member)
+		{
+			$membership_purchases = array();
+			$purchase_format = '"'.$member->email.'"';
+			$membership_purchases[] = $purchase_format;
+			echo implode(',', $membership_purchases)."\n";			
 		}
 		exit;
 	}
