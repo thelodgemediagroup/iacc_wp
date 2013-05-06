@@ -275,4 +275,5 @@ see http://rocketgeek.com/tips-and-tricks/load-a-custom-stylesheet/
 fieldset p {
 	margin: 0;
 	padding: 0;
+	position: relative;
 }

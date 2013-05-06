@@ -125,7 +125,6 @@ function imm_view_all_members()
 	
 	foreach ($iacc_users as $user)
 	{
-		fb($user);
 		echo '<tr>';
 		echo '<td>'.$user->nickname.'</td>';
 		echo '<td>'.$user->user_email.'</td>';
@@ -268,6 +267,10 @@ function imm_edit_member()
 			update_user_meta($user_id, 'member_permissions', $member_permissions);
 			update_user_meta($user_id, 'member_prettyprint', $member_prettyprint);
 
+			$current_date = strtotime(date('c'));
+
+
+
 			$redirect_path = '/wp-admin/admin.php?page=iacc-manager/iacc_manager.php';
 			header('Location: '.site_url().$redirect_path);
 			echo '<div class="updated"><p><b>Membership type updated.</b></p></div>';
@@ -303,10 +306,14 @@ function imm_edit_member()
 				<td>Membership Type:</td>
 				<td><?php echo $member_dropdown_form; ?></td>
 			</tr>
+			<tr>
+				<td>Membership Date:</td>
+				<td><input type="text" id="datepicker" name="membership_date"/></td>
+			</tr>
 		</table>
 		<br />
 		<input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
-		<input type="submit" name="submit" value="Edit Member" class="button-primary">
+		<input type="submit" name="submit" value="Save Member Changes" class="button-primary">
 
 	</form>		
 <?php
@@ -616,7 +623,7 @@ if (!empty($sponsors))
 						{
 							$spons_url = stripslashes($value);
 		
-							echo '<li style="height: 100px; width: 210px;"><a href="'.$spons_url.'"><img src="'.site_url().'/wp-content/plugins/iacc-manager/sponsors/'.$key.'"></a></li>';
+							echo '<li style="height: 100px; width: 210px;"><a href="'.$spons_url.'" target="_blank"><img src="'.site_url().'/wp-content/plugins/iacc-manager/sponsors/'.$key.'"></a></li>';
 
 						}
 					?>
