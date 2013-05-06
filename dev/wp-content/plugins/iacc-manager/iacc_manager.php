@@ -21,7 +21,19 @@ require_once(ABSPATH . "wp-admin" . '/includes/file.php');
 require_once(ABSPATH . "wp-admin" . '/includes/media.php');
 
 add_action('admin_menu', 'imm_create_menu');
+add_action('admin_init', 'imm_load_scripts');
 add_action('init', 'create_csv');
+
+// Load datepicker scripts
+function imm_load_scripts()
+{
+	$load_jquery_ui  = plugins_url( '/js/jquery-ui-1.10.3.custom.min.js', __FILE__);
+	$load_datepicker = plugins_url( '/js/datepicker.js', __FILE__);
+	$load_calendar_style = plugins_url( '/css/jquery-ui-1.10.3.custom.min.css', __FILE__);
+	wp_enqueue_script('load_datepicker', $load_datepicker, array('jquery', 'load_jquery_ui'));
+	wp_enqueue_script('load_jquery_ui', $load_jquery_ui, array('jquery'));
+	wp_enqueue_style('load_calendar_style', $load_calendar_style);
+}
 
 // Create the dashboard links
 
@@ -154,6 +166,17 @@ function imm_edit_member()
 	$member_meta = get_user_by('id', $user_id);
 	$user_email = $member_meta->user_email;
 
+	global $wpdb;
+
+	$sql = "SELECT * FROM ".MEMBER_PAYPAL." WHERE user_id = ".$user_id." ORDER BY timestamp DESC, amt DESC LIMIT 1;";
+	$purchase = $wpdb->get_results($sql);
+
+	$purchase_date = !empty($purchase[0]->timestamp) ? $purchase[0]->timestamp : '';
+	$purchase_amt = !empty($purchase[0]->amt) ? $purchase[0]->amt : 0.00;
+	$transaction_state = !empty($purchase) ? 1 : 0;
+	$purchase_print_date = !empty($purchase[0]->timestamp) ? date("m/d/y", $purchase_date) : date("F j, Y, g:i a", time());
+	$tx_id = !empty($purchase[0]->tx_id) ? $purchase[0]->tx_id : '';
+
 	//verify that a membership type exists. set a default for manually entered users.
 	if ( !empty($user['membership_type'][0]) )
 	{
@@ -216,10 +239,18 @@ function imm_edit_member()
 
 	//Do the post action if it's set
 
-	if (isset($_POST['submit']) && $_POST['submit'] == 'Edit Member')
+	if (isset($_POST['submit']) && $_POST['submit'] == 'Save Member Changes')
 	{
 		$user_id = $_POST['user_id'];
 		$member_permissions = $_POST['membership_type'];
+		$membership_payment = $_POST['membership_payment'];
+		$membership_date = strtotime($_POST['membership_date']);
+		$transaction_state = $_POST['transaction_state'];
+		$tx_id = $_POST['tx_id'];
+		$first_name = $_POST['first_name'];
+		$last_name = $_POST['last_name'];
+		$email = $_POST['email'];
+		$nickname = $_POST['nickname'];
 
 		switch($member_permissions)
 		{
@@ -263,13 +294,25 @@ function imm_edit_member()
 
 		if (isset($membership_type) && isset($member_prettyprint) && isset($member_permissions))
 		{
+			global $wpdb;
+
+			// Update the paypal table with the input values
+			/*if ($transaction_state == 1)
+			{
+				// update the record with new information
+				$sql = $wpdb->prepare("UPDATE `".MEMBER_PAYPAL."` SET `timestamp`=%d, `amt`=%d, `description`=%s, `pretty_print`=%s, `permissions`=%d WHERE `tx_id`=%d", $membership_date, $membership_payment, $membership_type, $member_prettyprint, $member_permissions, $tx_id);
+				$query = $wpdb->query($sql);
+			} */
+			
+			
+				// insert a new record
+			$sql = $wpdb->prepare("INSERT INTO `".MEMBER_PAYPAL."` (`timestamp`, `amt`, `description`, `pretty_print`, `permissions`, `user_id`, `nickname`, `first_name`, `last_name`, `email`, `tx_state`) VALUES (%d,%d,%s,%s,%d,%d,%s,%s,%s,%s,%d)", $membership_date, $membership_payment, $membership_type, $member_prettyprint, $member_permissions, $user_id, $nickname, $first_name, $last_name, $email, 1);
+			$query = $wpdb->query($sql);
+			
+			// Upate the wordpress user meta values
 			update_user_meta($user_id, 'membership_type', $membership_type);
 			update_user_meta($user_id, 'member_permissions', $member_permissions);
 			update_user_meta($user_id, 'member_prettyprint', $member_prettyprint);
-
-			$current_date = strtotime(date('c'));
-
-
 
 			$redirect_path = '/wp-admin/admin.php?page=iacc-manager/iacc_manager.php';
 			header('Location: '.site_url().$redirect_path);
@@ -307,13 +350,23 @@ function imm_edit_member()
 				<td><?php echo $member_dropdown_form; ?></td>
 			</tr>
 			<tr>
+				<td>Membership Payment</td>
+				<td>$<input type="text" id="payment" name="membership_payment" value="<?php echo $purchase_amt; ?>"/></td>
+			</tr>
+			<tr>
 				<td>Membership Date:</td>
-				<td><input type="text" id="datepicker" name="membership_date"/></td>
+				<td><input type="text" id="datepicker" name="membership_date" value="<?php echo $purchase_print_date; ?>"/></td>
 			</tr>
 		</table>
 		<br />
-		<input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
-		<input type="submit" name="submit" value="Save Member Changes" class="button-primary">
+		<input type="hidden" name="user_id" value="<?php echo $user_id; ?>"/>
+		<input type="hidden" name="nickname" value="<?php echo $user['nickname'][0]; ?>"/>
+		<input type="hidden" name="email" value="<?php echo $user_email; ?>"/>
+		<input type="hidden" name="first_name" value="<?php echo $user['first_name'][0]; ?>"/>
+		<input type="hidden" name="last_name" value="<?php echo $user['last_name'][0]; ?>"/>
+		<input type="hidden" name="transaction_state" value="<?php echo $transaction_state; ?>"/>
+		<input type="hidden" name="tx_id" value="<?php echo $tx_id; ?>"/>
+		<input type="submit" name="submit" value="Save Member Changes" class="button-primary"/>
 
 	</form>		
 <?php
