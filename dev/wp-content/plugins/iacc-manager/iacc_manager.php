@@ -53,6 +53,7 @@ function imm_member_action()
 
 	if ( $action == 'view' )
 	{
+		imm_view_ending_memberships();
 		imm_view_all_members();
 	}
 	else if ( $action == 'edit' )
@@ -96,6 +97,105 @@ function imm_sponsor_action()
 	{
 		imm_delete_sponsor();
 	}
+}
+
+function imm_view_ending_memberships()
+{
+	global $wpdb;
+
+	$row_style = '';
+	$membership_length = 31536000;
+	$membership_length_days = 365;
+	$day = 86400;
+	$three_days = 259200;
+	$seven_days = 604800;
+	$two_weeks = 1209600;
+	$one_month = 2592000;
+	$warning_period = $membership_length - $one_month;
+
+	$sql = $wpdb->prepare("SELECT * FROM member_paypal WHERE UNIX_TIMESTAMP() > `timestamp` AND (UNIX_TIMESTAMP() - `timestamp`) > %d AND tx_state = 1;", $warning_period);
+	$ends = $wpdb->get_results($sql);
+	$ends_count = count($ends);
+
+	if (!empty($ends))
+	{
+
+		echo '<div class="updated"><h2>Memberships Ending Soon ('.$ends_count.')</h2>';
+		echo '<table class="widefat page fixed" style="margin-bottom:6px;"><thead><tr>';
+		echo '<th>Member</th>';
+		echo '<th>Membership Type</th>';
+		echo '<th>Email</th>';
+		echo '<th>Ending In</th>';
+		echo '<th>End Date</th>';
+		echo '<th>Edit</th>';
+		echo '</tr></thead>';
+
+		foreach ($ends as $end)
+		{
+			$ending_in = intval($membership_length_days - intval((time() - $end->timestamp) / $day));
+			if ($ending_in <= 3)
+			{
+				$ending_message = $ending_in . ' days';
+				$row_style = ' style="background-color: #EFEFB6;"';
+			}			
+			else if ($ending_in == 1)
+			{
+				$ending_message = $ending_in . ' day';
+			}
+			else if ($ending_in <= 0)
+			{
+				$ending_message = 'ENDED';
+				$row_style = ' style="background-color: #DC7868;"';
+			}
+			else
+			{
+				$ending_message = $ending_in . ' days';
+			} 
+
+			switch($ending_in)
+			{
+				case $ending_in <= 0:
+					$row_style = ' style="background-color: #DC7868;"';
+					$ending_message = 'ENDED';
+					break;
+
+				case $ending_in == 1:
+					$row_style = ' style="background-color: #EFEFB6;"';
+					$ending_message = $ending_in . ' day';
+					break;
+
+				case $ending_in <= 3:
+					$row_style = ' style="background-color: #EFEFB6;"';					
+					$ending_message = $ending_in . ' days';
+					break;
+
+				default:
+					$ending_message = $ending_in . ' days';
+					break;
+			}
+				
+
+			$end_date_math = $end->timestamp + $membership_length;
+			$end_date = date("m/d/y", $end_date_math);
+
+			echo '<tr'.$row_style.'>';
+			echo '<td>'.$end->nickname.'</td>';
+			echo '<td>'.$end->description.'</td>';
+			echo '<td>'.$end->email.'</td>';
+			echo '<td>'.$ending_message.'</td>';
+			echo '<td>'.$end_date.'</td>';
+			echo '<td><a href="admin.php?page=iacc-manager/iacc_manager.php&action=edit&user_id='.$end->user_id.'" title="Edit Membership Details">Edit</a></td>';
+			echo '</tr>';
+		}
+
+		echo '</table>';
+		echo '<br />';
+		echo '<p><a href="admin.php?page=iacc-manager/iacc_manager.php&action=create_expiring_csv" title="Create CSV of Expiring Memberships" class="button-primary">Create Expiring Memberships CSV</a></p>';		
+		echo '</div>';
+
+	}
+	
+
 }
 
 function imm_view_all_members()
@@ -168,13 +268,14 @@ function imm_edit_member()
 
 	global $wpdb;
 
-	$sql = "SELECT * FROM ".MEMBER_PAYPAL." WHERE user_id = ".$user_id." ORDER BY timestamp DESC, amt DESC LIMIT 1;";
+	$sql = "SELECT * FROM ".MEMBER_PAYPAL." WHERE user_id = ".$user_id." AND tx_state = 1 ORDER BY timestamp DESC, amt DESC LIMIT 1;";
 	$purchase = $wpdb->get_results($sql);
 
+	// select the most recent record in membership transactions
 	$purchase_date = !empty($purchase[0]->timestamp) ? $purchase[0]->timestamp : '';
 	$purchase_amt = !empty($purchase[0]->amt) ? $purchase[0]->amt : 0.00;
 	$transaction_state = !empty($purchase) ? 1 : 0;
-	$purchase_print_date = !empty($purchase[0]->timestamp) ? date("m/d/y", $purchase_date) : date("F j, Y, g:i a", time());
+	$purchase_print_date = !empty($purchase[0]->timestamp) ? date("m/d/y", $purchase_date) : date("m/d/y", time());
 	$tx_id = !empty($purchase[0]->tx_id) ? $purchase[0]->tx_id : '';
 
 	//verify that a membership type exists. set a default for manually entered users.
@@ -240,10 +341,10 @@ function imm_edit_member()
 	//Do the post action if it's set
 
 	if (isset($_POST['submit']) && $_POST['submit'] == 'Save Member Changes')
-	{
+	{		
 		$user_id = $_POST['user_id'];
 		$member_permissions = $_POST['membership_type'];
-		$membership_payment = $_POST['membership_payment'];
+		$membership_payment = number_format($_POST['membership_payment'], 2, '.', '');
 		$membership_date = strtotime($_POST['membership_date']);
 		$transaction_state = $_POST['transaction_state'];
 		$tx_id = $_POST['tx_id'];
@@ -287,27 +388,29 @@ function imm_edit_member()
 				$member_prettyprint = 'Platinum Donor';
 				break;
 			default:
+				$member_permissions = 1;
 				$membership_type = "IACC Attendee";
-				$member_prettyprint = '0.00';
+				$member_prettyprint = 'Attendee';
 				break;
 		}
 
-		if (isset($membership_type) && isset($member_prettyprint) && isset($member_permissions))
+		if (isset($membership_type) && isset($member_prettyprint) && isset($member_permissions) && is_numeric($membership_payment))
 		{
 			global $wpdb;
-
-			// Update the paypal table with the input values
-			/*if ($transaction_state == 1)
+			
+			if ($member_permissions > 1)
 			{
-				// update the record with new information
-				$sql = $wpdb->prepare("UPDATE `".MEMBER_PAYPAL."` SET `timestamp`=%d, `amt`=%d, `description`=%s, `pretty_print`=%s, `permissions`=%d WHERE `tx_id`=%d", $membership_date, $membership_payment, $membership_type, $member_prettyprint, $member_permissions, $tx_id);
-				$query = $wpdb->query($sql);
-			} */
-			
-			
 				// insert a new record
-			$sql = $wpdb->prepare("INSERT INTO `".MEMBER_PAYPAL."` (`timestamp`, `amt`, `description`, `pretty_print`, `permissions`, `user_id`, `nickname`, `first_name`, `last_name`, `email`, `tx_state`) VALUES (%d,%d,%s,%s,%d,%d,%s,%s,%s,%s,%d)", $membership_date, $membership_payment, $membership_type, $member_prettyprint, $member_permissions, $user_id, $nickname, $first_name, $last_name, $email, 1);
-			$query = $wpdb->query($sql);
+				$sql = $wpdb->prepare("INSERT INTO `".MEMBER_PAYPAL."` (`timestamp`, `amt`, `description`, `pretty_print`, `permissions`, `user_id`, `nickname`, `first_name`, `last_name`, `email`, `tx_state`) VALUES (%d,%d,%s,%s,%d,%d,%s,%s,%s,%s,%d)", $membership_date, $membership_payment, $membership_type, $member_prettyprint, $member_permissions, $user_id, $nickname, $first_name, $last_name, $email, 1);
+				$query = $wpdb->query($sql);
+			}
+
+			if ($transaction_state == 1)
+			{
+				// expire the old record
+				$sql = $wpdb->prepare("UPDATE `".MEMBER_PAYPAL."` SET `tx_state` = %d WHERE `tx_id` = %d", 2, $tx_id);
+				$query = $wpdb->query($sql);				
+			}
 			
 			// Upate the wordpress user meta values
 			update_user_meta($user_id, 'membership_type', $membership_type);
@@ -486,7 +589,7 @@ function imm_get_membership_upgrades()
 	$order_by = !empty($_GET['order_by']) ? $_GET['order_by'] : 'timestamp DESC';
 
 	global $wpdb;
-	$sql = "SELECT * FROM ".MEMBER_PAYPAL." WHERE tx_state = 1 ORDER BY ".$order_by.";";
+	$sql = "SELECT * FROM ".MEMBER_PAYPAL." WHERE tx_state >= 1 ORDER BY ".$order_by.";";
 	$members = $wpdb->get_results($sql);
 
 	echo '<h2>Membership Upgrades</h2>';
@@ -500,10 +603,19 @@ function imm_get_membership_upgrades()
 		echo '<th><a href="admin.php?page=membership_upgrades&order_by=description">Membership Type</a></th>';
 		echo '<th><a href="admin.php?page=membership_upgrades&order_by=amt">Price</a></th>';
 		echo '<th><a href="admin.php?page=membership_upgrades&order_by=timestamp">Purchase Date</a></th>';
+		echo '<th><a href="admin.php?page=membership_upgrades&order_by=tx_state">Status</a></th>';
 		echo '</tr></thead>';
 
 		foreach ($members as $member)
 		{
+			if ($member->tx_state == 1)
+			{
+				$status = 'Active';
+			}
+			else if ($member->tx_state == 2)
+			{
+				$status = 'Expired';
+			}
 			echo '<tr>';
 			echo '<td>'.$member->first_name.' '.$member->last_name.'</td>';
 			echo '<td>'.$member->nickname.'</td>';
@@ -511,6 +623,7 @@ function imm_get_membership_upgrades()
 			echo '<td>'.$member->description.'</td>';
 			echo '<td>'.$member->amt.'</td>';
 			echo '<td>'.date("jS F, Y", $member->timestamp).'</td>';
+			echo '<td>'.$status.'</td>';
 			echo '</tr>';
 		}
 
@@ -805,6 +918,37 @@ function create_csv()
 			$purchase_format = '"'.$member->email.'"';
 			$membership_purchases[] = $purchase_format;
 			echo implode(',', $membership_purchases)."\n";			
+		}
+		exit;
+	}
+
+	if ( (isset($_GET['action'])) && ($_GET['action'] == 'create_expiring_csv') )
+	{
+		$filename = 'Expiring_Memberships_' . date('Y-m-d-H-i-s') . '.csv';
+		header( 'Content-Description: File Transfer' );
+		header( 'Content-Disposition: attachment; filename=' . $filename );
+		header( 'Content-Type: text/csv; charset=' . get_option( 'blog_charset' ), true );		
+
+		global $wpdb;
+
+		$membership_length = 31536000;
+		$membership_length_days = 365;
+		$day = 86400;
+		$three_days = 259200;
+		$seven_days = 604800;
+		$two_weeks = 1209600;
+		$one_month = 2592000;
+		$warning_period = $membership_length - $one_month;
+
+		$sql = $wpdb->prepare("SELECT * FROM member_paypal WHERE UNIX_TIMESTAMP() > `timestamp` AND (UNIX_TIMESTAMP() - `timestamp`) > %d AND tx_state = 1;", $warning_period);
+		$ends = $wpdb->get_results($sql);
+
+		foreach ($ends as $end)
+		{
+			$member_expirations = array();
+			$expiration_format = '"'.$end->email.'"';
+			$member_expirations[] = $expiration_format;
+			echo implode(',', $member_expirations)."\n";			
 		}
 		exit;
 	}
