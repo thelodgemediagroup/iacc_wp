@@ -133,24 +133,6 @@ function imm_view_ending_memberships()
 		foreach ($ends as $end)
 		{
 			$ending_in = intval($membership_length_days - intval((time() - $end->timestamp) / $day));
-			if ($ending_in <= 3)
-			{
-				$ending_message = $ending_in . ' days';
-				$row_style = ' style="background-color: #EFEFB6;"';
-			}			
-			else if ($ending_in == 1)
-			{
-				$ending_message = $ending_in . ' day';
-			}
-			else if ($ending_in <= 0)
-			{
-				$ending_message = 'ENDED';
-				$row_style = ' style="background-color: #DC7868;"';
-			}
-			else
-			{
-				$ending_message = $ending_in . ' days';
-			} 
 
 			switch($ending_in)
 			{
@@ -170,6 +152,7 @@ function imm_view_ending_memberships()
 					break;
 
 				default:
+					$row_style = '';
 					$ending_message = $ending_in . ' days';
 					break;
 			}
