@@ -48,3 +48,11 @@ body {
 	color: #17517a !important;
 	text-decoration: underline !important;	
 }
+
+#header {
+	padding: 8px 0 10px;
+}
+
+#logo {
+	margin: 0 30px 0 40px;
+}
