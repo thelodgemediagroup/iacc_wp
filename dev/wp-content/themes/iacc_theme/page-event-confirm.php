@@ -131,6 +131,24 @@ Template Name: Event Confirm
 					$timestamp = $query[0]->timestamp;
 					$payer_id = $query[0]->payer_id;
 					$amt = $query[0]->amt;
+					$event_title = $query[0]->event_title;
+					$event_date = $query[0]->event_date;
+					$event_venue = $query[0]->event_venue;
+					$ticket_quantity = $query[0]->quantity;
+
+					//get the users IACC email
+					$user_id_post = get_current_user_id();
+					$user_info = get_userdata($user_id_post);
+					$user_email = $user_info->user_email;
+
+
+					$event_details = array(
+						'event_title' => $event_title,
+						'event_venue' => $event_venue,
+						'event_date' => $event_date,
+						'quantity' => $ticket_quantity,
+						'amt' => $amt
+						);					
 
 					if ($chk_val != $token || $chk_val2 != $timestamp)
 					{
@@ -199,11 +217,11 @@ Template Name: Event Confirm
 
 							$query = $wpdb->query($sql);
 
-							$redirect_to = site_url().'/member-admin/';
+							// email confirmation to the user
+							email_event_confirmation($user_email, $event_details);
 
 							//redirect users to their profile
-
-							//wp_redirect($redirect_to);
+							$redirect_to = site_url().'/member-admin/';
 							header('Location: '.$redirect_to);
 							exit;
 

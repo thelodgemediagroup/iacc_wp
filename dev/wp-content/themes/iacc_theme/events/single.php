@@ -67,11 +67,22 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Purchase Tickets')
 					$timestamp = time();
 					$tx_state = 1;
 
+					$event_details = array(
+						'event_title' => $event_title,
+						'event_venue' => $event_venue,
+						'event_date' => $event_date,
+						'quantity' => $ticket_quantity,
+						'amt' => '0.00'
+						);
+
 					global $wpdb;
 					$sql = $wpdb->prepare(
 						"INSERT INTO `event_paypal` (`user_id`, `quantity`, `event_id`, `ticket_desc`, `event_title`, `event_venue`, `event_date`, `tx_state`, `first_name`, `last_name`, `email`, `timestamp`) VALUES (%d,%d,%d,%s,%s,%s,%d,%d,%s,%s,%s,%d)", $user_id, $ticket_quantity, $event_id, $ticket_type_desc, $event_title, $event_venue, $event_date, $tx_state, $first_name, $last_name, $email, $timestamp);
 					
 					$query = $wpdb->query($sql);
+
+					// email confirmation to the user
+					email_event_confirmation($email, $event_details);
 
 					//redirect users to their profile
 					$redirect_to = site_url().'/member-admin/';
@@ -129,8 +140,8 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Purchase Tickets')
 						'PAYMENTREQUEST_0_CURRENCYCODE' => urlencode('USD'),
 						'PAYMENTREQUEST_0_SHIPPINGAMT' => urlencode('0.00'),
 						'PAYMENTREQUEST_0_TAXAMT' => urlencode('0.00'),
-						'CANCELURL' => urlencode('http://iacc.thelodgemediagroup.com/events/'),
-						'RETURNURL' => urlencode('http://iacc.thelodgemediagroup.com/event-confirm/')					
+						'CANCELURL' => urlencode('http://local.iacc:80/events/'),
+						'RETURNURL' => urlencode('http://local.iacc:80/event-confirm/')					
 						);
 					
 					$fields_string = '';
@@ -234,11 +245,22 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Reserve Seats')
 					$timestamp = time();
 					$tx_state = 1;
 
+					$event_details = array(
+						'event_title' => $event_title,
+						'event_venue' => $event_venue,
+						'event_date' => $event_date,
+						'quantity' => $ticket_quantity,
+						'amt' => '0.00'
+						);
+
 					global $wpdb;
 					$sql = $wpdb->prepare(
 						"INSERT INTO `event_paypal` (`user_id`, `quantity`, `event_id`, `ticket_desc`, `event_title`, `event_venue`, `event_date`, `tx_state`, `first_name`, `last_name`, `email`, `timestamp`) VALUES (%d,%d,%d,%s,%s,%s,%d,%d,%s,%s,%s,%d)", $user_id, $ticket_quantity, $event_id, $ticket_type_desc, $event_title, $event_venue, $event_date, $tx_state, $first_name, $last_name, $email, $timestamp);
 					
 					$query = $wpdb->query($sql);
+
+					// email the confirmation to user
+					email_event_confirmation($email, $event_details);
 
 					//redirect users to their profile
 					$redirect_to = site_url().'/member-admin/';
@@ -252,6 +274,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Reserve Seats')
 if ( !defined('ABSPATH') ) { die('-1'); }
 ?>
 <span class="back"><a href="<?php echo tribe_get_events_link(); ?>"><?php _e('&laquo; Back to Events', 'tribe-events-calendar'); ?></a></span>				
+
 <?php
 	$gmt_offset = (get_option('gmt_offset') >= '0' ) ? ' +' . get_option('gmt_offset') : " " . get_option('gmt_offset');
  	$gmt_offset = str_replace( array( '.25', '.5', '.75' ), array( ':15', ':30', ':45' ), $gmt_offset );
@@ -434,7 +457,4 @@ if (is_user_logged_in())
    <a href="<?php echo tribe_get_gcal_link(); ?>" class="gcal-add" title="<?php _e('Add to Google Calendar', 'tribe-events-calendar'); ?>"><?php _e('+ Google Calendar', 'tribe-events-calendar'); ?></a>
 <?php endif; ?>
 
-<div class="navlink tribe-previous"><?php tribe_previous_event_link(); ?></div>
-
-<div class="navlink tribe-next"><?php tribe_next_event_link(); ?></div>
 <div style="clear:both"></div>

@@ -53,7 +53,7 @@ Template Name: IACC Member
 				}
 				else 
 				{
-					echo '<p>You are currently registered as a '.$member_prettyprint.'.</p>';	
+					echo '<p>You are currently registered as a '.$member_prettyprint.'.</p>';
 				}
 			
 			}

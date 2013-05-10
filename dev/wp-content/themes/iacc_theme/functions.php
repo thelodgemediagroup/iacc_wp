@@ -185,7 +185,38 @@ class logged_in_iacc_member
 
 $logged_in_iacc_member = new logged_in_iacc_member();
 
-update_option('home', 'local.iacc');
-update_option('siteurl', 'local.iacc');
+// Return content type for emails as text/html
+function set_html_content_type()
+{
+	return 'text/html';
+}
+
+// Set up a function for mailing confirmation of event registers
+function email_event_confirmation($user_email, $event_details)
+{
+	// recipient information
+	$to = $user_email;
+
+	// subject to display for email
+	$subject = 'Registration Confirmation: ' . $event_details['event_title'];
+
+	// message to format the event data
+	$message = '<p>Thank you for your IACC event registration. Keep the details below for your records.</p>';
+	$message .= '<br /><table>';
+	$message .= '<tr><td>Event Name: </td><td>'.$event_details['event_title'].'</td></tr>';
+	$message .= '<tr><td>Event Venue: </td><td>'.$event_details['event_venue'].'</td></tr>';
+	$message .= '<tr><td>Event Date: </td><td>'.date('l F jS, Y g:i a', $event_details['event_date']).'</td></tr>';
+	$message .= '<tr><td>Reserved Quantity: </td><td>'.$event_details['quantity'].'</td></tr>';
+	$message .= '<tr><td>Cost: </td><td>'.$event_details['amt'].'</td></tr>';
+	$message .= '</table><br />';
+	$message .= '<p>This is an automated message sent from iaccusa.org.</p>';
+
+	$headers = 'From: IACC Admin <admin@iaccusa.org>'."\r\n";
+
+	// send the email - set html content type first, then remove when sent
+	add_filter( 'wp_mail_content_type', 'set_html_content_type' );
+	wp_mail($to, $subject, $message, $headers);
+	remove_filter( 'wp_mail_content_type', 'set_html_content_type' );
+}
 
 ?>
