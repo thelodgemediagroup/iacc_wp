@@ -826,7 +826,7 @@ function create_csv()
 		foreach ($iacc_users as $user)
 		{
 			$iacc_members = array();
-			$member_format = '"'.$user->user_email.'"';
+			$member_format = '"'.$user->first_name.' '.$user->last_name.'",'.'"'.$user->user_email.'"';
 			$iacc_members[] = $member_format;
 			echo implode(',', $iacc_members)."\n";
 		}
@@ -850,7 +850,7 @@ function create_csv()
 		foreach ($purchases as $purchase)
 		{
 			$event_purchases = array();
-			$purchase_format = '"'.$purchase->email.'"';
+			$purchase_format = '"'.$purchase->first_name.' '.$purchase->last_name.'",'.'"'.$purchase->email.'"';
 			$event_purchases[] = $purchase_format;
 			echo implode(',', $event_purchases)."\n";
 		}
@@ -875,7 +875,7 @@ function create_csv()
 		foreach ($purchases as $purchase)
 		{
 			$event_purchases = array();
-			$purchase_format = '"'.$purchase->email.'"';
+			$purchase_format = '"'.$purchase->first_name.' '.$purchase->last_name.'",'.'"'.$purchase->email.'"';
 			$event_purchases[] = $purchase_format;
 			echo implode(',', $event_purchases)."\n";			
 		}
@@ -892,13 +892,13 @@ function create_csv()
 		$order_by = !empty($_GET['order_by']) ? $_GET['order_by'] : 'timestamp DESC';
 
 		global $wpdb;
-		$sql = "SELECT * FROM ".MEMBER_PAYPAL." WHERE tx_state = 1 ORDER BY ".$order_by.";";
+		$sql = "SELECT * FROM ".MEMBER_PAYPAL." WHERE tx_state >= 1 ORDER BY ".$order_by.";";
 		$members = $wpdb->get_results($sql);
 
 		foreach ($members as $member)
 		{
 			$membership_purchases = array();
-			$purchase_format = '"'.$member->email.'"';
+			$purchase_format = '"'.$member->nickname.'",'.'"'.$member->email.'"';
 			$membership_purchases[] = $purchase_format;
 			echo implode(',', $membership_purchases)."\n";			
 		}
@@ -929,7 +929,7 @@ function create_csv()
 		foreach ($ends as $end)
 		{
 			$member_expirations = array();
-			$expiration_format = '"'.$end->email.'"';
+			$expiration_format = '"'.$end->nickname.'",'.'"'.$end->email.'"';
 			$member_expirations[] = $expiration_format;
 			echo implode(',', $member_expirations)."\n";			
 		}
