@@ -67,7 +67,7 @@ Template Name: IACC Member
 
 		</section><!--/ #content -->
 
-		<?php get_sidebar('side'); ?>
+		<?php get_sidebar('member'); ?>
 
 	</section><!--/ .container -->
 

@@ -219,4 +219,67 @@ function email_event_confirmation($user_email, $event_details)
 	remove_filter( 'wp_mail_content_type', 'set_html_content_type' );
 }
 
+// Get users registered events
+function get_users_upcoming_events()
+{
+	$user_id = get_current_user_id();
+	$current_time = time();
+	$search_time = $current_time - 86400;
+
+	global $wpdb;
+
+	$sql = "SELECT * FROM ".EVENT_PAYPAL." WHERE tx_state = 1 AND user_id = ".$user_id." AND event_date > ".$search_time." ORDER BY event_date ASC LIMIT 5;";
+	$events = $wpdb->get_results($sql);
+	
+	if (!empty($events))
+	{
+		echo '<table class="custom-table">';
+		echo '<thead><tr>';
+		echo '<th colspan="3" style="text-align:center; background-color: #17517a; color: #fff;">Your Events</th>';
+		echo '</tr>';
+		echo '<tr>';
+		echo '<th style="padding: 0; text-align:center;">Qty</th>';
+		echo '<th>Event</th>';
+		echo '<th>Date</th>';
+		echo '</tr></thead>';
+		foreach ($events as $event)
+		{
+			$event_link = tribe_get_event_link($event->event_id);
+			$title = $event->event_title;
+
+			if (strlen($title) > 19)
+			{
+				$title = substr($event->event_title, 0 , 19) . '...';	
+			}
+			else
+			{
+				$title = $event->event_title;
+			}
+
+			echo '<tr>';
+			echo '<td>'.$event->quantity.'</td>';			
+			echo '<td><a href="'.$event_link.'">'.$title.'</a></td>';
+			echo '<td>'.date('n/j/y', $event->event_date).'</td>';
+			echo '</tr>';
+		}
+
+		echo '</table>';
+	}
+	else
+	{
+		$events_link = tribe_get_listview_link();
+
+		echo '<table class="custom-table">';
+		echo '<thead><tr>';
+		echo '<th colspan="3" style="text-align:center; background-color: #17517a; color: #fff;">Your Events</th>';
+		echo '</tr>';
+		echo '</tr></thead>';
+
+		echo '<tr><td colspan="3">You are not currenty registered for any events</td></tr>';
+		echo '<tr><td colspan="3">';
+		echo '<a href="'.$events_link.'">See Upcoming Events</a>';
+		echo '</td></tr>';
+		echo '</table>';
+	}
+}
 ?>
