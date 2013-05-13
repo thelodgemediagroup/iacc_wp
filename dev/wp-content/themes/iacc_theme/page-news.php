@@ -47,7 +47,8 @@ Template Name: IACC in the News
 
 				<?php if ( !have_posts() )
 				{
-					echo "There are currently no news articles to display";
+					echo "<h2>No News</h2>";
+					echo "<p>There are currently no news articles to display</p>";
 				}
 				?>
 

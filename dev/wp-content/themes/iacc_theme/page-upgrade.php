@@ -115,8 +115,8 @@ Template Name: Membership Upgrade
 					'PAYMENTREQUEST_0_CURRENCYCODE' => urlencode('USD'),
 					'PAYMENTREQUEST_0_SHIPPINGAMT' => urlencode('0.00'),
 					'PAYMENTREQUEST_0_TAXAMT' => urlencode('0.00'),
-					'CANCELURL' => urlencode('http://iacc.thelodgemediagroup.com/upgrade'),
-					'RETURNURL' => urlencode('http://iacc.thelodgemediagroup.com/confirm')					
+					'CANCELURL' => urlencode('http://www.iaccusa.org/upgrade'),
+					'RETURNURL' => urlencode('http://www.iaccusa.org/confirm')					
 					);
 
 				$fields_string = '';

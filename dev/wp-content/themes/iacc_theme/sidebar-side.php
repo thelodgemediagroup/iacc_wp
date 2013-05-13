@@ -9,17 +9,12 @@ global $_theme_side_sidebar;
 		
 		<aside id="sidebar">
 
-			<?php if ($_theme_side_sidebar == 'disable' || !dynamic_sidebar($_theme_side_sidebar)): ?>
-				<div class="widget-container widget_search">
-					<h3 class="widget-title"><?php _e('Search', TEMPLATENAME); ?></h3>
-					<?php get_search_form(); ?>
-				</div>
+			<?php if (is_user_logged_in()) { get_users_upcoming_events(); } ?>
 
-			<?php endif; ?>
+			<?php get_next_events_sidebar(); ?>
 
-
-		<!--<script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
-		<script type="IN/FollowCompany" data-id="2712759" data-counter="none"></script> -->
+		<script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
+		<script type="IN/FollowCompany" data-id="2712759" data-counter="none"></script>
 
 		</aside><!--/ #sidebar-->
 		

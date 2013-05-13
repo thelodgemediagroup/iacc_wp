@@ -60,3 +60,13 @@ body {
 ul.social-links {
 	margin: 0 20px 0 0;
 }
+
+.upcoming-event-date {
+	width: 40px;
+	vertical-align: middle;
+}
+
+.upcoming-event-quantity {
+	width: 12px;
+	vertical-align: middle;
+}

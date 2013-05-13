@@ -47,7 +47,8 @@ Template Name: Jobs
 
 				<?php if ( !have_posts() )
 				{
-					echo "There are currently no job postings available";
+					echo "<h2>No Jobs Available</h2>";
+					echo "<p>There are currently no job postings available</p>";
 				}
 				?>
 

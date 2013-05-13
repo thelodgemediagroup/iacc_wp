@@ -140,8 +140,8 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Purchase Tickets')
 						'PAYMENTREQUEST_0_CURRENCYCODE' => urlencode('USD'),
 						'PAYMENTREQUEST_0_SHIPPINGAMT' => urlencode('0.00'),
 						'PAYMENTREQUEST_0_TAXAMT' => urlencode('0.00'),
-						'CANCELURL' => urlencode('http://local.iacc:80/events/'),
-						'RETURNURL' => urlencode('http://local.iacc:80/event-confirm/')					
+						'CANCELURL' => urlencode('http://www.iaccusa.org/events/'),
+						'RETURNURL' => urlencode('http://www.iaccusa.org/event-confirm/')					
 						);
 					
 					$fields_string = '';

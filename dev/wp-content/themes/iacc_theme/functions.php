@@ -247,19 +247,10 @@ function get_users_upcoming_events()
 			$event_link = tribe_get_event_link($event->event_id);
 			$title = $event->event_title;
 
-			if (strlen($title) > 19)
-			{
-				$title = substr($event->event_title, 0 , 19) . '...';	
-			}
-			else
-			{
-				$title = $event->event_title;
-			}
-
 			echo '<tr>';
-			echo '<td>'.$event->quantity.'</td>';			
+			echo '<td class="upcoming-event-quantity">'.$event->quantity.'</td>';			
 			echo '<td><a href="'.$event_link.'">'.$title.'</a></td>';
-			echo '<td>'.date('n/j/y', $event->event_date).'</td>';
+			echo '<td class="upcoming-event-date">'.date('M j', $event->event_date).'</td>';
 			echo '</tr>';
 		}
 
@@ -276,9 +267,41 @@ function get_users_upcoming_events()
 		echo '</tr></thead>';
 
 		echo '<tr><td colspan="3">You are not currenty registered for any events</td></tr>';
-		echo '<tr><td colspan="3">';
-		echo '<a href="'.$events_link.'">See Upcoming Events</a>';
-		echo '</td></tr>';
+		echo '</table>';
+	}
+}
+
+// get next 3 upcoming events for sidebars
+function get_next_events_sidebar()
+{
+	$events_args = array(
+		'eventDisplay' => 'upcoming',
+		'posts_per_page' => 3
+		);
+
+	$next_events = tribe_get_events($events_args);
+
+	if (!empty($next_events))
+	{
+		echo '<table class="custom-table">';
+		echo '<thead><tr>';
+		echo '<th colspan="2" style="text-align:center; background-color: #17517a; color: #fff;">Upcoming Events</th>';
+		echo '</tr><tr>';
+		echo '<th>Event</th>';
+		echo '<th>Date</th>';
+		echo '</tr></thead>';
+
+		foreach ($next_events as $event)
+		{
+			fb($event);
+			$event_link = tribe_get_event_link($event->ID);
+			$event_timecode = strtotime($event->EventStartDate);
+
+			echo '<tr>';
+			echo '<td><a href="'.$event_link.'">'.$event->post_title.'</a></td>';
+			echo '<td class="upcoming-event-date">'.date('M j',$event_timecode).'</td>';
+			echo '</tr>';
+		}
 		echo '</table>';
 	}
 }
