@@ -13,6 +13,7 @@
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="The Indo-American Chamber of Commerce (IACC-USA) is a non-profit organization serving the Metro Detroit area and beyond">
 <link rel="shortcut icon" href="<?php theme_favico(); ?>" />
 <title><?php
 	/*
