@@ -115,10 +115,10 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Purchase Tickets')
 					$paypal_custom_json = json_encode($paypal_custom);
 
 					// set paypal constants
-					$paypal_user = 'iacctest_api1.iacc.org';
-					$paypal_pwd = '1364059762';
-					$paypal_signature = 'A7TqZwXuy-wkefzg6ZJOzSRN4BT0AMAkmbyUdSVB.gp7RG-kMNotJJ-O';
-					$paypal_target = 'https://api-3t.sandbox.paypal.com/nvp';
+					$paypal_user = 'admin_api1.iaccusa.org';
+					$paypal_pwd = 'M6HTJENSVREJY86N';
+					$paypal_signature = 'AVZGhB1VUnsI8UmFV0o9yMLggCMKA.uRTpoAgNe9M8CIgbrQ635nmKvN';
+					$paypal_target = 'https://api-3t.paypal.com/nvp';
 
 					$paypal_fields = array(
 						'USER' => urlencode($paypal_user),
@@ -176,7 +176,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Purchase Tickets')
 					if ( $result['ACK'] == 'Success')
 					{
 						$response = urldecode($result['TOKEN']);
-						header('Location: https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&token='.$response);
+						header('Location: https://www.paypal.com/webscr?cmd=_express-checkout&token='.$response);
 						exit;
 					}
 					else

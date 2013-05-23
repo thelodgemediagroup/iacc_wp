@@ -28,11 +28,10 @@ Template Name: Event Confirm
 
 			function confirm_paypal()
 			{
-				$paypal_user = 'iacctest_api1.iacc.org';
-				$paypal_pwd = '1364059762';
-				$paypal_signature = 'A7TqZwXuy-wkefzg6ZJOzSRN4BT0AMAkmbyUdSVB.gp7RG-kMNotJJ-O';
-
-				$paypal_target = 'https://api-3t.sandbox.paypal.com/nvp';
+				$paypal_user = 'admin_api1.iaccusa.org';
+				$paypal_pwd = 'M6HTJENSVREJY86N';
+				$paypal_signature = 'AVZGhB1VUnsI8UmFV0o9yMLggCMKA.uRTpoAgNe9M8CIgbrQ635nmKvN';
+				$paypal_target = 'https://api-3t.paypal.com/nvp';
 
 				$fields = array(
 					'USER' => urlencode($paypal_user),
@@ -157,11 +156,10 @@ Template Name: Event Confirm
 					else
 					{
 
-						$paypal_user = 'iacctest_api1.iacc.org';
-						$paypal_pwd = '1364059762';
-						$paypal_signature = 'A7TqZwXuy-wkefzg6ZJOzSRN4BT0AMAkmbyUdSVB.gp7RG-kMNotJJ-O';
-
-						$paypal_target = 'https://api-3t.sandbox.paypal.com/nvp';
+						$paypal_user = 'admin_api1.iaccusa.org';
+						$paypal_pwd = 'M6HTJENSVREJY86N';
+						$paypal_signature = 'AVZGhB1VUnsI8UmFV0o9yMLggCMKA.uRTpoAgNe9M8CIgbrQ635nmKvN';
+						$paypal_target = 'https://api-3t.paypal.com/nvp';
 
 						$fields = array(
 				              'USER' => urlencode($paypal_user),
