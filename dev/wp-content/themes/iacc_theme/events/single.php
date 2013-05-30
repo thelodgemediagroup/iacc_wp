@@ -38,6 +38,10 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Purchase Tickets')
 				{
 					echo '<div class="notice">Please enter a numeric value for ticket quantity</div>';
 				}
+				else if ($_POST['ticket_quantity'] < 1)
+				{
+					echo '<div class="notice">Please enter a quantity</div>';
+				}
 				else if ($ticket_type_price == 0)
 				{
 					$user_id = get_current_user_id();
@@ -217,6 +221,12 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Reserve Seats')
 				{
 					echo '<div class="notice">Please enter a numeric value for ticket quantity</div>';
 				}
+				else if ($_POST['ticket_quantity'] < 1)
+				{
+					echo '<div class="notice">Please enter a quantity</div>';
+				}
+				else
+				{				
 				
 					$user_id = get_current_user_id();
 					$user_info = get_userdata($user_id);
@@ -266,7 +276,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Reserve Seats')
 					$redirect_to = site_url().'/member-admin/';
 					header('Location: '.$redirect_to);
 					exit;
-				
+				}
 }
 
 //require_once('paypal_event.php');
