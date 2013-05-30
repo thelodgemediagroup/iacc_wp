@@ -41,7 +41,7 @@ function imm_create_menu()
 {
 	$imm_icon_location = plugin_dir_url( __FILE__ ).'/images/plugin_logo.png';
 	$imm_create_settings = add_menu_page('IACC Manager', 'IACC', 'administrator', __FILE__,'imm_member_action',$imm_icon_location,'30');
-	$imm_append_events = add_submenu_page(__FILE__, 'Purchased Events', 'Purchased Events', 'administrator', 'purchased_events', 'imm_event_action');
+	$imm_append_events = add_submenu_page(__FILE__, 'Event Registration', 'Event Registration', 'administrator', 'event_registration', 'imm_event_action');
 	$imm_append_members = add_submenu_page(__FILE__, 'Membership Upgrades', 'Membership Upgrades', 'administrator', 'membership_upgrades', 'imm_get_membership_upgrades');
 	$imm_append_sponsors = add_submenu_page(__FILE__, 'Sponsors Slider', 'Sponsors Slider', 'administrator', 'sponsors_slider', 'imm_sponsor_action');
 }
@@ -72,12 +72,16 @@ function imm_event_action()
 
 	if ( $action == 'view' )
 	{
-		imm_get_purchased_events();
+		imm_get_event_registration();
 	}
 	else if ( $action == 'event_view' )
 	{
 		imm_get_registers_by_event();
-	}	
+	}
+	else if ( $action == 'delete' )
+	{
+		imm_delete_event_register();
+	}
 }
 
 function imm_sponsor_action()
@@ -458,7 +462,7 @@ function imm_edit_member()
 <?php
 }
 
-function imm_get_purchased_events()
+function imm_get_event_registration()
 {
 	global $wpdb;
 
@@ -467,19 +471,20 @@ function imm_get_purchased_events()
 	$sql = "SELECT * FROM ".EVENT_PAYPAL." WHERE tx_state = 1 ORDER BY ".$order_by.";";
 	$purchases = $wpdb->get_results($sql);
 
-	echo '<h2>Purchased Events</h2>';
+	echo '<h2>Event Registration</h2>';
 
 	if (!empty($purchases))
 	{
 		echo '<table class="widefat page fixed"><thead><tr>';
-		echo '<th><a href="admin.php?page=purchased_events&order_by=event_id">Event</a></th>';
-		echo '<th><a href="admin.php?page=purchased_events&order_by=event_date">Event Date</a></th>';
-		echo '<th><a href="admin.php?page=purchased_events&order_by=quantity">Ticket Quantity</a></th>';
-		echo '<th><a href="admin.php?page=purchased_events&order_by=ticket_desc">Ticket Type</a></th>';
-		echo '<th><a href="admin.php?page=purchased_events&order_by=first_name">Member</a></th>';
-		echo '<th><a href="admin.php?page=purchased_events&order_by=email">Email</a></th>';
-		echo '<th><a href="admin.php?page=purchased_events&order_by=amt">Price</a></th>';
-		echo '<th><a href="admin.php?page=purchased_events&order_by=timestamp">Purchase Date</a></th>';
+		echo '<th><a href="admin.php?page=event_registration&order_by=event_id">Event</a></th>';
+		echo '<th><a href="admin.php?page=event_registration&order_by=event_date">Event Date</a></th>';
+		echo '<th><a href="admin.php?page=event_registration&order_by=quantity">Ticket Quantity</a></th>';
+		echo '<th><a href="admin.php?page=event_registration&order_by=ticket_desc">Ticket Type</a></th>';
+		echo '<th><a href="admin.php?page=event_registration&order_by=first_name">Member</a></th>';
+		echo '<th><a href="admin.php?page=event_registration&order_by=email">Email</a></th>';
+		echo '<th><a href="admin.php?page=event_registration&order_by=amt">Price</a></th>';
+		echo '<th><a href="admin.php?page=event_registration&order_by=timestamp">Purchase Date</a></th>';
+		echo '<th>Delete</th>';
 		echo '</tr></thead>';
 
 		foreach ($purchases as $purchase)
@@ -494,7 +499,7 @@ function imm_get_purchased_events()
 				$full_name = $purchase->first_name.' '.$purchase->last_name;
 			}
 			echo '<tr>';
-			echo '<td><a href="admin.php?page=purchased_events&action=event_view&event_id='.$purchase->event_id.'" title="View by Event">'.$purchase->event_title.'</a></td>';
+			echo '<td><a href="admin.php?page=event_registration&action=event_view&event_id='.$purchase->event_id.'" title="View by Event">'.$purchase->event_title.'</a></td>';
 			echo '<td>'.date("F j, Y, g:i a", $purchase->event_date).'</td>';
 			echo '<td>'.$purchase->quantity.'</td>';
 			echo '<td>'.$purchase->ticket_desc.'</td>';
@@ -502,12 +507,13 @@ function imm_get_purchased_events()
 			echo '<td>'.$purchase->email.'</td>';
 			echo '<td>'.$purchase->amt.'</td>';
 			echo '<td>'.date("F j, Y, g:i a", $purchase->timestamp).'</td>';
+			echo '<td><a href="admin.php?page=event_registration&action=delete&tx_id='.$purchase->tx_id.'" title="Delete Purchase">Delete</a></td>';
 			echo '</tr>';
 		}
 
 		echo '</table>';
 		echo '<br />';
-		echo '<p><a href="admin.php?page=purchased_events&action=create_event_purchases_csv&order_by='.$order_by.'" title="Create CSV of Event Purchase Emails" class="button-primary">Create Event Purchase CSV</a></p>';
+		echo '<p><a href="admin.php?page=event_registration&action=create_event_purchases_csv&order_by='.$order_by.'" title="Create CSV of Event Purchase Emails" class="button-primary">Create Event Purchase CSV</a></p>';
 	}
 	else
 	{
@@ -528,14 +534,15 @@ function imm_get_registers_by_event()
 
 	echo '<h2>'.$event_title.'</h2>';
 		echo '<table class="widefat page fixed"><thead><tr>';
-		echo '<th><a href="admin.php?page=purchased_events&action=event_view&event_id='.$_GET['event_id'].'&order_by=event_id">Event</a></th>';
-		echo '<th><a href="admin.php?page=purchased_events&action=event_view&event_id='.$_GET['event_id'].'&order_by=event_date">Event Date</a></th>';
-		echo '<th><a href="admin.php?page=purchased_events&action=event_view&event_id='.$_GET['event_id'].'&order_by=quantity">Ticket Quantity</a></th>';
-		echo '<th><a href="admin.php?page=purchased_events&action=event_view&event_id='.$_GET['event_id'].'&order_by=ticket_desc">Ticket Type</a></th>';
-		echo '<th><a href="admin.php?page=purchased_events&action=event_view&event_id='.$_GET['event_id'].'&order_by=first_name">Member</a></th>';
-		echo '<th><a href="admin.php?page=purchased_events&action=event_view&event_id='.$_GET['event_id'].'&order_by=email">Email</a></th>';
-		echo '<th><a href="admin.php?page=purchased_events&action=event_view&event_id='.$_GET['event_id'].'&order_by=amt">Price</a></th>';
-		echo '<th><a href="admin.php?page=purchased_events&action=event_view&event_id='.$_GET['event_id'].'&order_by=timestamp">Purchase Date</a></th>';
+		echo '<th><a href="admin.php?page=event_registration&action=event_view&event_id='.$_GET['event_id'].'&order_by=event_id">Event</a></th>';
+		echo '<th><a href="admin.php?page=event_registration&action=event_view&event_id='.$_GET['event_id'].'&order_by=event_date">Event Date</a></th>';
+		echo '<th><a href="admin.php?page=event_registration&action=event_view&event_id='.$_GET['event_id'].'&order_by=quantity">Ticket Quantity</a></th>';
+		echo '<th><a href="admin.php?page=event_registration&action=event_view&event_id='.$_GET['event_id'].'&order_by=ticket_desc">Ticket Type</a></th>';
+		echo '<th><a href="admin.php?page=event_registration&action=event_view&event_id='.$_GET['event_id'].'&order_by=first_name">Member</a></th>';
+		echo '<th><a href="admin.php?page=event_registration&action=event_view&event_id='.$_GET['event_id'].'&order_by=email">Email</a></th>';
+		echo '<th><a href="admin.php?page=event_registration&action=event_view&event_id='.$_GET['event_id'].'&order_by=amt">Price</a></th>';
+		echo '<th><a href="admin.php?page=event_registration&action=event_view&event_id='.$_GET['event_id'].'&order_by=timestamp">Purchase Date</a></th>';
+		echo '<th>Delete</th>';
 		echo '</tr></thead>';
 
 
@@ -551,7 +558,7 @@ function imm_get_registers_by_event()
 		}
 
 		echo '<tr>';
-		echo '<td><a href="admin.php?page=purchased_events&action=event_view&event_id='.$purchase->event_id.'" title="View by Event">'.$purchase->event_title.'</a></td>';
+		echo '<td><a href="admin.php?page=event_registration&action=event_view&event_id='.$purchase->event_id.'" title="View by Event">'.$purchase->event_title.'</a></td>';
 		echo '<td>'.date("F j, Y, g:i a", $purchase->event_date).'</td>';
 		echo '<td>'.$purchase->quantity.'</td>';
 		echo '<td>'.$purchase->ticket_desc.'</td>';
@@ -559,12 +566,25 @@ function imm_get_registers_by_event()
 		echo '<td>'.$purchase->email.'</td>';
 		echo '<td>'.$purchase->amt.'</td>';
 		echo '<td>'.date("F j, Y, g:i a", $purchase->timestamp).'</td>';
+		echo '<td><a href="admin.php?page=event_registration&action=delete&tx_id='.$purchase->tx_id.'" title="Delete Purchase">Delete</a></td>';
 		echo '</tr>';
 	}
 
 	echo '</table>';
 	echo '<br />';
-	echo '<p><a href="admin.php?page=purchased_events&action=create_registers_by_event_csv&event_id='.$_GET['event_id'].'&order_by='.$order_by.'" title="Create CSV of Emails for Purchases of This Event" class="button-primary">Create Event Purchase CSV</a></p>';
+	echo '<p><a href="admin.php?page=event_registration&action=create_registers_by_event_csv&event_id='.$_GET['event_id'].'&order_by='.$order_by.'" title="Create CSV of Emails for Purchases of This Event" class="button-primary">Create Event Purchase CSV</a></p>';
+}
+
+function imm_delete_event_register()
+{
+	$tx_id = $_GET['tx_id'];
+	echo $tx_id;
+
+	global $wpdb;
+	$sql = $wpdb->prepare("DELETE FROM `".EVENT_PAYPAL."` WHERE `tx_id`=%d", $tx_id);
+	$wpdb->query($sql);
+
+	header('Location: '.site_url().'/wp-admin/admin.php?page=event_registration/');
 }
 
 function imm_get_membership_upgrades()
@@ -612,7 +632,7 @@ function imm_get_membership_upgrades()
 
 		echo '</table>';
 		echo '<br />';
-		echo '<p><a href="admin.php?page=purchased_events&action=create_member_upgrade_csv&order_by='.$order_by.'" title="Create CSV of Membership Upgrades" class="button-primary">Create Membership Upgrade CSV</a></p>';
+		echo '<p><a href="admin.php?page=event_registration&action=create_member_upgrade_csv&order_by='.$order_by.'" title="Create CSV of Membership Upgrades" class="button-primary">Create Membership Upgrade CSV</a></p>';
 	}
 	else
 	{
