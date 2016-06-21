@@ -1,0 +1,1 @@
+[04-May-2015 20:33:03 America/Denver] PHP Fatal error:  Call to undefined function tribe_get_option() in /home2/iaccusao/public_html/wp-content/plugins/the-events-calendar/lib/tribe-presstrends.php on line 62

@@ -1,0 +1,8 @@
+[17-Feb-2016 05:12:47 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/hello.php on line 60
+[17-Feb-2016 05:13:49 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/hello.php on line 60
+[17-Feb-2016 05:13:52 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/hello.php on line 60
+[20-Feb-2016 15:04:04 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/hello.php on line 60
+[15-Mar-2016 22:57:44 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/hello.php on line 60
+[15-Mar-2016 22:58:10 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/hello.php on line 60
+[26-Apr-2016 20:49:02 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/hello.php on line 60
+[25-May-2016 18:28:55 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/hello.php on line 60

@@ -1,0 +1,22 @@
+[18-Aug-2013 09:51:41] PHP Fatal error:  Call to undefined function  add_action() in /home2/iaccusao/public_html/wp-content/plugins/contact-form-7/includes/controller.php on line 3
+[18-Aug-2013 09:52:09] PHP Fatal error:  Call to undefined function  add_filter() in /home2/iaccusao/public_html/wp-content/plugins/contact-form-7/includes/capabilities.php on line 3
+[18-Nov-2013 20:49:13 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/contact-form-7/includes/controller.php on line 3
+[18-Nov-2013 20:49:35 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home2/iaccusao/public_html/wp-content/plugins/contact-form-7/includes/capabilities.php on line 3
+[23-Feb-2014 21:48:42 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/contact-form-7/includes/controller.php on line 3
+[23-Feb-2014 21:49:12 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home2/iaccusao/public_html/wp-content/plugins/contact-form-7/includes/capabilities.php on line 3
+[21-Jul-2014 08:04:15 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/contact-form-7/includes/controller.php on line 3
+[21-Jul-2014 08:04:26 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home2/iaccusao/public_html/wp-content/plugins/contact-form-7/includes/capabilities.php on line 3
+[24-Feb-2015 01:53:31 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/contact-form-7/includes/controller.php on line 3
+[24-Feb-2015 01:53:59 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home2/iaccusao/public_html/wp-content/plugins/contact-form-7/includes/capabilities.php on line 3
+[18-Apr-2015 02:25:07 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/contact-form-7/includes/controller.php on line 3
+[18-Apr-2015 02:25:28 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home2/iaccusao/public_html/wp-content/plugins/contact-form-7/includes/capabilities.php on line 3
+[26-Jun-2015 13:38:56 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/contact-form-7/includes/controller.php on line 3
+[26-Jun-2015 13:38:57 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home2/iaccusao/public_html/wp-content/plugins/contact-form-7/includes/capabilities.php on line 3
+[18-May-2016 05:51:31 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/contact-form-7/includes/controller.php on line 3
+[18-May-2016 05:51:57 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home2/iaccusao/public_html/wp-content/plugins/contact-form-7/includes/capabilities.php on line 3
+[22-May-2016 12:06:34 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/contact-form-7/includes/controller.php on line 3
+[22-May-2016 12:06:59 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home2/iaccusao/public_html/wp-content/plugins/contact-form-7/includes/capabilities.php on line 3
+[20-Jun-2016 05:35:19 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/contact-form-7/includes/controller.php on line 3
+[20-Jun-2016 05:35:49 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home2/iaccusao/public_html/wp-content/plugins/contact-form-7/includes/capabilities.php on line 3
+[20-Jun-2016 05:39:26 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home2/iaccusao/public_html/wp-content/plugins/contact-form-7/includes/capabilities.php on line 3
+[20-Jun-2016 05:41:51 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/contact-form-7/includes/controller.php on line 3

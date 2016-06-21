@@ -1,0 +1,13 @@
+[18-Aug-2013 09:53:06] PHP Fatal error:  Call to undefined function  add_action() in /home2/iaccusao/public_html/wp-content/plugins/wp-google-maps/wpGoogleMaps.php on line 35
+[18-Aug-2013 09:55:16] PHP Fatal error:  Call to undefined function  add_action() in /home2/iaccusao/public_html/wp-content/plugins/wp-google-maps/wpGoogleMaps.php on line 35
+[18-Nov-2013 20:50:47 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/wp-google-maps/wpGoogleMaps.php on line 35
+[18-Nov-2013 20:52:56 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/wp-google-maps/wpGoogleMaps.php on line 35
+[23-Feb-2014 21:51:41 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/wp-google-maps/wpGoogleMaps.php on line 35
+[21-Jul-2014 08:07:16 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/wp-google-maps/wpGoogleMaps.php on line 35
+[24-Feb-2015 01:55:10 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/wp-google-maps/wpGoogleMaps.php on line 35
+[24-Feb-2015 01:57:28 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/wp-google-maps/wpGoogleMaps.php on line 35
+[18-Apr-2015 02:28:30 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/wp-google-maps/wpGoogleMaps.php on line 35
+[26-Jun-2015 13:42:38 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/wp-google-maps/wpGoogleMaps.php on line 35
+[22-May-2016 12:08:16 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/wp-google-maps/wpGoogleMaps.php on line 35
+[22-May-2016 12:11:31 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/wp-google-maps/wpGoogleMaps.php on line 35
+[20-Jun-2016 05:38:07 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/iaccusao/public_html/wp-content/plugins/wp-google-maps/wpGoogleMaps.php on line 35

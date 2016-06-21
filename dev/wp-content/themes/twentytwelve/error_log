@@ -1,0 +1,8 @@
+[15-Aug-2013 11:11:40] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/twentytwelve/tag.php on line 14
+[27-Aug-2013 04:26:00] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/twentytwelve/index.php on line 17
+[02-Sep-2013 18:49:21] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/twentytwelve/404.php on line 10
+[25-May-2014 15:07:33 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/twentytwelve/tag.php on line 14
+[20-Dec-2014 01:15:31 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/twentytwelve/404.php on line 10
+[04-Oct-2015 17:12:16 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/twentytwelve/404.php on line 10
+[26-Apr-2016 20:49:08 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/twentytwelve/404.php on line 10
+[25-May-2016 18:28:55 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/twentytwelve/404.php on line 10

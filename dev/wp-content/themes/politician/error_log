@@ -1,0 +1,184 @@
+[03-Jun-2013 16:44:11] PHP Warning:  fopen(./cache/timthumb_int_51c5f22ff01035ff50ad39dc4a8e682b.timthumb.txt) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[08-Jul-2013 08:39:49] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:39:49] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:39:51] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:39:51] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:39:52] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:39:52] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:39:54] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:39:54] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:39:58] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:39:58] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:40:00] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:40:00] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:40:01] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:40:01] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:40:03] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:40:03] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:40:58] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:40:58] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:41:02] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:41:03] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:41:03] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:41:04] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:41:06] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:41:06] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:41:10] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:41:10] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:41:11] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:41:12] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:41:13] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:41:13] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:41:14] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[08-Jul-2013 08:41:15] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[11-Jul-2013 06:01:39] PHP Warning:  fopen(./cache/timthumb_int_443aa98b72a81953c671c72327f34714.timthumb.txt) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[29-Jul-2013 14:35:08] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[29-Jul-2013 14:35:09] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[29-Jul-2013 14:35:11] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[29-Jul-2013 14:35:11] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[29-Jul-2013 14:35:31] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[29-Jul-2013 14:35:32] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[29-Jul-2013 14:35:33] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[29-Jul-2013 14:35:33] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[29-Jul-2013 14:36:50] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[29-Jul-2013 14:36:50] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[29-Jul-2013 14:36:52] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[29-Jul-2013 14:36:52] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[29-Jul-2013 14:36:54] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[29-Jul-2013 14:36:55] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[29-Jul-2013 14:36:56] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[29-Jul-2013 14:36:57] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[30-Jul-2013 02:03:11] PHP Warning:  fopen(./cache/timthumb_int_443aa98b72a81953c671c72327f34714.timthumb.txt) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[04-Aug-2013 19:01:13] PHP Warning:  fopen(./cache/timthumb_int_443aa98b72a81953c671c72327f34714.timthumb.txt) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[08-Aug-2013 03:05:07] PHP Warning:  fopen(./cache/timthumb_int_51c5f22ff01035ff50ad39dc4a8e682b.timthumb.txt) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[15-Aug-2013 16:25:04] PHP Warning:  fopen(./cache/timthumb_int_443aa98b72a81953c671c72327f34714.timthumb.txt) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[18-Aug-2013 09:54:45] PHP Fatal error:  Call to undefined function  get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[20-Sep-2013 06:43:19] PHP Warning:  fopen(./cache/timthumb_int_443aa98b72a81953c671c72327f34714.timthumb.txt) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[28-Oct-2013 13:20:20] PHP Warning:  fopen(./cache/timthumb_int_443aa98b72a81953c671c72327f34714.timthumb.txt) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[06-Nov-2013 15:46:06] PHP Warning:  fopen(./cache/timthumb_int_443aa98b72a81953c671c72327f34714.timthumb.txt) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[18-Nov-2013 20:52:26 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[27-Nov-2013 09:00:49 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[27-Nov-2013 09:00:49 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[27-Nov-2013 09:00:51 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[27-Nov-2013 09:00:52 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[27-Nov-2013 09:00:53 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[27-Nov-2013 09:00:54 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[27-Nov-2013 09:00:55 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[27-Nov-2013 09:00:55 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[27-Nov-2013 09:26:09 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[27-Nov-2013 09:26:09 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[27-Nov-2013 09:26:11 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[27-Nov-2013 09:26:11 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[27-Nov-2013 09:26:13 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[27-Nov-2013 09:26:13 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[27-Nov-2013 09:26:15 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[27-Nov-2013 09:26:15 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[04-Dec-2013 12:17:03 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[04-Dec-2013 12:17:04 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[04-Dec-2013 12:17:06 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[04-Dec-2013 12:17:06 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[05-Dec-2013 12:04:34 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[05-Dec-2013 12:04:35 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[05-Dec-2013 12:04:38 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[05-Dec-2013 12:04:38 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[05-Dec-2013 12:04:53 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[05-Dec-2013 12:04:53 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[05-Dec-2013 12:05:01 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[05-Dec-2013 12:05:02 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[05-Dec-2013 12:11:09 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[05-Dec-2013 12:11:09 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[05-Dec-2013 12:11:11 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[05-Dec-2013 12:11:12 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[05-Dec-2013 12:12:03 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[05-Dec-2013 12:12:04 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[05-Dec-2013 12:12:06 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[05-Dec-2013 12:12:06 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[22-Dec-2013 03:41:32 UTC] PHP Warning:  fopen(./cache/timthumb_int_6f95b9f07d5ca470986a8f35cdbc5906.timthumb.txt): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[25-Dec-2013 17:14:44 UTC] PHP Warning:  fopen(./cache/timthumb_int_51c5f22ff01035ff50ad39dc4a8e682b.timthumb.txt): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[02-Jan-2014 10:05:14 UTC] PHP Warning:  fopen(./cache/timthumb_int_443aa98b72a81953c671c72327f34714.timthumb.txt): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[02-Jan-2014 10:05:14 UTC] PHP Warning:  fopen(./cache/timthumb_int_51c5f22ff01035ff50ad39dc4a8e682b.timthumb.txt): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[24-Jan-2014 15:33:43 UTC] PHP Warning:  fopen(./cache/timthumb_int_443aa98b72a81953c671c72327f34714.timthumb.txt): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[04-Feb-2014 16:50:40 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[04-Feb-2014 16:50:40 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[04-Feb-2014 16:50:42 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[04-Feb-2014 16:50:42 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[04-Feb-2014 16:51:26 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[04-Feb-2014 16:51:26 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[04-Feb-2014 16:51:27 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[04-Feb-2014 16:51:28 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[04-Feb-2014 16:51:36 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[04-Feb-2014 16:51:36 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[04-Feb-2014 16:51:37 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[04-Feb-2014 16:51:37 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[04-Feb-2014 16:52:08 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[04-Feb-2014 16:52:08 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[04-Feb-2014 16:52:09 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[04-Feb-2014 16:52:10 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[23-Feb-2014 21:50:54 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[04-Apr-2014 12:00:22 UTC] PHP Warning:  fopen(./cache/timthumb_int_51c5f22ff01035ff50ad39dc4a8e682b.timthumb.txt): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[20-Apr-2014 03:30:49 UTC] PHP Warning:  fopen(./cache/timthumb_int_443aa98b72a81953c671c72327f34714.timthumb.txt): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[01-May-2014 18:30:06 UTC] PHP Warning:  fopen(./cache/timthumb_int_6f95b9f07d5ca470986a8f35cdbc5906.timthumb.txt): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[07-May-2014 16:29:35 UTC] PHP Warning:  fopen(./cache/timthumb_int_6f95b9f07d5ca470986a8f35cdbc5906.timthumb.txt): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[08-May-2014 17:29:10 UTC] PHP Warning:  fopen(./cache/timthumb_int_51c5f22ff01035ff50ad39dc4a8e682b.timthumb.txt): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[13-May-2014 06:22:35 UTC] PHP Warning:  fopen(./cache/timthumb_int_443aa98b72a81953c671c72327f34714.timthumb.txt): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[19-May-2014 23:50:54 UTC] PHP Warning:  fopen(./cache/timthumb_int_51c5f22ff01035ff50ad39dc4a8e682b.timthumb.txt): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[28-May-2014 07:21:02 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[28-May-2014 07:21:02 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[28-May-2014 07:21:08 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[28-May-2014 07:21:08 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[28-May-2014 07:21:13 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[28-May-2014 07:21:13 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[28-May-2014 07:21:15 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[28-May-2014 07:21:15 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[19-Jun-2014 15:31:27 UTC] PHP Warning:  fopen(./cache/timthumb_int_443aa98b72a81953c671c72327f34714.timthumb.txt): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[30-Jun-2014 13:30:50 UTC] PHP Warning:  fopen(./cache/timthumb_int_96b686c192948b63dc03bc171af02651.timthumb.txt): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[08-Jul-2014 18:48:50 UTC] PHP Warning:  fopen(./cache/timthumb_int_51c5f22ff01035ff50ad39dc4a8e682b.timthumb.txt): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[21-Jul-2014 08:06:46 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[29-Jul-2014 03:52:16 UTC] PHP Warning:  fopen(./cache/timthumb_int_6f95b9f07d5ca470986a8f35cdbc5906.timthumb.txt): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[30-Jul-2014 07:34:13 UTC] PHP Warning:  fopen(./cache/timthumb_int_443aa98b72a81953c671c72327f34714.timthumb.txt): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[25-Aug-2014 09:16:42 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[25-Aug-2014 09:16:43 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[25-Aug-2014 09:16:45 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[25-Aug-2014 09:16:46 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[25-Aug-2014 09:17:31 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[25-Aug-2014 09:17:31 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[25-Aug-2014 09:17:33 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[25-Aug-2014 09:17:33 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[25-Aug-2014 09:17:36 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[25-Aug-2014 09:17:36 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[25-Aug-2014 09:17:38 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[25-Aug-2014 09:17:39 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[27-Aug-2014 03:45:50 UTC] PHP Warning:  fopen(./cache/timthumb_int_443aa98b72a81953c671c72327f34714.timthumb.txt): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[16-Sep-2014 14:42:58 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[16-Sep-2014 14:42:58 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[16-Sep-2014 14:43:01 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[16-Sep-2014 14:43:01 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[28-Sep-2014 08:46:27 UTC] PHP Warning:  fopen(./cache/timthumb_int_51c5f22ff01035ff50ad39dc4a8e682b.timthumb.txt): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[03-Oct-2014 01:29:31 UTC] PHP Warning:  fopen(./cache/timthumb_int_51c5f22ff01035ff50ad39dc4a8e682b.timthumb.txt): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[28-Oct-2014 07:14:28 UTC] PHP Warning:  fopen(./cache/timthumb_int_6f95b9f07d5ca470986a8f35cdbc5906.timthumb.txt): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[17-Dec-2014 14:12:47 UTC] PHP Warning:  fopen(./cache/timthumb_int_443aa98b72a81953c671c72327f34714.timthumb.txt): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[24-Feb-2015 01:56:56 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[18-Apr-2015 02:27:59 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[26-Jun-2015 13:41:20 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[14-Sep-2015 03:47:58 America/Denver] PHP Fatal error:  Call to undefined function post_password_required() in /home2/iaccusao/public_html/wp-content/themes/politician/comments.php on line 17
+[24-Sep-2015 12:08:54 UTC] PHP Warning:  fopen(./cache/timthumb_int_05c11ebb39ace8a3b5e6bb25a18fcfbd.timthumb.txt): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[29-Feb-2016 14:25:37 America/Denver] PHP Fatal error:  Call to undefined function language_attributes() in /home2/iaccusao/public_html/wp-content/themes/politician/header.php on line 12
+[29-Feb-2016 14:25:38 America/Denver] PHP Notice:  Use of undefined constant TEMPLATEPATH - assumed 'TEMPLATEPATH' in /home2/iaccusao/public_html/wp-content/themes/politician/functions.php on line 10
+[29-Feb-2016 14:25:38 America/Denver] PHP Warning:  require_once(TEMPLATEPATH/functions/core.php): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/functions.php on line 10
+[29-Feb-2016 14:25:38 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'TEMPLATEPATH/functions/core.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/iaccusao/public_html/wp-content/themes/politician/functions.php on line 10
+[29-Feb-2016 14:25:38 America/Denver] PHP Fatal error:  Call to undefined function get_sidebar() in /home2/iaccusao/public_html/wp-content/themes/politician/footer.php on line 13
+[12-Mar-2016 13:40:07 America/Denver] PHP Notice:  Use of undefined constant TEMPLATEPATH - assumed 'TEMPLATEPATH' in /home2/iaccusao/public_html/wp-content/themes/politician/functions.php on line 10
+[12-Mar-2016 13:40:07 America/Denver] PHP Warning:  require_once(TEMPLATEPATH/functions/core.php): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/functions.php on line 10
+[12-Mar-2016 13:40:07 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'TEMPLATEPATH/functions/core.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/iaccusao/public_html/wp-content/themes/politician/functions.php on line 10
+[12-Mar-2016 13:40:08 America/Denver] PHP Fatal error:  Call to undefined function get_sidebar() in /home2/iaccusao/public_html/wp-content/themes/politician/footer.php on line 13
+[12-Mar-2016 20:10:51 America/Denver] PHP Notice:  Use of undefined constant TEMPLATEPATH - assumed 'TEMPLATEPATH' in /home2/iaccusao/public_html/wp-content/themes/politician/functions.php on line 10
+[12-Mar-2016 20:10:51 America/Denver] PHP Warning:  require_once(TEMPLATEPATH/functions/core.php): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/functions.php on line 10
+[12-Mar-2016 20:10:51 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'TEMPLATEPATH/functions/core.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/iaccusao/public_html/wp-content/themes/politician/functions.php on line 10
+[12-Mar-2016 20:10:52 America/Denver] PHP Fatal error:  Call to undefined function get_sidebar() in /home2/iaccusao/public_html/wp-content/themes/politician/footer.php on line 13
+[18-May-2016 20:18:08 UTC] PHP Warning:  fopen(./cache/timthumb_int_9aa27cc1f547507ff44f8115a4899fbe.timthumb.txt): failed to open stream: No such file or directory in /home2/iaccusao/public_html/wp-content/themes/politician/timthumb.php on line 1020
+[22-May-2016 12:10:16 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[27-May-2016 08:57:41 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[27-May-2016 08:57:42 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[27-May-2016 08:57:45 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[27-May-2016 08:57:45 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
+[20-Jun-2016 05:37:24 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/iaccusao/public_html/wp-content/themes/politician/index.php on line 8
