@@ -70,3 +70,17 @@ ul.social-links {
 	width: 12px;
 	vertical-align: middle;
 }
+
+#header {
+	position: relative;
+}
+
+.login-header {
+	color: #eaeaea;
+	background-color: #175078;
+	font-size: 18px;
+	padding: 8px 22px 8px 22px;
+	top: 6px;
+	right: 6px;
+	position: absolute;
+}

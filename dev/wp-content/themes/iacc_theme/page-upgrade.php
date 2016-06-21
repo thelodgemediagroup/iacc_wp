@@ -29,7 +29,7 @@ Template Name: Membership Upgrade
 
 			// Set prices for the user to select from
 			// # appended represents max employees
-			$individual_member_price = '75.00';
+			$individual_member_price = '100.00';
 			$corporate_member_25_price = '250.00';
 			$corporate_member_50_price = '500.00';
 			$corporate_member_75_price = '750.00';

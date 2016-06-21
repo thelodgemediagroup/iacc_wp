@@ -49,57 +49,6 @@ function move_signout_link()
 	echo $move_signout_link;
 }
 
-// Make an admin bar for anon users. Prompt them to login
-class force_admin_bar
-{
-
-	function __construct()
-	{
-
-		if ( is_user_logged_in() ) { return false; } 
-
-		add_action( 'wp_before_admin_bar_render', array( &$this, 'disable_bar_search' ) );
-
-		add_filter( 'show_admin_bar', '__return_true' );
-
-		add_action( 'admin_bar_menu', array( &$this, 'logged_out_menus'), 15 );
-
-	}
-
-	function logged_out_menus( $meta = FALSE )
-	{
-		global $wp_admin_bar, $blog_id;
-
-		$wp_admin_bar->add_menu( array (
-			'id' => 'login_menu',
-			'title' => __( 'Login' ),
-			'href' => get_home_url( $blog_id, '/login/')
-			));
-	}
-
-	function remove_wp_logo()
-	{
-		global $wp_admin_bar;
-		$wp_admin_bar->remove_menu('wp-logo');
-	}
-
-	function disable_bar_search()
-	{
-		global $wp_admin_bar;
-		$wp_admin_bar->remove_menu('search');
-	}
-
-	function disable_events_menu()
-	{
-		global $wp_admin_bar;
-		$wp_admin_bar->remove_menu('events-calendar');
-	}
-
-}
-
-// Instantiate the anonymous user login admin bar
-$force_admin_bar = new force_admin_bar();
-
 // Regular member admin admin bar. Profile link.
 class logged_in_iacc_member 
 {

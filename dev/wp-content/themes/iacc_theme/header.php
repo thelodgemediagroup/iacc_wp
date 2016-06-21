@@ -82,6 +82,10 @@
 	<!-- - - - - - - - - - - - - - Header - - - - - - - - - - - - - - - - -->	
 	
 	<header id="header" class="clearfix">
+
+		<a class="login-header" href="/login/">
+			Login
+		</a>
 		
 		<a href="<?php echo home_url('/'); ?>" id="logo"><img src="<?php theme_logo(); ?>" alt="IACC USA, Indo American Chamber of Commerce" title="IACC USA" /></a>
 
